@@ -1,6 +1,8 @@
 {
-  "name": "svelte-app",
+  "name": "bobo",
+  "author": "gaconkzk@gmail.com",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "build": "rollup -c",
     "start": "sirv public --single",
