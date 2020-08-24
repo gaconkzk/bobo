@@ -11,5 +11,5 @@
     .flex.items-center.justify-between
       button.bg-blue-500.text-white.font-bold.py-2.px-4.rounded.hover_bg-blue-700.focus_outline-none(type="button") Sign In
       a.inline-block.align-baseline.font-bold.text-sm.text-blue-500.hover_text-blue-800(href="/#") Forgot Password?
-  p.text-center.text-gray-500.text-xs &copy;2020 Acme Corp. All rights reserved.
+  p.text-center.text-gray-500.text-xs &copy;2020 The Flies. All rights reserved.
 </template>

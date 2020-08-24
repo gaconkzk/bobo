@@ -17,7 +17,10 @@
 
 {#if $activeRoute.path === path}
   {#if $activeRoute.component}
-    <svelte:component this="{$activeRoute.component}" {...$$restProps} {...params} />
+    <svelte:component
+      this={$activeRoute.component}
+      {...$$restProps}
+      {...params} />
   {:else}
     <slot {params} />
   {/if}

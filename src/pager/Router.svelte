@@ -3,7 +3,7 @@
 
   export const activeRoute = writable({})
   const routes = {}
-  
+
   export function register(route) {
     routes[route.path] = route
   }
@@ -15,7 +15,7 @@
 
   const last = (route) => {
     return (ctx) => {
-      $activeRoute = {...route, params: ctx.params}
+      $activeRoute = { ...route, params: ctx.params }
     }
   }
 
@@ -27,7 +27,7 @@
 
     page.start()
   }
-  
+
   onMount(registerRoutes)
 
   onDestroy(page.stop)

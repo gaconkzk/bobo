@@ -8,5 +8,5 @@ module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
   },
-  separator: '_',
-}
+  separator: "_",
+};
