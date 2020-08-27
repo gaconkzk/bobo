@@ -7,6 +7,7 @@
   import About from './pages/About.svelte'
   import Profile from './pages/Profile.svelte'
   import Login from './pages/Login.svelte'
+  import CodeTyphoon from './pages/CodeTyphoon.svelte'
 
   const guard = (ctx, next) => {
     if (true) {
@@ -22,6 +23,8 @@
     <Route path="/" component={Home} />
     <Route path="/login" component={Login} />
     <Route path="/about" component={About} />
+    <Route path="/codetypoon" component={CodeTyphoon} />
+    <Route path="/ct" component={CodeTyphoon} />
     <Route path="/profile/:username" let:params>
       <h2>Hello {params.username}!</h2>
       <p>Profile page</p>
