@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "start": "sirv public --single",
-    "serve": "serve public -p 80",
+    "start": "sirv public --single --host",
+    "serve": "serve public -p 80 --host",
     "dev": "rollup -c -w"
   },
   "devDependencies": {
