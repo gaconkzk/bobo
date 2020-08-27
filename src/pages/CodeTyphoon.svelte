@@ -36,5 +36,5 @@
       <span class="normal">88</span>
     </div>
   </div>
-  <div class="flex">A cuuuul editor for speed typoon coder</div>
+  <div class="flex">A cuuuul editor for code typoonie</div>
 </div>
