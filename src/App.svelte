@@ -1,13 +1,13 @@
 <script>
-  import GlobalStyle from './components/GlobalStyle.svelte'
+  import GlobalStyle from './components/GlobalStyle'
 
   import { Router, Route, NotFound, redirect } from './pager'
 
-  import Home from './pages/Home.svelte'
-  import About from './pages/About.svelte'
-  import Profile from './pages/Profile.svelte'
-  import Login from './pages/Login.svelte'
-  import CodeTyphoon from './pages/CodeTyphoon.svelte'
+  import Home from './pages/Home'
+  import About from './pages/About'
+  import Profile from './pages/Profile'
+  import Login from './pages/Login'
+  import CodeTyphoon from './pages/CodeTyphoon'
 
   const guard = (ctx, next) => {
     if (true) {

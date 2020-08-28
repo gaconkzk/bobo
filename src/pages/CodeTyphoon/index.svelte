@@ -1,17 +1,7 @@
-<style lang="scss">
-  .small-card {
-    @apply flex flex-col items-center py-2 px-4 rounded shadow mx-1 w-40 h-20;
-    .title {
-      @apply font-bold text-blue-400 uppercase;
-    }
-    .error {
-      @apply text-red-400 text-3xl;
-    }
-    .normal {
-      @apply text-3xl;
-    }
-  }
-</style>
+<script>
+  import StatusBar from './components/StatusBar'
+  import CodeLive from './components/CodeLive'
+</script>
 
 <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
@@ -22,19 +12,6 @@
   </div>
 </nav>
 <div class="flex flex-col h-screen w-full items-center py-2">
-  <div class="flex flex-row items-center self-auto">
-    <div class="small-card self-auto">
-      <span class="title">Errors</span>
-      <span class="error">2</span>
-    </div>
-    <div class="small-card self-auto">
-      <span class="title">Time(s)</span>
-      <span class="normal">43</span>
-    </div>
-    <div class="small-card self-auto">
-      <span class="title">Accuracy(%)</span>
-      <span class="normal">88</span>
-    </div>
-  </div>
-  <div class="flex">A cuuuul editor for code typoonie</div>
+  <StatusBar />
+  <CodeLive />
 </div>

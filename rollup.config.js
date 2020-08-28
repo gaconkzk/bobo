@@ -1,45 +1,54 @@
-import svelte from "rollup-plugin-svelte";
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import livereload from "rollup-plugin-livereload";
-import { terser } from "rollup-plugin-terser";
+import path from 'path'
+import svelte from 'rollup-plugin-svelte'
+import resolve from '@rollup/plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
+import livereload from 'rollup-plugin-livereload'
+import { terser } from 'rollup-plugin-terser'
 
-import sveltePreprocess from "svelte-preprocess";
+import replacement from 'rollup-plugin-module-replacement'
 
-const production = !process.env.ROLLUP_WATCH;
+import sveltePreprocess from 'svelte-preprocess'
+
+const production = !process.env.ROLLUP_WATCH
+
+const customResolver = resolve({
+  extensions: ['.js', '.svelte']
+})
+
+const projectRootDir = path.resolve(__dirname)
 
 function serve() {
-  let server;
+  let server
 
   function toExit() {
-    if (server) server.kill(0);
+    if (server) server.kill(0)
   }
 
   return {
     writeBundle() {
-      if (server) return;
-      server = require("child_process").spawn(
-        "npm",
-        ["run", "start", "--", "--dev"],
+      if (server) return
+      server = require('child_process').spawn(
+        'npm',
+        ['run', 'start', '--', '--dev'],
         {
-          stdio: ["ignore", "inherit", "inherit"],
+          stdio: ['ignore', 'inherit', 'inherit'],
           shell: true,
         }
-      );
+      )
 
-      process.on("SIGTERM", toExit);
-      process.on("exit", toExit);
+      process.on('SIGTERM', toExit)
+      process.on('exit', toExit)
     },
-  };
+  }
 }
 
 export default {
-  input: "src/main.js",
+  input: 'src/main.js',
   output: {
     sourcemap: true,
-    format: "iife",
-    name: "app",
-    file: "public/build/bundle.js",
+    format: 'iife',
+    name: 'app',
+    file: 'public/build/bundle.js',
   },
   plugins: [
     svelte({
@@ -51,10 +60,19 @@ export default {
       // we'll extract any component CSS out into
       // a separate file - better for performance
       css: (css) => {
-        css.write("public/build/bundle.css");
+        css.write('public/build/bundle.css')
       },
     }),
 
+    replacement({
+        entries: [
+          {
+            find: 'components',
+            replacement: path.resolve(projectRootDir, 'src/components')
+          }
+        ],
+        customResolver
+    }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
     // some cases you'll need additional configuration -
@@ -62,7 +80,8 @@ export default {
     // https://github.com/rollup/plugins/tree/master/packages/commonjs
     resolve({
       browser: true,
-      dedupe: ["svelte"],
+      dedupe: ['svelte'],
+      extensions: ['.js', '.svelte']
     }),
     commonjs(),
 
@@ -72,7 +91,7 @@ export default {
 
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
-    !production && livereload("public"),
+    !production && livereload('public'),
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
@@ -81,4 +100,4 @@ export default {
   watch: {
     clearScreen: false,
   },
-};
+}
