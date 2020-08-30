@@ -1,5 +1,6 @@
 <script>
   let current = "A quick brown fox jumps over the lazy dog"
+  let all_words = current.split(' ')
   let typed = ""
   let isStarted = false
 
@@ -11,12 +12,14 @@
       
       if (possible_char_regex.test(e.key)) {
         typed += e.key
+        render(current)
       } else {
         if (e.key === 'Backspace') {
           typed = typed.slice(0, -1)
+          render(current)
         }
       }
-      render(current)
+      
       e.preventDefault()
     }
   }
@@ -27,19 +30,46 @@
     typed = ""
   }
 
+  function compare_word(c, o) {
+    let idx = 0
+
+    while (idx < c.length && c[idx] === o[idx]) {
+      idx ++
+    }
+
+    return idx
+  }
+
   const render = (current) => {
-    let html = current.split(' ').map(w => `<span>${w}</span>`).join(' ')
-    console.log(html)
-    codelive.innerHTML = html
+    let typed_words = typed.split(' ')
+
+    let last_w = typed_words.length-1
+
+    let current_word = typed_words[last_w]
+
+    if (current_word !== '') {
+      let orig_word = all_words[last_w].replace(/<\/?[^>]+(>|$)/g, "")
+      let gidx = compare_word(current_word, orig_word)
+
+      if (gidx < current_word.length) {
+        orig_word=`<strong>${orig_word.substr(0, gidx)}</strong><mark>${orig_word.substr(gidx, 1)}</mark>${orig_word.substr(gidx+1)}`
+      } else
+        orig_word = `<strong>${orig_word.substr(0, gidx)}</strong>${orig_word.substr(gidx)}`
+
+      all_words[last_w] = orig_word
+
+      let html = all_words.join(' ')
+      codelive.innerHTML = html
+    }
   }
 </script>
 
 <style lang="scss">
 #codelive {
-  strong {
+  :global(strong) {
     @apply text-green-500
   }
-  mark {
+  :global(mark) {
     @apply text-red-500 bg-white
   }
 }

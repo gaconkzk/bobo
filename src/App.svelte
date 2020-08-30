@@ -20,7 +20,7 @@
 
 <main>
   <Router>
-    <Route path="/" component={Home} />
+    <Route path="/" component={CodeTyphoon} />
     <Route path="/login" component={Login} />
     <Route path="/about" component={About} />
     <Route path="/codetypoon" component={CodeTyphoon} />
