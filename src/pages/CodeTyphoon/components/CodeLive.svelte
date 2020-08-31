@@ -31,13 +31,9 @@
   }
 
   function compare_word(c, o) {
-    let idx = 0
-
-    while (idx < c.length && c[idx] === o[idx]) {
-      idx ++
-    }
-
-    return idx
+    return c.split('')
+      .map((char, i) => (char !== o[i] ? i : undefined))
+      .filter(x => x >= 0)
   }
 
   const render = (current) => {
@@ -46,27 +42,42 @@
     let last_w = typed_words.length-1
 
     let current_word = typed_words[last_w]
+  
+    let orig_word = all_words[last_w].replace(/<\/?[^>]+(>|$)/g, "")
+    let new_word = `${orig_word}`
+    let gidx = compare_word(current_word, orig_word)
 
-    if (current_word !== '') {
-      let orig_word = all_words[last_w].replace(/<\/?[^>]+(>|$)/g, "")
-      let gidx = compare_word(current_word, orig_word)
+    let ca = orig_word.split('')
+    if (current_word.length) {
+      gidx.forEach(e_idx => {
+        ca[e_idx] = `<mark>${ca[e_idx]}</mark>`
+      })
+      ca.forEach((char, i) => {
+        if (i < current_word.length && gidx.indexOf(i)<0) {
+          ca[i] = `<span>${ca[i]}</span>`
+        }
+      })
+      new_word = ca.join('')
 
       if (gidx < current_word.length) {
         orig_word=`<strong>${orig_word.substr(0, gidx)}</strong><mark>${orig_word.substr(gidx, 1)}</mark>${orig_word.substr(gidx+1)}`
-      } else
+      } else if (gidx >= 0) {
         orig_word = `<strong>${orig_word.substr(0, gidx)}</strong>${orig_word.substr(gidx)}`
+      }
 
-      all_words[last_w] = orig_word
-
-      let html = all_words.join(' ')
-      codelive.innerHTML = html
+      all_words[last_w] = new_word
+    } else {
+      
     }
+
+    let html = all_words.join(' ')
+    codelive.innerHTML = html
   }
 </script>
 
 <style lang="scss">
 #codelive {
-  :global(strong) {
+  :global(span) {
     @apply text-green-500
   }
   :global(mark) {
