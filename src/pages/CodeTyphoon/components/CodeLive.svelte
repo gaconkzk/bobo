@@ -12,13 +12,16 @@
       
       if (possible_char_regex.test(e.key)) {
         typed += e.key
-        render(current)
+        render()
       } else {
         if (e.key === 'Backspace') {
           typed = typed.slice(0, -1)
-          render(current)
+          render()
         }
       }
+
+      // TODO should stop this when ???
+      
       
       e.preventDefault()
     }
@@ -36,38 +39,43 @@
       .filter(x => x >= 0)
   }
 
-  const render = (current) => {
-    let typed_words = typed.split(' ')
-
-    let last_w = typed_words.length-1
-
-    let current_word = typed_words[last_w]
-  
-    let orig_word = all_words[last_w].replace(/<\/?[^>]+(>|$)/g, "")
-    let new_word = `${orig_word}`
+  function htmlWord(idx, typed_words, all_words, eow = false) {
+    let current_word = typed_words[idx]
+    let orig_word = all_words[idx].replace(/<\/?[^>]+(>|$)/g, "")
     let gidx = compare_word(current_word, orig_word)
 
     let ca = orig_word.split('')
-    if (current_word.length) {
-      gidx.forEach(e_idx => {
-        ca[e_idx] = `<mark>${ca[e_idx]}</mark>`
-      })
-      ca.forEach((char, i) => {
-        if (i < current_word.length && gidx.indexOf(i)<0) {
-          ca[i] = `<span>${ca[i]}</span>`
-        }
-      })
-      new_word = ca.join('')
-
-      if (gidx < current_word.length) {
-        orig_word=`<strong>${orig_word.substr(0, gidx)}</strong><mark>${orig_word.substr(gidx, 1)}</mark>${orig_word.substr(gidx+1)}`
-      } else if (gidx >= 0) {
-        orig_word = `<strong>${orig_word.substr(0, gidx)}</strong>${orig_word.substr(gidx)}`
+    gidx.forEach(e_idx => {
+      ca[e_idx] = `<mark>${ca[e_idx]}</mark>`
+    })
+    
+    ca.forEach((char, i) => {
+      if (i < current_word.length && gidx.indexOf(i)<0) {
+        ca[i] = `<span>${ca[i]}</span>`
       }
+    })
 
-      all_words[last_w] = new_word
-    } else {
-      
+    if (eow && current_word.length < orig_word.length) {
+      for (let i = current_word.length; i < orig_word.length; i++) {
+        ca[i] = `<mark>${ca[i]}</mark>`
+      }
+    }
+
+    return ca.join('')
+  }
+
+  const render = () => {
+    let typed_words = typed.split(' ')
+
+    let last_w_idx = typed_words.length-1
+    let prev_w_idx = typed_words.length-2
+
+    let current_word = typed_words[last_w_idx]
+
+    all_words[last_w_idx] = htmlWord(last_w_idx, typed_words, all_words)
+
+    if (!current_word.length && prev_w_idx >= 0) {
+      all_words[prev_w_idx] = htmlWord(prev_w_idx, typed_words, all_words, true)
     }
 
     let html = all_words.join(' ')
