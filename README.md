@@ -6,4 +6,4 @@ Trying to work with:
 - svelte
 - tailwindcss
 
-A dashboard
+## (WIP) A speed typing playing ground
