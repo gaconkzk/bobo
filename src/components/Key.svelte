@@ -117,13 +117,16 @@ $color-key: mix($color-black, $color-white, 87%);
       content: '';
       position: absolute;
     }
-    &::before{
+    &::before {
       background-color: $color-key;
       border-radius: $key-radius 0 0 $key-radius;
       height: $key-size;
       left: - $key-size / 4;
       top: 0;
       width: $key-size / 4;
+    }
+    &:hover::before {
+      background-color: green;
     }
     &::after{
       border-top-right-radius: $key-radius;
@@ -133,6 +136,9 @@ $color-key: mix($color-black, $color-white, 87%);
       left: - $key-gutter;
       top: $key-size - $key-gutter;
       width: $key-gutter * 2;
+    }
+    &:hover::after{
+      box-shadow: - $key-gutter $key-gutter 0 0 green inset;
     }
     .key__top{
       height: $key-size - ($key-spacing-vertical * 2);
