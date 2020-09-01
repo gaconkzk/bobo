@@ -11,7 +11,7 @@
     <span class="font-semibold text-xl tracking-tight">Code Typhoon</span>
   </div>
 </nav>
-<div class="flex flex-col h-screen w-full items-center py-2">
+<div class="flex flex-col w-full items-center py-2">
   <StatusBar />
   <CodeLive />
 </div>
