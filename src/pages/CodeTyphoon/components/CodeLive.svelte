@@ -2,8 +2,8 @@
   import Keyboard from './Keyboard'
 
   let current = "A quick brown fox jumps over the lazy dog"
-  let all_words = current.split(' ')
-  let typed = ""
+  let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
+  let typed = ''
   let isStarted = false
 
   let codelive
@@ -31,8 +31,12 @@
 
   const handleStart = () => {
     isStarted = !isStarted
-
-    typed = ""
+  
+    if (isStarted) {
+      typed = ''
+      all_words = current.replace(/<\/?[^>]+(>|$)/g, '').split(' ')
+      codelive.innerHTML = all_words.join(' ')
+    }
   }
 
   function compare_word(c, o) {
@@ -98,9 +102,7 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<div id="codelive" class="rounded border-2 border-green-200 shadow-5 my-10" bind:this={codelive}>
-  {current}
-</div>
+<div id="codelive" class="rounded border-2 border-green-200 shadow-5 my-10" bind:this={codelive}>{current}</div>
 
 <button class="bg-green-500 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold shadow-2xl" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 
