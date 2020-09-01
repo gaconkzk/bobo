@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": "stylelint-config-recommended",
   "rules": {
     "at-rule-no-unknown": [
@@ -12,6 +12,12 @@
           "responsive",
           "screen"
         ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
       }
     ],
     "block-no-empty": null,
