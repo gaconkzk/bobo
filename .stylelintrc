@@ -6,7 +6,7 @@
       {
         "ignoreAtRules": [
           "tailwind",
-          "global",
+          "/global/",
           "/apply/",
           "variants",
           "responsive",
@@ -19,7 +19,8 @@
       "em",
       "rem",
       "s",
-      "px"
+      "px",
+      "%"
     ]
   },
   "declaration-block-trailing-semicolon": null,

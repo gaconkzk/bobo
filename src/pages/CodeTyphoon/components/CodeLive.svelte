@@ -1,4 +1,6 @@
 <script>
+  import Keyboard from './Keyboard'
+
   let current = "A quick brown fox jumps over the lazy dog"
   let all_words = current.split(' ')
   let typed = ""
@@ -103,3 +105,7 @@
 <button class="bg-green-500 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold shadow-2xl" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 
 <div>{typed}</div>
+
+<br/>
+
+<Keyboard />
