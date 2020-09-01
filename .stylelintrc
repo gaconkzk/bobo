@@ -6,7 +6,7 @@
       {
         "ignoreAtRules": [
           "tailwind",
-          "/global/",
+          "/\:global/",
           "/apply/",
           "variants",
           "responsive",

@@ -54,6 +54,20 @@ $keyboard-spacing: 16px;
   justify-content: center;
   padding: $key-spacing-vertical $key-spacing-horizontal;
   margin: $key-gutter / 2;
+  &.is-home {
+    text-decoration: none;
+    position: relative;
+    &:after {
+      content: '';
+      width: 20%;
+      position: absolute;
+      left: 40%;
+      bottom: 5px;
+      border-width: 0 0 3px;
+      border-style: solid;
+      border-color: green;
+    }
+  }
   &.is-arrow {
     &.is-arrow-left {
       grid-column-start: 53;
@@ -243,10 +257,10 @@ $keyboard-spacing: 16px;
     <div class="key">A</div>
     <div class="key">S</div>
     <div class="key">D</div>
-    <div class="key">F</div>
+    <div class="key is-home">F</div>
     <div class="key">G</div>
     <div class="key">H</div>
-    <div class="key">J</div>
+    <div class="key is-home">J</div>
     <div class="key">K</div>
     <div class="key">L</div>
     <div class="key">
