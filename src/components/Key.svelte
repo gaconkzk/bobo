@@ -7,7 +7,7 @@
 
 <style lang="scss">
 $key-radius: 4px;
-$key-size: 64px;
+$key-size: 48px;
 $key-spacing-horizontal: 9px;
 $key-spacing-vertical: 5px;
 $key-gutter: 4px;

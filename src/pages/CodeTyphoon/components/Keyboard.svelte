@@ -13,7 +13,7 @@ $color-keyboard: mix($color-black, $color-white, 12%);
 
 $color-text: $color-white;
 
-$key-size: 64px;
+$key-size: 48px;
 $key-gutter: 4px;
 $keyboard-spacing: 16px;
 
