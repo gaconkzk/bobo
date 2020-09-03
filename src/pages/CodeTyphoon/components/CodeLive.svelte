@@ -4,8 +4,9 @@
 
   // TODO current should be external prop and load by a mechanism (user allow to chose any thing they want to challenge or practice)
   // future welcome meee yo yo yo
-  let current = `A quick brown fox jumps over the lazy dog.
-  - Fixed a bug: typed more than it should be`
+  let current = `
+A quick brown fox jumps over the lazy dog.
+- Fixed a bug: typed more than it should be`
 
   let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
   let typed = ''
@@ -16,6 +17,7 @@
   const PressedState = {
     NORMALKEY: 1,
     BACKSPACE: 2,
+    ENTERKEY: 13,
   }
 
   const checkKey = (e) => {
@@ -25,6 +27,9 @@
       } else {
         if (e.key === 'Backspace') {
           return PressedState.BACKSPACE
+        }
+        if (e.key === 'Enter') {
+          return PressedState.ENTERKEY
         }
       }
 
@@ -59,13 +64,15 @@
 
       let shouldRender = checkKey(e)
       if (shouldRender) {
-        switch (checkKey(e)) {
+        switch (shouldRender) {
           case PressedState.NORMALKEY:
             typed += e.key
             break
           case PressedState.BACKSPACE:
             typed = typed.slice(0, -1)
             break
+          case PressedState.ENTERKEY:
+            typed = typed + '\n'
           default:
         }
 
@@ -85,7 +92,7 @@
     if (isStarted) {
       typed = ''
       all_words = current.replace(/<\/?[^>]+(>|$)/g, '').split(' ')
-      codelive.innerHTML = all_words.join(' ').replace('\n', '<br/>')
+      codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>')
     }
   }
 
@@ -143,7 +150,7 @@
       all_words[prev_w_idx] = htmlWord(prev_w_idx, typed_words, true)
     }
 
-    let html = all_words.join(' ').replace('\n', '<br/>')
+    let html = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>')
     codelive.innerHTML = html
   }
 </script>
@@ -161,7 +168,7 @@
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div id="codelive" class="rounded border-2 border-green-200 shadow-5 my-10" bind:this={codelive}>{@html current.replace('\n', '<br/>')}</div>
+<div id="codelive" class="rounded border-2 border-green-200 shadow-5 my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>')}</div>
 
 <button class="bg-green-500 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold shadow-2xl" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 

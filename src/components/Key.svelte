@@ -1,4 +1,7 @@
 <script>
+  import { createEventDispatcher } from 'svelte'
+  const dispatch = createEventDispatcher()
+
   export let top = false, bottom = false, data = false, right = false, 
     left = false, space = false, command = false, arrow = false,
     up = false, down = false, backspace = false, tab = false,
@@ -11,6 +14,36 @@
     if (keyCode) { // useless, but I need get rid of vscode warning
       actived = !up
     }
+  }
+
+  const updateEvent = () => {
+    if (!Number.isInteger(keyCode)) {
+      let [ lr, kc ] = keyCode.split('_')
+
+      event.keyCode = kc
+      event.location = lr === 'l' ? 1 : (lr === 'r' ? 2 : 0)
+    } else {
+      event.keyCode = keyCode
+    }
+  }
+
+  const event = {
+    ctrlKey: bottom === 'ctrl',
+    altKey: bottom === 'alt',
+    shiftKey: bottom === 'shift',
+    metaKey: bottom === 'W',
+  }
+  updateEvent()
+
+  function mousedown() {
+    
+    dispatch('keydown', event)
+  }
+
+  function mouseup() {
+    // let e = new KeyboardEvent('keyup', event)
+
+    dispatch('keyup', event)
   }
 </script>
 
@@ -207,6 +240,9 @@ $color-key: mix($color-black, $color-white, 87%);
   class:is-shift-right={shift && right}
 
   class:is-down={actived}
+
+  on:mousedown={mousedown}
+  on:mouseup={mouseup}
 >
   {@html data || ''}
   {#if top}

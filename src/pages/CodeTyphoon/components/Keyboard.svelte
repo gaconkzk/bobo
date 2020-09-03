@@ -13,6 +13,18 @@
     }
   }
 
+  const dispatchdown = (e) => {
+    let data = e.detail
+    let event = new KeyboardEvent('keydown', data)
+    window.dispatchEvent(event)
+  }
+
+  const dispatchup = (e) => {
+    let data = e.detail
+    let event = new KeyboardEvent('keyup', data)
+    window.dispatchEvent(event)
+  }
+
   let keyboard = {}
 </script>
 
@@ -53,7 +65,7 @@ $keyboard-spacing: 16px;
   <div class="keyboard">
     {#each keysmap as rows}
       {#each rows as key}
-        <Key {...key} bind:this={keyboard[key.keyCode]}/>
+        <Key {...key} bind:this={keyboard[key.keyCode]} on:keydown={dispatchdown} on:keyup={dispatchup}/>
       {/each}
     {/each}
   </div>
