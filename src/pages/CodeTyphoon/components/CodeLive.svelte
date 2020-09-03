@@ -46,15 +46,17 @@
   }
 
   const handleKeyup = (e) => {
-    let keyCode = mapLeftRight(e)
-    keyboard.keydown(keyCode, true)
+    if (isStarted) {
+      let keyCode = mapLeftRight(e)
+      keyboard.keydown(keyCode, true)
+    }
   }
 
   const handleKeydown = (e) => {
-    let keyCode = mapLeftRight(e)
-    keyboard.keydown(keyCode)
-
     if (isStarted) {
+      let keyCode = mapLeftRight(e)
+      keyboard.keydown(keyCode)
+
       let shouldRender = checkKey(e)
       if (shouldRender) {
         switch (checkKey(e)) {
