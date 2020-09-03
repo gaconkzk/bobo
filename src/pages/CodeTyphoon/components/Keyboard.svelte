@@ -1,7 +1,19 @@
 <script>
-  import Key from 'components/Key'
+  import { createEventDispatcher } from 'svelte'
 
-  import keysmap from "components/keymaps"
+  import Key from 'components/Key'
+  import keysmap from 'components/keymaps'
+
+  const dispatch = createEventDispatcher()
+
+  export const keydown = (code, up = false) => {
+    let key = keyboard[code]
+    if (key) {
+      key.pressed(up)
+    }
+  }
+
+  let keyboard = {}
 </script>
 
 <style lang="scss">
@@ -41,7 +53,7 @@ $keyboard-spacing: 16px;
   <div class="keyboard">
     {#each keysmap as rows}
       {#each rows as key}
-        <Key {...key} />
+        <Key {...key} bind:this={keyboard[key.keyCode]}/>
       {/each}
     {/each}
   </div>

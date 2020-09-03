@@ -1,9 +1,6 @@
 <script>
-  import { createEventDispatcher } from 'svelte'
-
-  const dispatch = createEventDispatcher()
-
   import Keyboard from './Keyboard'
+  let keyboard
 
   // TODO current should be external prop and load by a mechanism (user allow to chose any thing they want to challenge or practice)
   // future welcome meee yo yo yo
@@ -34,20 +31,24 @@
     return 0
   }
 
+  const handleKeyup = (e) => keyboard.keydown(e.keyCode, true)
+
   const handleKeydown = (e) => {
+    keyboard.keydown(e.keyCode)
+
     if (isStarted) {
       let shouldRender = checkKey(e)
-      switch (checkKey(e)) {
-        case PressedState.NORMALKEY:
-          typed += e.key
-          break
-        case PressedState.BACKSPACE:
-          typed = typed.slice(0, -1)
-          break
-        default:
-      }
-
       if (shouldRender) {
+        switch (checkKey(e)) {
+          case PressedState.NORMALKEY:
+            typed += e.key
+            break
+          case PressedState.BACKSPACE:
+            typed = typed.slice(0, -1)
+            break
+          default:
+        }
+
         render()
       }
 
@@ -138,7 +139,7 @@
 }
 </style>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
 <div id="codelive" class="rounded border-2 border-green-200 shadow-5 my-10" bind:this={codelive}>{@html current.replace('\n', '<br/>')}</div>
 
@@ -148,4 +149,4 @@
 
 <br/>
 
-<Keyboard />
+<Keyboard bind:this={keyboard}/>

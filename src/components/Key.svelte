@@ -2,7 +2,14 @@
   export let top = false, bottom = false, data = false, right = false, 
     left = false, space = false, command = false, arrow = false,
     up = false, down = false, backspace = false, tab = false,
-    enter = false, capslck = false, homekey = false, shift = false;
+    enter = false, capslck = false, homekey = false, shift = false, keyCode = undefined
+
+
+  let actived = false
+
+  export const pressed = (up = false) => {
+    actived = !up
+  }
 </script>
 
 <style lang="scss">
@@ -165,10 +172,17 @@ $color-key: mix($color-black, $color-white, 87%);
   &.is-tab{
     align-items: flex-start;
   }
+  &.is-down{
+    @apply bg-blue-400;
+  }
 }
 </style>
 
-<div class="key" class:is-right={right && !arrow} class:is-left={left && !arrow} class:is-space={space} class:is-command={command}
+<div 
+  class="key"
+  class:is-right={right && !arrow}
+  class:is-left={left && !arrow}
+  class:is-space={space} class:is-command={command}
   class:is-arrow={arrow && (left || right || up || down)}
   class:is-arrow-left={arrow && left}
   class:is-arrow-right={arrow && right}
@@ -181,6 +195,8 @@ $color-key: mix($color-black, $color-white, 87%);
   class:is-home={homekey}
   class:is-shift-left={shift && left}
   class:is-shift-right={shift && right}
+
+  class:is-down={actived}
 >
   {@html data || ''}
   {#if top}

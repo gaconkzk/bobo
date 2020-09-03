@@ -1,10 +1,12 @@
 module.exports = [
   [
     {
+      keyCode: 192,
       top: '~',
       bottom: '`',
     },
     {
+      keyCode: 49,
       top: '!',
       bottom: '1',
     },
@@ -113,6 +115,7 @@ module.exports = [
       bottom: 'capslck',
     },
     {
+      keyCode: 65,
       data: 'A',
     },
     {
