@@ -5,7 +5,7 @@
   export let top = false, bottom = false, data = false, right = false, 
     left = false, space = false, command = false, arrow = false,
     up = false, down = false, backspace = false, tab = false,
-    enter = false, capslck = false, homekey = false, shift = false
+    enter = false, capslck = false, capson = false, homekey = false, shift = false
   export let keyCode = undefined
 
   let actived = false
@@ -13,6 +13,15 @@
   export const pressed = (up = false) => {
     if (keyCode) { // useless, but I need get rid of vscode warning
       actived = !up
+    }
+  }
+
+  export const led = (on = false) => {
+    console.log('turn on???', capslck, on)
+    if (capslck && on) {
+      capson = true
+    } else {
+      capson = false
     }
   }
 
@@ -36,7 +45,6 @@
   updateEvent()
 
   function mousedown() {
-    
     dispatch('keydown', event)
   }
 
@@ -138,6 +146,9 @@ $color-key: mix($color-black, $color-white, 87%);
   }
   &.is-capslock{
     grid-column-end: span 7;
+    &.is-capson {
+      @apply text-blue-400;
+    }
   }
   &.is-command {
     grid-column-end: span 4;
@@ -235,6 +246,7 @@ $color-key: mix($color-black, $color-white, 87%);
   class:is-tab={tab}
   class:is-enter={enter}
   class:is-capslock={capslck}
+  class:is-capson={capslck && capson}
   class:is-home={homekey}
   class:is-shift-left={shift && left}
   class:is-shift-right={shift && right}

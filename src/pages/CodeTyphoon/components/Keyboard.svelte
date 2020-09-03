@@ -4,23 +4,50 @@
   import Key from 'components/Key'
   import keysmap from 'components/keymaps'
 
+  import codekey from 'components/codekey'
+
   const dispatch = createEventDispatcher()
 
+  let is_shift = false;
+  let is_capslck = false;
   export const keydown = (code, up = false) => {
     let key = keyboard[code]
     if (key) {
       key.pressed(up)
+
+      // enable
+      if (code === 'l_16' || code === 'r_16') {
+          is_shift = !up
+      }
+
+      if (up && code === 20) {
+        is_capslck = !is_capslck
+        // caps_led update
+        key.led(is_capslck)
+      }
     }
   }
 
   const dispatchdown = (e) => {
     let data = e.detail
+    
+    if (data.keyCode >= 32) {
+      data.key = is_shift || is_capslck ? String.fromCharCode([data.keyCode]) : String.fromCharCode([data.keyCode]).toLowerCase()
+    } else {
+      data.key = codekey[data.keyCode]
+    }
     let event = new KeyboardEvent('keydown', data)
+    console.log(event)
     window.dispatchEvent(event)
   }
 
   const dispatchup = (e) => {
     let data = e.detail
+    if (data.keyCode >= 32) {
+      data.key = is_shift || is_capslck ? String.fromCharCode([data.keyCode]) : String.fromCharCode([data.keyCode]).toLowerCase()
+    } else {
+      data.key = codekey[data.keyCode]
+    }
     let event = new KeyboardEvent('keyup', data)
     window.dispatchEvent(event)
   }
