@@ -31,7 +31,7 @@
   const dispatchdown = (e) => {
     let data = e.detail
     
-    if (data.keyCode >= 32) {
+    if (data.keyCode >= 32 && data.keyCode <= 90 ) {
       data.key = is_shift || is_capslck ? String.fromCharCode([data.keyCode]) : String.fromCharCode([data.keyCode]).toLowerCase()
     } else {
       data.key = codekey[data.keyCode]

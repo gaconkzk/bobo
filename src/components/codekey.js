@@ -4,4 +4,6 @@ module.exports = {
   16: 'Shift',
   17: 'Control',
   20: 'CapsLock',
+  219: '[',
+  221: '['
 }

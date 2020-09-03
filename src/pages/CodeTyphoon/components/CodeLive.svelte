@@ -51,6 +51,7 @@ A quick brown fox jumps over the lazy dog.
   }
 
   const handleKeyup = (e) => {
+    console.log(e)
     if (isStarted) {
       let keyCode = mapLeftRight(e)
       keyboard.keydown(keyCode, true)
