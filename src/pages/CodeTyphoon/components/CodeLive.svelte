@@ -31,10 +31,28 @@
     return 0
   }
 
-  const handleKeyup = (e) => keyboard.keydown(e.keyCode, true)
+  const mapLeftRight = (e) => {
+    let featureLeft = ['ShiftLeft', 'ControlLeft', 'MetaLeft', 'AltLeft']
+    let featureRight = ['ShiftRight', 'ControlRight', 'MetaRight', 'AltRight']
+    let mapkc = e.keyCode
+
+    if (featureLeft.indexOf(e.code) >= 0) {
+      mapkc = 'l_' + mapkc
+    } else if (featureRight.indexOf(e.code) >= 0) {
+      mapkc = 'r_' + mapkc
+    }
+
+    return mapkc
+  }
+
+  const handleKeyup = (e) => {
+    let keyCode = mapLeftRight(e)
+    keyboard.keydown(keyCode, true)
+  }
 
   const handleKeydown = (e) => {
-    keyboard.keydown(e.keyCode)
+    let keyCode = mapLeftRight(e)
+    keyboard.keydown(keyCode)
 
     if (isStarted) {
       let shouldRender = checkKey(e)

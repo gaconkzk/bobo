@@ -2,13 +2,15 @@
   export let top = false, bottom = false, data = false, right = false, 
     left = false, space = false, command = false, arrow = false,
     up = false, down = false, backspace = false, tab = false,
-    enter = false, capslck = false, homekey = false, shift = false, keyCode = undefined
-
+    enter = false, capslck = false, homekey = false, shift = false
+  export let keyCode = undefined
 
   let actived = false
 
   export const pressed = (up = false) => {
-    actived = !up
+    if (keyCode) { // useless, but I need get rid of vscode warning
+      actived = !up
+    }
   }
 </script>
 
@@ -55,9 +57,6 @@ $color-key: mix($color-black, $color-white, 87%);
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-  &:hover {
-    background-color: green;
-  }
   &.is-home {
     text-decoration: none;
     position: relative;
@@ -132,6 +131,10 @@ $color-key: mix($color-black, $color-white, 87%);
       top: 0;
       width: $key-size / 4;
     }
+    &.is-down::before {
+      @apply bg-blue-400
+    }
+    &.is-down:hover::before,
     &:hover::before {
       background-color: green;
     }
@@ -144,6 +147,10 @@ $color-key: mix($color-black, $color-white, 87%);
       top: $key-size - $key-gutter;
       width: $key-gutter * 2;
     }
+    &.is-down::after {
+      box-shadow: - $key-gutter $key-gutter 0 0 #63b3ed inset;
+    }
+    &.is-down:hover::after,
     &:hover::after{
       box-shadow: - $key-gutter $key-gutter 0 0 green inset;
     }
@@ -174,6 +181,9 @@ $color-key: mix($color-black, $color-white, 87%);
   }
   &.is-down{
     @apply bg-blue-400;
+  }
+  &:hover {
+    background-color: green;
   }
 }
 </style>
