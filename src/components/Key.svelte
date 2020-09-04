@@ -17,7 +17,6 @@
   }
 
   export const led = (on = false) => {
-    console.log('turn on???', capslck, on)
     if (capslck && on) {
       capson = true
     } else {

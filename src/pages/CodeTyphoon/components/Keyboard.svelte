@@ -37,7 +37,6 @@
       data.key = codekey[data.keyCode]
     }
     let event = new KeyboardEvent('keydown', data)
-    console.log(event)
     window.dispatchEvent(event)
   }
 
