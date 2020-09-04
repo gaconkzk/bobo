@@ -1,6 +1,12 @@
 <script>
   import StatusBar from './components/StatusBar'
   import CodeLive from './components/CodeLive'
+
+  let status = { error: 0, accuracy: 0.00 }
+
+  const handleMessage = (e) => {
+    status = e.detail
+  }
 </script>
 
 <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -12,6 +18,6 @@
   </div>
 </nav>
 <div class="flex flex-col w-full items-center py-2">
-  <StatusBar />
-  <CodeLive />
+  <StatusBar {...status}/>
+  <CodeLive on:message={handleMessage}/>
 </div>
