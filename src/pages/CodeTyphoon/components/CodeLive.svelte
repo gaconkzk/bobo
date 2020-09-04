@@ -196,7 +196,7 @@ A quick brown fox jumps over the lazy dog.
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div id="codelive" class="rounded border-2 border-green-200 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>')}</div>
+<div id="codelive" class="rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>')}</div>
 
 <button class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 
