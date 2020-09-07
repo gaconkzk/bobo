@@ -19,4 +19,5 @@
   <SmallCard title="Errors" data={error} dataStyle="error"/>
   <SmallCard title="Times(s)" data={seconds}/>
   <SmallCard title="Accuracy(%)" data={(accuracy * 100).toFixed(2)} />
+  <SmallCard title="WPM" data={0} />
 </div>
