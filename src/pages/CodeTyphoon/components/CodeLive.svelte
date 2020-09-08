@@ -21,7 +21,7 @@ A quick brown fox jumps over the lazy dog.
 
   let codelive
 
-  let next = 0
+  let next = current[0].charCodeAt(0)
 
   const PressedState = {
     NORMALKEY: 1,
@@ -115,9 +115,10 @@ A quick brown fox jumps over the lazy dog.
 
       typed = ''
       
+      let next = current[0].charCodeAt(0)
       all_words = current.split(' ')
+      all_words[0] = '<em>' + all_words[0][0] + '</em>' + all_words[0].substring(1)
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
-      next = 0
 
       dispatch('message', {
         error: err,
@@ -167,10 +168,9 @@ A quick brown fox jumps over the lazy dog.
 
     // space
     if (ca.length > nidx) {
+      next = ca[nidx].charCodeAt(0)
       ca[nidx] = `<em>${ca[nidx]}</em>`
     }
-
-    next++
 
     return ca.join('')
   }
@@ -192,8 +192,9 @@ A quick brown fox jumps over the lazy dog.
     }
 
     let html_word = htmlWord(last_w_idx, typed_words)
-    if (html_word.indexOf('</em>') === -1) {
+    if (html_word.indexOf('</em>') === -1 && last_w_idx < all_words.length - 1) {
       all_words[last_w_idx] = html_word + '^|^'
+      next = ' '.charCodeAt(0)
     } else {
       all_words[last_w_idx] = html_word
     }
@@ -230,7 +231,7 @@ A quick brown fox jumps over the lazy dog.
 <button class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 
 <!-- <div>{typed}</div> -->
-
+<div>{next}</div>
 <br/>
 
 <Keyboard bind:this={keyboard}/>
