@@ -86,6 +86,7 @@ $keyboard-spacing: 16px;
   line-height: 24px;
   padding: $keyboard-spacing;
   transform-origin: top left;
+  z-index: -10;
 }
 </style>
 
