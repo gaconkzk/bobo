@@ -5,6 +5,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 
+import svg from 'rollup-plugin-svelte-svg'
+
 import replacement from 'rollup-plugin-module-replacement'
 
 import sveltePreprocess from 'svelte-preprocess'
@@ -63,12 +65,16 @@ export default {
         css.write('public/build/bundle.css')
       },
     }),
-
+    svg(),
     replacement({
         entries: [
           {
             find: 'components',
             replacement: path.resolve(projectRootDir, 'src/components')
+          },
+          {
+            find: 'assets',
+            replacement: path.resolve(projectRootDir, 'src/assets')
           }
         ],
         customResolver

@@ -6,6 +6,8 @@
 
   import codekey from 'components/codekey'
 
+  import Palms from 'components/Palms'
+
   const dispatch = createEventDispatcher()
 
   let is_shift = false;
@@ -87,7 +89,7 @@ $keyboard-spacing: 16px;
 }
 </style>
 
-<div class="keyboard-container">
+<div class="keyboard-container relative">
   <div class="keyboard">
     {#each keysmap as rows}
       {#each rows as key}
@@ -95,4 +97,5 @@ $keyboard-spacing: 16px;
       {/each}
     {/each}
   </div>
+  <Palms />
 </div>
