@@ -6,11 +6,16 @@
 
   const dispatch = createEventDispatcher()
 
+  const renderHtml = (data) => {
+    data = data.substring(0, next-1) + `<em>${data[next]}</em>` + data.substring(next + 1);
+    return data.replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
+  }
+
   // TODO current should be external prop and load by a mechanism (user allow to chose any thing they want to challenge or practice)
   // future welcome meee yo yo yo
   let current = `
 A quick brown fox jumps over the lazy dog.
-- Fixed a bug: typed more than it should be`
+  - Fixed a bug: typed more than it should be`
 
   let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
   let typed = ''
@@ -20,6 +25,8 @@ A quick brown fox jumps over the lazy dog.
   let acc = 0.00
 
   let codelive
+
+  let next = 0
 
   const PressedState = {
     NORMALKEY: 1,
@@ -112,8 +119,11 @@ A quick brown fox jumps over the lazy dog.
       acc = 0.00
 
       typed = ''
+      
       all_words = current.replace(/<\/?[^>]+(>|$)/g, '').split(' ')
-      codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>')
+      codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/ /g, '&nbsp;')
+
+      next = 0
 
       dispatch('message', {
         error: err,
@@ -176,7 +186,7 @@ A quick brown fox jumps over the lazy dog.
       all_words[prev_w_idx] = htmlWord(prev_w_idx, typed_words, true)
     }
 
-    let html = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>')
+    let html = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
     codelive.innerHTML = html
 
     calculate(html)
@@ -191,12 +201,15 @@ A quick brown fox jumps over the lazy dog.
   :global(mark) {
     @apply text-red-500 bg-white
   }
+  :global(em){
+    @apply text-blue-500 bg-green-200
+  }
 }
 </style>
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div id="codelive" class="rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>')}</div>
+<div id="codelive" class="rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html renderHtml(current)}</div>
 
 <button class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 
