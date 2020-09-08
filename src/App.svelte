@@ -18,7 +18,7 @@
   }
 </script>
 
-<main class="h-screen">
+<main class="h-screen overflow-x-hidden">
   <Router>
     <Route path="/" component={CodeTyphoon} />
     <Route path="/login" component={Login} />
