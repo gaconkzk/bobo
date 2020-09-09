@@ -22,8 +22,12 @@ A quick brown fox jumps over the lazy dog.
   let codelive
 
   const keyCode = (char) => {
+    // should return two, 1 for left, 1 for right, 0 for neutral
     switch (char) {
       case '\n': return 13
+      case '.': return 190
+      case '-': return 189
+      case ':': return 186
 
       default:
       return char.toUpperCase().charCodeAt(0)
