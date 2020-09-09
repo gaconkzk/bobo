@@ -22,7 +22,12 @@ A quick brown fox jumps over the lazy dog.
   let codelive
 
   const keyCode = (char) => {
-    return char.charCodeAt(0)
+    switch (char) {
+      case '\n': return 13
+
+      default:
+      return char.toUpperCase().charCodeAt(0)
+    }
   }
 
   let next = keyCode(current[0])
@@ -120,6 +125,9 @@ A quick brown fox jumps over the lazy dog.
       typed = ''
       
       next = keyCode(current[0])
+
+      keyboard.fingerAt(next)
+
       all_words = current.split(' ')
       all_words[0] = '<em>' + all_words[0][0] + '</em>' + all_words[0].substring(1)
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
@@ -129,6 +137,7 @@ A quick brown fox jumps over the lazy dog.
         accuracy: err/current.length,
       })
     } else {
+      keyboard.fingerAt(0)
       all_words = current.split(' ')
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
     }
@@ -176,6 +185,7 @@ A quick brown fox jumps over the lazy dog.
     // space
     if (ca.length > nidx) {
       next = keyCode(ca[nidx])
+      keyboard.fingerAt(next)
       ca[nidx] = `<em>${ca[nidx]}</em>`
     }
 
@@ -202,6 +212,7 @@ A quick brown fox jumps over the lazy dog.
     if (html_word.indexOf('</em>') === -1 && last_w_idx < all_words.length - 1) {
       all_words[last_w_idx] = html_word + '^|^'
       next = keyCode(' ')
+      keyboard.fingerAt(next)
     } else {
       all_words[last_w_idx] = html_word
     }

@@ -20,6 +20,11 @@
   
   let palms
 
+  // TODO - I dup lupp passing prop down
+  export const fingerAt = (code) => {
+    palms.fingerAt(code)
+  }
+
   export const keydown = (code, up = false) => {
     let key = keyboard[code]
     if (key) {
