@@ -254,4 +254,4 @@ A quick brown fox jumps over the lazy dog.
 <!-- <div>{next}</div> -->
 <br/>
 
-<Keyboard bind:this={keyboard}/>
+<Keyboard bind:this={keyboard} bind:next={next}/>

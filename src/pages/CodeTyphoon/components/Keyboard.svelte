@@ -10,11 +10,15 @@
 
   const dispatch = createEventDispatcher()
 
+  export let next
+
   let is_shift = false;
   let is_capslck = false;
 
   let left = 'neutral-left';
   let right = 'neutral-right';
+  
+  let palms
 
   export const keydown = (code, up = false) => {
     let key = keyboard[code]
@@ -103,5 +107,5 @@ $keyboard-spacing: 16px;
       {/each}
     {/each}
   </div>
-  <Palms left={left} right={right}/>
+  <Palms bind:this={palms}/>
 </div>
