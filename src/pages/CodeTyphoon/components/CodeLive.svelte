@@ -220,13 +220,26 @@ A quick brown fox jumps over the lazy dog.
 <style lang="scss">
 #codelive {
   :global(span) {
-    @apply text-green-500
+    @apply text-green-500;
   }
   :global(mark) {
-    @apply text-red-500 bg-white
+    @apply text-red-500 bg-white;
   }
-  :global(em){
-    @apply text-black bg-green-200
+  :global(em) {
+    @apply text-black bg-green-200 not-italic;
+    animation: blink-animation 0.5s steps(5, start) infinite;
+    -webkit-animation: blink-animation 0.5s steps(5, start) infinite;
+  }
+
+  @keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+  @-webkit-keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
   }
 }
 </style>

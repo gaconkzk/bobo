@@ -153,53 +153,55 @@ $color-key: mix($color-black, $color-white, 87%);
     grid-column-end: span 4;
   }
   &.is-shift-left{
-    grid-column-end: span 9;
+    grid-column-end: span 10;
   }
   &.is-enter{
-    border-radius: 0 $key-radius $key-radius $key-radius;
-    grid-column-start: 56;
-    grid-column-end: span 3;
-    grid-row-end: span 4;
-    position: relative;
-    &::before,
-    &::after{
-      content: '';
-      position: absolute;
-    }
-    &::before {
-      background-color: $color-key;
-      border-radius: $key-radius 0 0 $key-radius;
-      height: $key-size;
-      left: - $key-size / 4;
-      top: 0;
-      width: $key-size / 4;
-    }
-    &.is-down::before {
-      @apply bg-blue-400
-    }
-    &.is-down:hover::before,
-    &:hover::before {
-      background-color: green;
-    }
-    &::after{
-      border-top-right-radius: $key-radius;
-      box-shadow: - $key-gutter $key-gutter 0 0 $color-key inset;
-      cursor: default;
-      height: $key-gutter * 2;
-      left: - $key-gutter;
-      top: $key-size - $key-gutter;
-      width: $key-gutter * 2;
-    }
-    &.is-down::after {
-      box-shadow: - $key-gutter $key-gutter 0 0 #63b3ed inset;
-    }
-    &.is-down:hover::after,
-    &:hover::after{
-      box-shadow: - $key-gutter $key-gutter 0 0 green inset;
-    }
-    .key__top{
-      height: $key-size - ($key-spacing-vertical * 2);
-    }
+    grid-column-end: span 7;
+    // well no special enter - :D
+    // border-radius: 0 $key-radius $key-radius $key-radius;
+    // grid-column-start: 56;
+    // grid-column-end: span 3;
+    // grid-row-end: span 4;
+    // position: relative;
+    // &::before,
+    // &::after{
+    //   content: '';
+    //   position: absolute;
+    // }
+    // &::before {
+    //   background-color: $color-key;
+    //   border-radius: $key-radius 0 0 $key-radius;
+    //   height: $key-size;
+    //   left: - $key-size / 4;
+    //   top: 0;
+    //   width: $key-size / 4;
+    // }
+    // &.is-down::before {
+    //   @apply bg-blue-400
+    // }
+    // &.is-down:hover::before,
+    // &:hover::before {
+    //   background-color: green;
+    // }
+    // &::after{
+    //   border-top-right-radius: $key-radius;
+    //   box-shadow: - $key-gutter $key-gutter 0 0 $color-key inset;
+    //   cursor: default;
+    //   height: $key-gutter * 2;
+    //   left: - $key-gutter;
+    //   top: $key-size - $key-gutter;
+    //   width: $key-gutter * 2;
+    // }
+    // &.is-down::after {
+    //   box-shadow: - $key-gutter $key-gutter 0 0 #63b3ed inset;
+    // }
+    // &.is-down:hover::after,
+    // &:hover::after{
+    //   box-shadow: - $key-gutter $key-gutter 0 0 green inset;
+    // }
+    // .key__top{
+    //   height: $key-size - ($key-spacing-vertical * 2);
+    // }
   }
   &.is-left,
   &.is-right{
@@ -214,7 +216,7 @@ $color-key: mix($color-black, $color-white, 87%);
     align-items: flex-end;
   }
   &.is-shift-right{
-    grid-column-end: span 9;
+    grid-column-end: span 8;
   }
   &.is-space{
     grid-column-end: span 24;

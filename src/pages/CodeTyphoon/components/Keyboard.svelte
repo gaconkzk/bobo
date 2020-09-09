@@ -12,6 +12,10 @@
 
   let is_shift = false;
   let is_capslck = false;
+
+  let left = 'neutral-left';
+  let right = 'neutral-right';
+
   export const keydown = (code, up = false) => {
     let key = keyboard[code]
     if (key) {
@@ -34,10 +38,12 @@
     let data = e.detail
     
     if (data.keyCode >= 32 && data.keyCode <= 90 ) {
-      data.key = is_shift || is_capslck ? String.fromCharCode([data.keyCode]) : String.fromCharCode([data.keyCode]).toLowerCase()
+      data.key = is_shift || is_capslck ? codekey[data.keyCode] : codekey[data.keyCode].toLowerCase()
     } else {
       data.key = codekey[data.keyCode]
     }
+
+    console.log(data)
     let event = new KeyboardEvent('keydown', data)
     window.dispatchEvent(event)
   }
@@ -86,7 +92,6 @@ $keyboard-spacing: 16px;
   line-height: 24px;
   padding: $keyboard-spacing;
   transform-origin: top left;
-  z-index: -10;
 }
 </style>
 
@@ -98,5 +103,5 @@ $keyboard-spacing: 16px;
       {/each}
     {/each}
   </div>
-  <Palms />
+  <Palms left={left} right={right}/>
 </div>

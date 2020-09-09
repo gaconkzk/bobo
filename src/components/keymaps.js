@@ -126,13 +126,18 @@ module.exports = [
       top: '}',
       bottom: ']',
     },
-    // special key, this span on 2 rows
     {
-      keyCode: 13,
-      enter: true,
-      top: '&larrhk;',
-      bottom: '',
+      keyCode: 220,
+      top: '|',
+      bottom: '\\',
     },
+    // special key, this span on 2 rows
+    // {
+    //   keyCode: 13,
+    //   enter: true,
+    //   top: '&larrhk;',
+    //   bottom: '',
+    // },
   ],[
     {
       keyCode: 20,
@@ -190,9 +195,10 @@ module.exports = [
       bottom: '\'',
     },
     {
-      keyCode: 220,
-      top: '|',
-      bottom: '\\',
+      keyCode: 13,
+      enter: true,
+      top: '&larrhk;',
+      bottom: '',
     },
   ],[
     {
