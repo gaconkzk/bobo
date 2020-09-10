@@ -2,8 +2,6 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
-console.log(__bobo)
-
 var firebaseConfig = {
   apiKey: __bobo.env.API_KEY,
   authDomain: __bobo.env.AUTH_DOMAIN,
