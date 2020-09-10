@@ -22,7 +22,7 @@
   }
 </script>
 
-<main class="h-screen overflow-x-hidden">
+<main class="h-screen overflow-x-hidden flex flex-col">
   <Router>
     <Route path="/" component={Home} />
     <Route path="/login" component={Login} />
