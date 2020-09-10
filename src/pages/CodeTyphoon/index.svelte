@@ -10,7 +10,6 @@
   import { auth as fauth } from 'components/firebase'
 
   import Slug from 'components/Slug'
-import About from '../About.svelte';
 
   let user = get(auth)
   let status = { error: 0, accuracy: 0.00 }
@@ -26,8 +25,6 @@ import About from '../About.svelte';
     })
   }
 
-  // for slug - i'll move it out later
-  var borderRadius = 40;
   var numslugs = 10;
 
   let race;
@@ -44,11 +41,6 @@ import About from '../About.svelte';
     var inner = Math.random() > 0.5 ? ' ' + pupil : pupil + ' ';
     var eye = eyes.charAt(idx) + inner + eyes.charAt(idx + 1);
     return eye + ' ' + eye;
-  }
-
-  function getBorder(step) {
-    var px = borderRadius + 'px ';
-    return px + px + (step ? px + ' 0px' : '0px ' + px);
   }
 
   function animateSlug(slug) {
@@ -104,7 +96,6 @@ import About from '../About.svelte';
     let z = rndInt(15)
     let speed = Math.random() * 3 + 0.25
     let bottom = `${264 * (25 - z) / 100}px`
-    let radius = getBorder()
     // var bottom = race.height * (25 - z) / 100
     
 
@@ -116,7 +107,7 @@ import About from '../About.svelte';
     // $slug.data('speed', speed).mouseover(jump);
     // animateSlug($slug);
     // blinkSlug($slug);
-    return { hue, z, speed, bottom, radius }
+    return { hue, z, speed, bottom }
   }
 
   let slugs = [createSlug(), createSlug()]
@@ -126,8 +117,8 @@ import About from '../About.svelte';
   .race {
     @apply absolute w-full overflow-hidden bg-gradient-to-b from-white via-gray-100 to-black;
     height: 264px;
-    z-index: -5;
     bottom: 0;
+    z-index: -1;
   }
   .slug {
     font-family: monospace;

@@ -1,14 +1,91 @@
 <script>
+  import { onMount } from 'svelte'
+
   function rndInt(max) {
     return Math.floor(Math.random() * max);
   }
 
-  export let radius
+  function getBorder(step) {
+    var px = radius + 'px ';
+    return px + px + (step ? px + ' 0px' : '0px ' + px);
+  }
+
+  
+  // for slug - i'll move it out later
+  let radius = 40
   export let hue
   export let z
   // this will be calculate and set dynamically
   export let speed
   export let bottom
+
+  let me
+
+  let eyes = '()<>[]',
+    pupils = 'oO*.°´`\'+x';
+
+  function jump() {
+    console.log('jump jump')
+    let tl = new TimelineMax();
+    tl.to(me, 0.25, {
+        y: -50,
+        ease: Quad.easeOut
+      })
+      .to(me, 0.75, {
+        y: 0,
+        ease: Bounce.easeOut
+      })
+      .to(me, 1, {
+        x: "+=50",
+        ease: Linear.easeNone
+      }, 0)
+  }
+
+  function getEyes() {
+    var idx = rndInt(eyes.length * 0.5) * 2;
+    var pupil = pupils.charAt(rndInt(pupils.length));
+    var inner = Math.random() > 0.5 ? ' ' + pupil : pupil + ' ';
+    var eye = eyes.charAt(idx) + inner + eyes.charAt(idx + 1);
+    return eye + ' ' + eye;
+  }
+
+  function blinkSlug(close) {
+    if (close) me.innerText = '---- ----'
+      else me.innerText = getEyes()
+    TweenMax.delayedCall(
+      close ? 0.25 : Math.random() * 20,
+      blinkSlug, [me, !close]
+    );
+  }
+
+  function animateSlug() {
+    var tl = new TimelineMax();
+    let gsTransform = me['_gsTransform']
+    if (gsTransform && gsTransform.x > screen.width) {
+      TweenMax.set(me, {
+        x: -170,
+      });
+    }
+    
+    tl.to(me, speed, {
+      x: '+=' + radius,
+      borderRadius: getBorder(true)
+    }).to(me, speed * 0.25, {
+      rotation: -5,
+      ease: Quad.easeOut
+    }).to(me, speed * 0.25, {
+      rotation: 0,
+      ease: Quad.easeIn
+    }).to(me, speed * 0.5, {
+      borderRadius: getBorder(false)
+    }, speed).addCallback(animateSlug, speed * 1.5, []);
+  }
+
+  onMount(() => {
+    blinkSlug()
+    animateSlug()
+  })
+
 </script>
 
 <style>
@@ -30,4 +107,4 @@
 }
 </style>
 
-<div class="slug" style="--slug-border-color: {hue}; --slug-color: {hue + 180}; --slug-border-radius: {radius}; --slug-z-index: {z}; --slug-bottom: {bottom}" data={speed}></div>
+<div bind:this={me} on:mouseenter={jump} class="slug" style="--slug-border-color: {hue}; --slug-color: {hue + 180}; --slug-z-index: {z}; --slug-bottom: {bottom}; border-radius: {getBorder()}"></div>
