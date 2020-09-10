@@ -5,3 +5,5 @@
 /public/index.css
 
 yarn-error.log
+
+.env

@@ -2,6 +2,8 @@ import path from 'path'
 import svelte from 'rollup-plugin-svelte'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
+import replace from '@rollup/plugin-replace'
+
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 
@@ -10,6 +12,8 @@ import svg from 'rollup-plugin-svelte-svg'
 import replacement from 'rollup-plugin-module-replacement'
 
 import sveltePreprocess from 'svelte-preprocess'
+
+import { config } from 'dotenv'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -75,7 +79,11 @@ export default {
           {
             find: 'assets',
             replacement: path.resolve(projectRootDir, 'src/assets')
-          }
+          },
+          {
+            find: 'services',
+            replacement: path.resolve(projectRootDir, 'src/services')
+          },
         ],
         customResolver
     }),
@@ -89,6 +97,16 @@ export default {
       dedupe: ['svelte'],
       extensions: ['.js', '.svelte']
     }),
+
+    replace({
+      __bobo: JSON.stringify({
+        env: {
+          isProd: production,
+          ...config().parsed
+        }
+      })
+    }),
+
     commonjs(),
 
     // In dev mode, call `npm run start` once
