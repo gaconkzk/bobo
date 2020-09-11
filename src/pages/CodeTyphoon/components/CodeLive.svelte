@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import keymaps from 'components/keymaps'
   import Keyboard from './Keyboard'
+import { flat } from '../../../components/Palms/palm_data';
   let keyboard
 
   const dispatch = createEventDispatcher()
@@ -44,7 +45,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
       needShift = true
     }
 
-    let key = flatkeys.find(k => k.top === char || k.bottom === char || k.data === char)
+    let key = flatkeys.find(k => k.top === char || k.bottom === char || k.data === char.toUpperCase())
     if (!key) {
       switch (char) {
         case '\n': 
@@ -62,6 +63,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
   }
 
   let next = keyCode(current[0])
+  keyboard && keyboard.fingerAt(next)
 
   const PressedState = {
     NORMALKEY: 1,
@@ -154,7 +156,6 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
       acc = 0.00
 
       typed = ''
-      
       next = keyCode(current[0])
 
       keyboard.fingerAt(next)
@@ -170,7 +171,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
         accuracy: err/current.length,
       })
     } else {
-      keyboard.fingerAt(0)
+      keyboard.fingerAt({code: 0 })
       all_words = current.split(' ')
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
     }

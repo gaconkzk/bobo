@@ -6,7 +6,7 @@
 </script>
 
 {#if actived}
-  <g>
+  <g data={left}>
     <slot />
   </g>
 {/if}

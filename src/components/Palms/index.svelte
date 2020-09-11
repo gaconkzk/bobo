@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte'
+  
   import Finger from './Finger'
 
   import palmdata from './palm_data'
@@ -52,23 +54,26 @@
     }
     return `Id_${codekey[code]}${optional ? '_' + codekey[optional] : ''}`
   }
+
+  onMount(() => {
+    reset(true)
+  })
 </script>
 
 <style type="text/css">
-  .st0{display:none;}
   .st1{display:inline;opacity:0.33;fill:#E0E1E2;}
   .st2{display:inline;fill:none;stroke:#808285;stroke-width:2;stroke-miterlimit:10;}
   .st3{display:inline;opacity:0.5;}
   .st4{fill:#AEB0B2;}
   .st5{display:inline;fill:none;stroke:#2969D0;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;}
+/* not in-use
+  .theme-dark .st1 {fill: #CCCCCC ;}
+  .theme-dark .st5 {stroke: #b158b5 ;}
+  .theme-dark .st2 {stroke: black;}
 
-    .theme-dark .st1 {fill: #CCCCCC ;}
-    .theme-dark .st5 {stroke: #b158b5 ;}
-    .theme-dark .st2 {stroke: black;}
-
-    .theme-robot .st1 {fill: #b1b7ce ;}
-    .theme-robot .st5 {stroke: #b238b7;}
-    .theme-robot .st2 {stroke: black;}
+  .theme-robot .st1 {fill: #b1b7ce ;}
+  .theme-robot .st5 {stroke: #b238b7;}
+  .theme-robot .st2 {stroke: black;} */
 
     .theme-kingfish .st1 {fill: #b5bac3 ;}
     .theme-kingfish .st5 {stroke: #2196f3 ;}

@@ -10,12 +10,9 @@
 
   const dispatch = createEventDispatcher()
 
-  let is_shift = false;
-  let is_capslck = false;
+  let is_shift = false
+  let is_capslck = false
 
-  let left = 'neutral-left';
-  let right = 'neutral-right';
-  
   let palms
 
   // TODO - I dup lupp passing prop down

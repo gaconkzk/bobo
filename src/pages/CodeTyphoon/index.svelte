@@ -120,15 +120,6 @@
     bottom: 0;
     z-index: -1;
   }
-  .slug {
-    font-family: monospace;
-    width: 170px;
-    height: 95px;
-    bottom: 88px;
-    text-align: right;
-    border: 2px solid;
-    @apply absolute
-  }
 </style>
 
 <nav class="flex-initial flex items-center justify-between flex-wrap bg-teal-500 p-6">
