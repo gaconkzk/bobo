@@ -10,8 +10,17 @@
 
   // TODO current should be external prop and load by a mechanism (user allow to chose any thing they want to challenge or practice)
   // future welcome meee yo yo yo
-  let current = `A quick brown fox jumps over the lazy dog.
-  - Fixed a bug: typed more than it should be`
+  let current = `function getOffset( el ) {
+    var _x = 0;
+    var _y = 0;
+    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+        _x += el.offsetLeft - el.scrollLeft;
+        _y += el.offsetTop - el.scrollTop;
+        el = el.offsetParent;
+    }
+    return { top: _y, left: _x };
+}
+var x = getOffset( document.getElementById('yourElId') ).left;`
 
   let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
   let typed = ''

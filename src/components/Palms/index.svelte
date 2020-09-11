@@ -1,6 +1,8 @@
 <script>
   import Finger from './Finger'
 
+  import palmdata from './palm_data'
+
   import codekey from 'components/codekey'
 
   // Each time, only one position on left and/or right
@@ -13,7 +15,6 @@
     } else {
       reset()
       let kid = takeId(key.code)
-      console.log(kid, fingers)
       if (fingers && fingers[kid]) {
         let f = fingers[kid]
         f.actived = true

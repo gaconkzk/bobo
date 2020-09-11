@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
 
   function rndInt(max) {
     return Math.floor(Math.random() * max);
@@ -18,6 +18,9 @@
   // this will be calculate and set dynamically
   export let speed
   export let bottom
+
+  // for controlling timeline
+  let tl
 
   let me
 
@@ -50,40 +53,51 @@
   }
 
   function blinkSlug(close) {
-    if (close) me.innerText = '---- ----'
-      else me.innerText = getEyes()
-    TweenMax.delayedCall(
-      close ? 0.25 : Math.random() * 20,
-      blinkSlug, [me, !close]
-    );
+    if (me) {
+      if (close) me.innerText = '---- ----'
+        else me.innerText = getEyes()
+      TweenMax.delayedCall(
+        close ? 0.25 : Math.random() * 20,
+        blinkSlug, [me, !close]
+      )
+    }
   }
 
   function animateSlug() {
-    var tl = new TimelineMax();
-    let gsTransform = me['_gsTransform']
+    let gsTransform = me && me['_gsTransform']
+    
     if (gsTransform && gsTransform.x > screen.width) {
       TweenMax.set(me, {
         x: -170,
       });
     }
-    
-    tl.to(me, speed, {
-      x: '+=' + radius,
-      borderRadius: getBorder(true)
-    }).to(me, speed * 0.25, {
-      rotation: -5,
-      ease: Quad.easeOut
-    }).to(me, speed * 0.25, {
-      rotation: 0,
-      ease: Quad.easeIn
-    }).to(me, speed * 0.5, {
-      borderRadius: getBorder(false)
-    }, speed).addCallback(animateSlug, speed * 1.5, []);
+
+    if (me) {
+      tl = new TimelineMax();
+      tl.to(me, speed, {
+        x: '+=' + radius,
+        borderRadius: getBorder(true)
+      }).to(me, speed * 0.25, {
+        rotation: -5,
+        ease: Quad.easeOut
+      }).to(me, speed * 0.25, {
+        rotation: 0,
+        ease: Quad.easeIn
+      }).to(me, speed * 0.5, {
+        borderRadius: getBorder(false)
+      }, speed).addCallback(animateSlug, speed * 1.5, []);
+    }
   }
 
   onMount(() => {
     blinkSlug()
     animateSlug()
+  })
+
+  onDestroy(() => {
+    if (me) {
+      TweenMax.set(me, {clearProps: 'all'})
+    }
   })
 
 </script>
