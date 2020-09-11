@@ -10,8 +10,6 @@
 
   const dispatch = createEventDispatcher()
 
-  export let next
-
   let is_shift = false;
   let is_capslck = false;
 
@@ -21,8 +19,8 @@
   let palms
 
   // TODO - I dup lupp passing prop down
-  export const fingerAt = (code) => {
-    palms.fingerAt(code)
+  export const fingerAt = (key) => {
+    palms.fingerAt(key)
   }
 
   export const keydown = (code, up = false) => {

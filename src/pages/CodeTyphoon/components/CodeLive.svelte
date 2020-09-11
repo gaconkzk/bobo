@@ -1,15 +1,16 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-
+  import keymaps from 'components/keymaps'
   import Keyboard from './Keyboard'
   let keyboard
 
   const dispatch = createEventDispatcher()
 
+  const flatkeys = keymaps.flat()
+
   // TODO current should be external prop and load by a mechanism (user allow to chose any thing they want to challenge or practice)
   // future welcome meee yo yo yo
-  let current = `
-A quick brown fox jumps over the lazy dog.
+  let current = `A quick brown fox jumps over the lazy dog.
   - Fixed a bug: typed more than it should be`
 
   let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
@@ -22,16 +23,33 @@ A quick brown fox jumps over the lazy dog.
   let codelive
 
   const keyCode = (char) => {
+    // shift top row
+    let specShift = '~!@#$%^&*()_+{}|:"<>?"'
+    let charShift = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    let shiftArr = specShift + charShift
     // should return two, 1 for left, 1 for right, 0 for neutral
-    switch (char) {
-      case '\n': return 13
-      case '.': return 190
-      case '-': return 189
-      case ':': return 186
 
-      default:
-      return char.toUpperCase().charCodeAt(0)
+    let needShift = false
+
+    if (shiftArr.includes(char)) {
+      needShift = true
     }
+
+    let key = flatkeys.find(k => k.top === char || k.bottom === char || k.data === char)
+    if (!key) {
+      switch (char) {
+        case '\n': 
+          key = flatkeys.find(k => !!k.enter)
+          break;
+        case ' ':
+          key = flatkeys.find(k => !!k.space)
+          break;
+        default:
+          key = { keyCode: 0 }
+      }
+    }
+
+    return { code: key.keyCode, shift: needShift}
   }
 
   let next = keyCode(current[0])
@@ -133,7 +151,9 @@ A quick brown fox jumps over the lazy dog.
       keyboard.fingerAt(next)
 
       all_words = current.split(' ')
-      all_words[0] = '<em>' + all_words[0][0] + '</em>' + all_words[0].substring(1)
+      if (all_words[0].length > 0) {
+        all_words[0] = '<em>' + all_words[0][0] + '</em>' + all_words[0].substring(1)
+      }
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
 
       dispatch('message', {
@@ -269,4 +289,4 @@ A quick brown fox jumps over the lazy dog.
 <!-- <div>{next}</div> -->
 <br/>
 
-<Keyboard bind:this={keyboard} bind:next={next}/>
+<Keyboard bind:this={keyboard}/>
