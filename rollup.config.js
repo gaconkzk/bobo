@@ -4,6 +4,8 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
 
+import del from 'rollup-plugin-delete'
+
 import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 
@@ -51,11 +53,15 @@ function serve() {
 export default {
   input: 'src/main.js',
   output: {
-    sourcemap: true,
-    format: 'iife',
-    name: 'app',
-    file: 'public/build/bundle.js',
+    format: 'es',
+    dir: 'public/build/',
   },
+  // output: {
+  //   sourcemap: !production,
+  //   format: 'iife',
+  //   name: 'app',
+  //   file: 'public/build/bundle.js',
+  // },
   plugins: [
     svelte({
       preprocess: sveltePreprocess({
@@ -66,7 +72,7 @@ export default {
       // we'll extract any component CSS out into
       // a separate file - better for performance
       css: (css) => {
-        css.write('public/build/bundle.css')
+        css.write('public/build/bundle.css', !production)
       },
     }),
     svg(),
@@ -119,7 +125,15 @@ export default {
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
-    production && terser(),
+    production && terser({
+      compress: {
+        unused: false,
+        collapse_vars: false,
+      }
+    }),
+    production && del({
+      targets: 'public/build/*'
+    }),
   ],
   watch: {
     clearScreen: false,

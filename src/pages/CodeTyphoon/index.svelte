@@ -3,7 +3,14 @@
   import { redirect } from 'components/pager';
 
   import StatusBar from './components/StatusBar'
-  import CodeLive from './components/CodeLive'
+
+  // Testing split
+  let CodeLive
+  import('./components/CodeLive')
+    .then(module => module.default)
+    .then(cl => CodeLive = cl)
+    .catch(err => console.error(err))
+  // import CodeLive from './components/CodeLive'
 
   import { auth, logout } from 'services/auth'
 
@@ -137,7 +144,7 @@
 </nav>
 <div class="flex-1 flex flex-col w-full items-center pt-2">
   <StatusBar {...status}/>
-  <CodeLive on:message={handleMessage}/>
+  <svelte:component this={CodeLive} on:message={handleMessage}/>
 </div>
 
 <div class="race">

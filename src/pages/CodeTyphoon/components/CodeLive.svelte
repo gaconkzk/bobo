@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte'
   import keymaps from 'components/keymaps'
   import Keyboard from './Keyboard'
-import { flat } from '../../../components/Palms/palm_data';
   let keyboard
 
   const dispatch = createEventDispatcher()
