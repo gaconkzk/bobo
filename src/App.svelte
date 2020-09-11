@@ -22,23 +22,22 @@
   }
 </script>
 
-<main class="h-screen overflow-x-hidden flex flex-col">
-  <Router>
-    <Route path="/" component={Home} />
-    <Route path="/login" component={Login} />
-    <Route path="/about" component={About} />
-    <Route path="/codetypoon" component={CodeTyphoon} middleware={[guard]}/>
-    <Route path="/ct" component={CodeTyphoon}  middleware={[guard]}/>
-    <!-- <Route path="/profile/:username" let:params>
-      <h2>Hello {params.username}!</h2>
-      <p>Profile page</p>
-    </Route>
-    <Route path="/news" middleware={[guard]}>
-      <h2>Latest News</h2>
-      <p>Finally some good news!</p>
-    </Route> -->
-    <NotFound>
-      <h2>Sorry. Page not found.</h2>
-    </NotFound>
-  </Router>
-</main>
+<Router>
+  <Route path="/" component={Home} />
+  <Route path="/login" component={Login} />
+  <Route path="/about" component={About} />
+  <Route path="/codetypoon" component={CodeTyphoon} middleware={[guard]}/>
+  <Route path="/ct" component={CodeTyphoon}  middleware={[guard]}/>
+  <!-- <Route path="/profile/:username" let:params>
+    <h2>Hello {params.username}!</h2>
+    <p>Profile page</p>
+  </Route>
+  <Route path="/news" middleware={[guard]}>
+    <h2>Latest News</h2>
+    <p>Finally some good news!</p>
+  </Route> -->
+  <NotFound>
+    <h2>Sorry. Page not found.</h2>
+  </NotFound>
+</Router>
+<!-- </main> -->

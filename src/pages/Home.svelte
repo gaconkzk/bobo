@@ -1,4 +1,4 @@
-<nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
+<!-- <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
     <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http_//www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
     <span class="font-semibold text-xl tracking-tight">Bobo</span>
@@ -15,4 +15,187 @@
       </a>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<style lang="scss">
+  #homepage {
+    font-family: 'Source Sans Pro', sans-serif;
+  }
+</style>
+
+<div id="homepage" class="text-gray-700 bg-white">
+  <nav>
+    <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+      <span class="font-bold text-2xl lg_text-4xl">
+        BOBO
+      </span>
+      <div class="block lg_hidden">
+        <button class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover_text-gray-800 hover_border-teal-500 appearance-none focus_outline-none">
+          <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <title>Menu</title>
+            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg_block">
+        <ul class="inline-flex">
+          <li><a class="px-4 font-bold" href="/">Home</a></li>
+          <li><a class="px-4 hover_text-gray-800" href="/ct">Code Typhoon</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="py-20" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-2 text-white">
+        Smart But Bored!
+      </h2>
+      <h3 class="text-2xl mb-8 text-gray-200">
+        Monitor your boredom.
+      </h3>
+
+      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+        Goo
+      </button>
+    </div>
+  </div>
+  <section class="container mx-auto px-6 p-10">
+    <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">
+      What we should do?
+    </h2>
+    <div class="flex items-center flex-wrap mb-20">
+      <div class="w-full md:w-1/2">
+        <h4 class="text-3xl text-gray-800 font-bold mb-3">Exercise Metric</h4>
+        <p class="text-gray-600 mb-8">Build ur muscles... Yay.</p>
+      </div>
+      <div class="w-full md:w-1/2">
+        <img src="imgs/health.svg" alt="Monitoring" />
+      </div>
+    </div>
+  
+    <div class="flex items-center flex-wrap mb-20">
+      <div class="w-full md:w-1/2">
+        <img src="imgs/report.svg" alt="Reporting" />
+      </div>
+      <div class="w-full md:w-1/2 pl-10">
+        <h4 class="text-3xl text-gray-800 font-bold mb-3">Check ur progress</h4>
+        <p class="text-gray-600 mb-8">Did u improve? or you are just fall flat 4ever.</p>
+      </div>
+    </div>
+  
+    <div class="flex items-center flex-wrap mb-20">
+      <div class="w-full md:w-1/2">
+        <h4 class="text-3xl text-gray-800 font-bold mb-3">Certificates or leave</h4>
+        <p class="text-gray-600 mb-8">U are passed, or u are false, up 2 ya.</p>
+      </div>
+      <div class="w-full md:w-1/2">
+        <img src="imgs/sync.svg" alt="Syncing" />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray-100">
+    <div class="container mx-auto px-6 py-20">
+      <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">
+        What gals thinks?
+      </h2>
+      <div class="flex flex-wrap">
+        <div class="w-full md:w-1/3 px-2 mb-4">
+          <div class="bg-white rounded shadow py-2">
+            <p class="text-gray-800 text-base px-6 mb-5">OMG It's suck. Should be -5 star</p>
+            <p class="text-gray-500 text-xs md:text-sm px-6">John Doe</p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 px-2 mb-4">
+          <div class="bg-white rounded shadow py-2">
+            <p class="text-gray-800 text-base px-6 mb-5">Cmon, leave this page.</p>
+            <p class="text-gray-500 text-xs md:text-sm px-6">Jane Doe</p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 px-2 mb-4">
+          <div class="bg-white rounded shadow py-2">
+            <p class="text-gray-800 text-base px-6 mb-5">I don't regret, I have no regret. At least I'm the owner.</p>
+            <p class="text-gray-500 text-xs md:text-sm px-6">vto</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background-color: #667eea">
+    <div class="container mx-auto px-6 text-center py-20">
+      <h2 class="mb-6 text-4xl font-bold text-center text-white">
+        Limited in THIS Winter
+      </h2>
+      <h3 class="my-4 text-2xl text-white">
+        Get yourself a shitty shiny slug
+      </h3>
+      <button
+        class="bg-white font-bold rounded-full mt-6 py-4 px-8 shadow-lg uppercase tracking-wider"
+      >
+        &rarr;
+      </button>
+    </div>
+  </section>
+
+  <footer class="bg-gray-100">
+    <div class="container mx-auto px-6 pt-10 pb-6">
+      <div class="flex flex-wrap">
+        <div class="w-full md_w-1/4 text-center md_text-left">
+          <h5 class="uppercase mb-6 font-bold">Links</h5>
+          <ul class="mb-4">
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">FAQ</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Help</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Support</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full md_w-1/4 text-center md_text-left">
+          <h5 class="uppercase mb-6 font-bold">Legal</h5>
+          <ul class="mb-4">
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Terms</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Privacy</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full md_w-1/4 text-center md_text-left">
+          <h5 class="uppercase mb-6 font-bold">Social</h5>
+          <ul class="mb-4">
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Facebook</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Linkedin</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Twitter</a>
+            </li>
+          </ul>
+        </div>
+        <div class="w-full md_w-1/4 text-center md_text-left">
+          <h5 class="uppercase mb-6 font-bold">Company</h5>
+          <ul class="mb-4">
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Official Blog</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">About Us</a>
+            </li>
+            <li class="mt-2">
+              <a href="#" class="hover_underline text-gray-600 hover_text-orange-500">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
