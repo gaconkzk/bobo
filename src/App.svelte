@@ -27,7 +27,7 @@
   <Route path="/login" component={Login} />
   <Route path="/about" component={About} />
   <Route path="/codetypoon" component={CodeTyphoon} middleware={[guard]}/>
-  <Route path="/ct" component={CodeTyphoon}  middleware={[guard]}/>
+  <Route path="/ct" component={CodeTyphoon}/>
   <!-- <Route path="/profile/:username" let:params>
     <h2>Hello {params.username}!</h2>
     <p>Profile page</p>
