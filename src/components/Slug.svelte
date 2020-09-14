@@ -59,7 +59,7 @@
         else me.innerText = getEyes()
       TweenMax.delayedCall(
         close ? 0.25 : Math.random() * 20,
-        blinkSlug, [me, !close]
+        blinkSlug, [!close]
       )
     }
   }
