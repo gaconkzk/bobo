@@ -1,16 +1,17 @@
-<script>
-  import { onDestroy, onMount } from 'svelte'
-
-  function rndInt(max) {
+<script context="module">
+  export function rndInt(max) {
     return Math.floor(Math.random() * max);
   }
+</script>
+
+<script>
+  import { onDestroy, onMount } from 'svelte'
 
   function getBorder(step) {
     var px = radius + 'px ';
     return px + px + (step ? px + ' 0px' : '0px ' + px);
   }
 
-  
   // for slug - i'll move it out later
   let radius = 40
   export let hue

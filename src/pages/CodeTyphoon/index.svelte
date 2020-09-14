@@ -16,7 +16,7 @@
 
   import { auth as fauth } from 'components/firebase'
 
-  import Slug from 'components/Slug'
+  import Slug, { rndInt } from 'components/Slug'
 
   let user = get(auth)
   let status = { error: 0, accuracy: 0.00 }
@@ -32,88 +32,14 @@
     })
   }
 
-  var numslugs = 10;
-
   let race;
-  var eyes = '()<>[]',
-      pupils = 'oO*.°´`\'+x';
-
-  function rndInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-  function getEyes() {
-    var idx = rndInt(eyes.length * 0.5) * 2;
-    var pupil = pupils.charAt(rndInt(pupils.length));
-    var inner = Math.random() > 0.5 ? ' ' + pupil : pupil + ' ';
-    var eye = eyes.charAt(idx) + inner + eyes.charAt(idx + 1);
-    return eye + ' ' + eye;
-  }
-
-  function animateSlug(slug) {
-    var speed = slug.data('speed');
-    var tl = new TimelineMax();
-    if (slug[0]._gsTransform.x > race.width()) {
-      TweenMax.set(slug, {
-        x: -slug.width()
-      });
-    }
-    tl.to(slug, speed, {
-      x: '+=' + borderRadius,
-      borderRadius: getBorder(true)
-    }).to(slug, speed * 0.25, {
-      rotation: -5,
-      ease: Quad.easeOut
-    }).to(slug, speed * 0.25, {
-      rotation: 0,
-      ease: Quad.easeIn
-    }).to(slug, speed * 0.5, {
-      borderRadius: getBorder(false)
-    }, speed).addCallback(animateSlug, speed * 1.5, [slug]);
-  }
-
-  function blinkSlug(slug, close) {
-    if (close) slug.text('---- ----');
-      else slug.text(getEyes());
-    TweenMax.delayedCall(
-      close ? 0.25 : Math.random() * 20,
-      blinkSlug, [slug, !close]
-    );
-  }
-
-  function jump(e) {
-    var slug = e.target;
-    var tl = new TimelineMax();
-    tl.to(slug, 0.25, {
-        y: -50,
-        ease: Quad.easeOut
-      })
-      .to(slug, 0.75, {
-        y: 0,
-        ease: Bounce.easeOut
-      })
-      .to(slug, 1, {
-        x: "+=50",
-        ease: Linear.easeNone
-      }, 0);
-  }
-
   function createSlug() {
     let hue = rndInt(360)
     let z = rndInt(15)
     let speed = Math.random() * 3 + 0.25
     let bottom = `${264 * (25 - z) / 100}px`
-    // var bottom = race.height * (25 - z) / 100
-    
+    // TODO size of the slug
 
-    // TweenMax.set($slug, {
-    //   x: $container.width() * Math.random(),
-    //   transformOrigin: borderRadius + 'px 100%',
-    //   scale: 0.75 + z / 100
-    // });
-    // $slug.data('speed', speed).mouseover(jump);
-    // animateSlug($slug);
-    // blinkSlug($slug);
     return { hue, z, speed, bottom }
   }
 

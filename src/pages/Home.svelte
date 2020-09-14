@@ -29,9 +29,9 @@
   }
 </style>
 
-<div id="homepage" class="text-gray-700 bg-white font-sans">
-  <nav>
-    <div class="container mx-auto px-6 py-2 flex justify-between items-center">
+<div id="homepage" class="text-gray-700 bg-white font-sans">  
+  <nav class="fixed w-screen bg-white mx-auto px-6">
+    <div class="mx-auto px-6 py-2 flex justify-between items-center">
       <span class="font-bold text-2xl lg_text-4xl">
         BOBO
       </span>

@@ -28,6 +28,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
   let err = 0
   let acc = 0.00
+  let time = 60
 
   let tab_length = 2
 
@@ -178,6 +179,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
       dispatch('message', {
         error: err,
         accuracy: err/current.length,
+        time,
       })
     } else {
       keyboard.fingerAt({code: 0 })
