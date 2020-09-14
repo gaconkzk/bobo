@@ -11,14 +11,14 @@
   // TODO current should be external prop and load by a mechanism (user allow to chose any thing they want to challenge or practice)
   // future welcome meee yo yo yo
   let current = `function getOffset( el ) {
-    var _x = 0;
-    var _y = 0;
-    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-        _x += el.offsetLeft - el.scrollLeft;
-        _y += el.offsetTop - el.scrollTop;
-        el = el.offsetParent;
-    }
-    return { top: _y, left: _x };
+  var _x = 0;
+  var _y = 0;
+  while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+    _x += el.offsetLeft - el.scrollLeft;
+    _y += el.offsetTop - el.scrollTop;
+    el = el.offsetParent;
+  }
+  return { top: _y, left: _x };
 }
 var x = getOffset( document.getElementById('yourElId') ).left;`
 
@@ -28,6 +28,8 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
   let err = 0
   let acc = 0.00
+
+  let tab_length = 2
 
   let codelive
 
@@ -67,6 +69,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
   const PressedState = {
     NORMALKEY: 1,
     BACKSPACE: 2,
+    TABKEY: 9,
     ENTERKEY: 13,
   }
 
@@ -80,6 +83,9 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
         }
         if (e.key === 'Enter') {
           return PressedState.ENTERKEY
+        }
+        if (e.key === 'Tab') {
+          return PressedState.TABKEY
         }
       }
 
@@ -123,6 +129,10 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
             break
           case PressedState.ENTERKEY:
             typed = typed + '\n'
+            break
+          case PressedState.TABKEY:
+            typed = typed + ' '.repeat(tab_length)
+            break
           default:
         }
 
@@ -237,12 +247,26 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     for (let i = last_w_idx + 1; i > last_w_idx && i < all_words.length; i++) {
       let next_word = all_words[i]
       if (next_word && next_word.indexOf('<em>') >= 0) {
-        all_words[i] = next_word.replace(/<\/?[^>]+(>|$)/g, "")
+        all_words[i] = next_word.replace(/<\/?[^>]+(>|$)/g, '')
+      }
+      if (next_word && next_word.indexOf('^|^') >= 0) {
+        all_words[i] = next_word.replace('^|^', '')
+      }
+    }
+
+    for (let i = 0; i < last_w_idx; i++) {
+      let next_word = all_words[i]
+      if (next_word && next_word.indexOf('<em>') >= 0) {
+        all_words[i] = next_word.replace(/<\/?[^>]+(>|$)/g, '')
+      }
+      if (next_word && next_word.indexOf('^|^') >= 0) {
+        all_words[i] = next_word.replace('^|^', '')
       }
     }
 
     let html_word = htmlWord(last_w_idx, typed_words)
     if (html_word.indexOf('</em>') === -1 && last_w_idx < all_words.length - 1) {
+      // clear old one
       all_words[last_w_idx] = html_word + '^|^'
       next = keyCode(' ')
       keyboard.fingerAt(next)
@@ -253,6 +277,12 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     if (!current_word.length && prev_w_idx >= 0) {
       all_words[prev_w_idx] = htmlWord(prev_w_idx, typed_words, true)
     }
+
+    // for (let i = 0; i < last_w_idx; i++) {
+    //   if (all_words[i].endsWith('^|^')) {
+    //     all_words[i].replace('^|^', '')
+    //   }
+    // }
 
     let html = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\^\|\^\s/g, '<em>&nbsp;</em>').replace(/\s/g, '&nbsp;')
     codelive.innerHTML = html
@@ -290,7 +320,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div id="codelive" class="rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')}</div>
+<div id="codelive" class="font-mono rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')}</div>
 
 <button class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 
