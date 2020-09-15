@@ -32,6 +32,15 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
   let tab_length = 2
 
+  let total_lines = current.split('\n').length
+  let current_line = 0;
+
+  $: {
+    if (codelive) {
+      codelive.scrollTop = 24*current_line
+    }
+  }
+
   let codelive
 
   const keyCode = (char) => {
@@ -126,10 +135,16 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
             typed += e.key
             break
           case PressedState.BACKSPACE:
+            if (typed[typed.length - 1] === '\n' && current_line > 0) {
+              current_line--
+            }
             typed = typed.slice(0, -1)
             break
           case PressedState.ENTERKEY:
             typed = typed + '\n'
+            if (current_line < total_lines) {
+              current_line++
+            }
             break
           case PressedState.TABKEY:
             typed = typed + ' '.repeat(tab_length)
@@ -212,6 +227,15 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
       } else {
         // no ca - the guy typed too much
         ca[e_idx] = `<mark>${cb[e_idx]}</mark>`
+        if (cb[e_idx] === '\n') {
+          current_line++
+        }
+      }
+      
+      if (cb[e_idx] === '\n' && current_line > 0) {
+        if (ca[e_idx]) {
+          current_line--
+        }
       }
     })
     

@@ -1,7 +1,26 @@
 <script>
+  import { onMount, onDestroy } from 'svelte'
   import { redirect } from 'components/pager'
 
   const star = '<svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-yellow-600 inline -ml-1 -mt-1" width="15px" height="15px" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>'
+
+  let atTopOfPage = true
+
+  const handleScroll = (e) => {
+    if (window.pageYOffset > 346) {
+      if (atTopOfPage) atTopOfPage = false
+    } else {
+      if (!atTopOfPage) atTopOfPage = true
+    }
+  }
+
+  onMount(() => {
+    window.addEventListener('scroll', handleScroll)
+  })
+
+  onDestroy(() => {
+    window.removeEventListener('scroll', handleScroll)
+  })
 </script>
 
 <!-- <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
@@ -26,11 +45,19 @@
 <style lang="scss">
   #homepage {
     font-family: 'Source Sans Pro', sans-serif;
+
+    nav {
+      @apply fixed top-0 w-screen bg-white mx-auto px-6 mt-0;
+      &.scrolled {
+        @apply shadow-2xl;
+        border-bottom: 0px;
+      }
+    }
   }
 </style>
 
 <div id="homepage" class="text-gray-700 bg-white font-sans">  
-  <nav class="fixed w-screen bg-white mx-auto px-6">
+  <nav class:scrolled={!atTopOfPage}>
     <div class="mx-auto px-6 py-2 flex justify-between items-center">
       <span class="font-bold text-2xl lg_text-4xl">
         BOBO
@@ -52,7 +79,7 @@
     </div>
   </nav>
 
-  <div class="py-20" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
+  <div class="py-20 mt-10" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold mb-2 text-white">
         Smart But Bored!
