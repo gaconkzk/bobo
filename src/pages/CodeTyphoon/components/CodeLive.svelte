@@ -24,6 +24,8 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
   let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
   let typed = ''
+  // this keep all typed entries - for calculate wpm
+  let all_typed = typed
   let isStarted = false
 
   let err = 0
@@ -133,6 +135,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
         switch (shouldRender) {
           case PressedState.NORMALKEY:
             typed += e.key
+            all_typed = typed
             break
           case PressedState.BACKSPACE:
             if (typed[typed.length - 1] === '\n' && current_line > 0) {
@@ -142,12 +145,14 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
             break
           case PressedState.ENTERKEY:
             typed = typed + '\n'
+            all_typed = typed
             if (current_line < total_lines) {
               current_line++
             }
             break
           case PressedState.TABKEY:
             typed = typed + ' '.repeat(tab_length)
+            all_typed = typed
             break
           default:
         }
@@ -157,6 +162,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
         dispatch('message', {
           error: err,
           accuracy: acc,
+          typed: all_typed.length,
         })
       }
 
@@ -191,15 +197,18 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
       }
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
 
-      dispatch('message', {
+      dispatch('start', {
         error: err,
         accuracy: err/current.length,
+        typed: all_typed.length,
         time,
       })
     } else {
       keyboard.fingerAt({code: 0 })
       all_words = current.split(' ')
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
+
+      dispatch('stop')
     }
   }
 
