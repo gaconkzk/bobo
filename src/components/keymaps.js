@@ -47,13 +47,13 @@ module.exports = [
     },
     {
       keyCode: 57,
-      top: '9',
-      bottom: '(',
+      top: '(',
+      bottom: '9',
     },
     {
       keyCode: 48,
-      top: '0',
-      bottom: ')',
+      top: ')',
+      bottom: '0',
     },
     {
       keyCode: 189,

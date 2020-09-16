@@ -1,4 +1,5 @@
 <script>
+  import TypingBoard from './TypingBoard'
   import { createEventDispatcher } from 'svelte'
   import keymaps from 'components/keymaps'
   import Keyboard from './Keyboard'
@@ -22,15 +23,25 @@
 }
 var x = getOffset( document.getElementById('yourElId') ).left;`
 
-  let all_words = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
-  let typed = ''
+  // this keep all typed entries - for calculate wpm
+  let totalTyped = 0
   let isStarted = false
 
   let err = 0
   let acc = 0.00
   let time = 60
 
-  let tab_length = 2
+  let board = new TypingBoard(current)
+  let total_lines = current.split('\n').length
+
+  $: {
+    if (codelive) {
+      let bottom = codelive.getBoundingClientRect().bottom
+      let scrollTo = 24 * board.line()
+      scrollTo = scrollTo > bottom ? bottom : scrollTo
+      codelive.scrollTop = scrollTo
+    }
+  }
 
   let codelive
 
@@ -116,46 +127,45 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
   const handleKeydown = (e) => {
     if (isStarted) {
-      let keyCode = mapLeftRight(e)
-      keyboard.keydown(keyCode)
+      let code = mapLeftRight(e)
+      keyboard.keydown(code)
 
       let shouldRender = checkKey(e)
       if (shouldRender) {
         switch (shouldRender) {
           case PressedState.NORMALKEY:
-            typed += e.key
+            totalTyped++
+            board.type(e.key)
             break
           case PressedState.BACKSPACE:
-            typed = typed.slice(0, -1)
+            board.backspace()
             break
           case PressedState.ENTERKEY:
-            typed = typed + '\n'
+            totalTyped = totalTyped++
+            board.type('\n')
             break
           case PressedState.TABKEY:
-            typed = typed + ' '.repeat(tab_length)
+            totalTyped = totalTyped++
+            board.tab()
+
             break
           default:
         }
 
+        next = keyCode(board.char())
+        keyboard.fingerAt(next)
         render()
 
         dispatch('message', {
-          error: err,
-          accuracy: acc,
+          error: board.errors(),
+          accuracy: board.accuracy(),
+          typed: totalTyped,
         })
       }
 
       // TODO should stop this when ???
-      
-      
       e.preventDefault()
     }
-  }
-
-  function calculate(html) {
-    err = (html.match(/<mark>/g) || []).length
-    let all = current.length
-    acc = (all - err) / all
   }
 
   const handleStart = () => {
@@ -164,132 +174,34 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     if (isStarted) {
       err = 0
       acc = 0.00
+      totalTyped = 0
 
-      typed = ''
-      next = keyCode(current[0])
+      board.reset()
+      board.blinking = true
 
+      next = keyCode(board.char())
       keyboard.fingerAt(next)
+      codelive.innerHTML = board.html()
 
-      all_words = current.split(' ')
-      if (all_words[0].length > 0) {
-        all_words[0] = '<em>' + all_words[0][0] + '</em>' + all_words[0].substring(1)
-      }
-      codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
-
-      dispatch('message', {
-        error: err,
-        accuracy: err/current.length,
+      dispatch('start', {
+        error: board.errors(),
+        accuracy: board.accuracy(),
+        typed: totalTyped,
         time,
       })
     } else {
+      board.blinking = false
       keyboard.fingerAt({code: 0 })
       all_words = current.split(' ')
       codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
+
+      dispatch('stop')
     }
-  }
-
-  function compare_word(c, o) {
-    return c.split('')
-      .map((char, i) => (char !== o[i] ? i : undefined))
-      .filter(x => x >= 0)
-  }
-
-  function htmlWord(idx, typed_words, eow = false) {
-    let current_word = typed_words[idx]
-    // use the original one, since we might changed some words
-    let orig_all = current.replace(/<\/?[^>]+(>|$)/g, "").split(' ')
-    let orig_word = orig_all[idx].replace(/<\/?[^>]+(>|$)/g, '')
-    let gidx = compare_word(current_word, orig_word)
-
-    let nidx = current_word.length
-
-    let ca = orig_word.split('')
-    let cb = current_word.split('')
-    
-    gidx.forEach(e_idx => {
-      if (ca[e_idx]) {
-        ca[e_idx] = `<mark>${ca[e_idx]}</mark>`
-      } else {
-        // no ca - the guy typed too much
-        ca[e_idx] = `<mark>${cb[e_idx]}</mark>`
-      }
-    })
-    
-    ca.forEach((char, i) => {
-      if (i < current_word.length && gidx.indexOf(i)<0) {
-        ca[i] = `<span>${ca[i]}</span>`
-      }
-    })
-
-    if (eow && current_word.length < orig_word.length) {
-      for (let i = current_word.length; i < orig_word.length; i++) {
-        ca[i] = `<mark>${ca[i]}</mark>`
-      }
-    }
-
-    // space
-    if (ca.length > nidx) {
-      next = keyCode(ca[nidx])
-      keyboard.fingerAt(next)
-      ca[nidx] = `<em>${ca[nidx]}</em>`
-    }
-
-    return ca.join('')
   }
 
   const render = () => {
-    let typed_words = typed.split(' ')
-
-    let last_w_idx = typed_words.length-1
-    let prev_w_idx = typed_words.length-2
-
-    let current_word = typed_words[last_w_idx]
-
-    // clear all ori em
-    for (let i = last_w_idx + 1; i > last_w_idx && i < all_words.length; i++) {
-      let next_word = all_words[i]
-      if (next_word && next_word.indexOf('<em>') >= 0) {
-        all_words[i] = next_word.replace(/<\/?[^>]+(>|$)/g, '')
-      }
-      if (next_word && next_word.indexOf('^|^') >= 0) {
-        all_words[i] = next_word.replace('^|^', '')
-      }
-    }
-
-    for (let i = 0; i < last_w_idx; i++) {
-      let next_word = all_words[i]
-      if (next_word && next_word.indexOf('<em>') >= 0) {
-        all_words[i] = next_word.replace(/<\/?[^>]+(>|$)/g, '')
-      }
-      if (next_word && next_word.indexOf('^|^') >= 0) {
-        all_words[i] = next_word.replace('^|^', '')
-      }
-    }
-
-    let html_word = htmlWord(last_w_idx, typed_words)
-    if (html_word.indexOf('</em>') === -1 && last_w_idx < all_words.length - 1) {
-      // clear old one
-      all_words[last_w_idx] = html_word + '^|^'
-      next = keyCode(' ')
-      keyboard.fingerAt(next)
-    } else {
-      all_words[last_w_idx] = html_word
-    }
-
-    if (!current_word.length && prev_w_idx >= 0) {
-      all_words[prev_w_idx] = htmlWord(prev_w_idx, typed_words, true)
-    }
-
-    // for (let i = 0; i < last_w_idx; i++) {
-    //   if (all_words[i].endsWith('^|^')) {
-    //     all_words[i].replace('^|^', '')
-    //   }
-    // }
-
-    let html = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\^\|\^\s/g, '<em>&nbsp;</em>').replace(/\s/g, '&nbsp;')
+    let html = board.html()
     codelive.innerHTML = html
-
-    calculate(html)
   }
 </script>
 
@@ -299,7 +211,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     @apply text-green-500;
   }
   :global(mark) {
-    @apply text-red-500 bg-white;
+    @apply text-red-500 bg-red-200 bg-opacity-50;
   }
   :global(em) {
     @apply text-black bg-green-200 not-italic;
@@ -323,7 +235,8 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
 <div class="flex flex-col overflow-hidden h-full items-center">
-  <div id="codelive" class="h-32 min-h-0  overflow-auto font-mono rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')}</div>
+  <!-- <div id="codelive" class="h-32 min-h-0  overflow-auto font-mono rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')}</div> -->
+  <div id="codelive" class="h-32 min-h-0  overflow-auto font-mono rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html board.html()}</div>
 
   <button class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
 

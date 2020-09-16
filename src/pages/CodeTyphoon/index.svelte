@@ -19,10 +19,20 @@
   import Slug, { rndInt } from 'components/Slug'
 
   let user = get(auth)
-  let status = { error: 0, accuracy: 0.00 }
+  let status = { error: 0, accuracy: 0.00, typed: 0 }
 
+  let statusBar
   const handleMessage = (e) => {
     status = e.detail
+  }
+
+  const handleStart = (e) => {
+    status = e.detail
+    statusBar.start()
+  }
+
+  const handleStop = (e) => {
+    statusBar.stop()
   }
 
   const logoutClicked = () => {
@@ -51,7 +61,7 @@
     @apply absolute w-full overflow-hidden bg-gradient-to-b from-white via-gray-100 to-black;
     height: 264px;
     bottom: 0;
-    z-index: -1;
+    z-index: -10;
   }
 </style>
 
@@ -70,8 +80,8 @@
   {/if}
   </nav>
   <div class="flex-1 flex flex-col w-full items-center pt-2">
-    <StatusBar {...status}/>
-    <svelte:component this={CodeLive} on:message={handleMessage}/>
+    <StatusBar bind:this={statusBar} {...status}/>
+    <svelte:component this={CodeLive} on:message={handleMessage} on:start={handleStart} on:stop={handleStop}/>
   </div>
 </main>
 <div class="race">

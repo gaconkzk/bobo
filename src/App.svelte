@@ -8,6 +8,8 @@
   import Login from './pages/Login'
   import CodeTyphoon from './pages/CodeTyphoon'
 
+  import NotSupport from './pages/NotSupport'
+
   import { get }   from 'svelte/store'
 
   import { auth } from 'services/auth'
@@ -20,14 +22,24 @@
       redirect('/login')
     }
   }
+
+  const desktop = (ctx, next) => {
+    let isDesktop = !window.isMobileOrTablet()
+    if (isDesktop) {
+      next()
+    } else {
+      redirect('/mobile')
+    }
+  }
 </script>
 
 <Router>
   <Route path="/" component={Home} />
   <Route path="/login" component={Login} />
   <Route path="/about" component={About} />
-  <Route path="/codetypoon" component={CodeTyphoon} middleware={[guard]}/>
-  <Route path="/ct" component={CodeTyphoon}/>
+  <Route path="/codetypoon" component={CodeTyphoon} middleware={[desktop]}/>
+  <Route path="/ct" component={CodeTyphoon}  middleware={[desktop]}/>
+  <Route path="/mobile" component={NotSupport}/>
   <!-- <Route path="/profile/:username" let:params>
     <h2>Hello {params.username}!</h2>
     <p>Profile page</p>
