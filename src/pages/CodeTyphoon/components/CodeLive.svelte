@@ -213,9 +213,9 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     @apply text-red-500 bg-red-200 bg-opacity-50;
   }
   :global(em) {
-    @apply text-black bg-green-200 not-italic;
-    animation: blink-animation 0.5s steps(5, start) infinite;
-    -webkit-animation: blink-animation 0.5s steps(5, start) infinite;
+    @apply text-black bg-green-200 bg-opacity-75 not-italic;
+    animation: blink-animation 1.5s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1.5s steps(5, start) infinite;
   }
 
   @keyframes blink-animation {
