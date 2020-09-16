@@ -7,6 +7,11 @@ window.isMobileOrTablet = function() {
   return check;
 }
 
+String.prototype.replaceAt = function(index, replacement) {
+  return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+// hehehe -  - - end of global def
+
 const app = new App({
   target: document.body,
 });

@@ -35,8 +35,8 @@
 </script>
 
 <div class="flex flex-row items-center self-auto my-2">
-  <SmallCard title="Errors" data={error} dataStyle="error"/>
   <SmallCard title="Times(s)" data={seconds}/>
-  <SmallCard title="Accuracy(%)" data={(accuracy * 100).toFixed(2)} />
-  <SmallCard title="WPM" data={wpm || 0} />
+  <SmallCard title="Errors" data={error} dataStyle="error"/>
+  <SmallCard title="WPM" data={((wpm && wpm < 0) || !wpm) ? 0 : wpm} />
+  <SmallCard title="Accuracy(%)" data={accuracy.toFixed(2)} />
 </div>
