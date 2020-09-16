@@ -192,8 +192,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     } else {
       board.blinking = false
       keyboard.fingerAt({code: 0 })
-      all_words = current.split(' ')
-      codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
+      codelive.innerHTML = board.html()
 
       dispatch('stop')
     }
