@@ -60,18 +60,23 @@ class TypingBoard {
   }
 
   type(char) {
-    let orig = this.data[this.cursor]
+    if (this.cursor < this.data.length) {
+      let orig = this.data[this.cursor]
 
-    orig.status = char === orig.char ? GOOD : char
-    if (this.cursor < this.data.length) this.cursor++
+      orig.status = char === orig.char ? GOOD : char
+      this.cursor++
+    }
   }
 
   char() {
-    return this.data[this.cursor].char
+    if (this.cursor < this.data.length) {
+      return this.data[this.cursor].char
+    }
+    return null
   }
 
   backspace() {
-    this.data[this.cursor].status = NONE
+    // this.data[this.cursor].status = NONE
     if (this.cursor > 0) {
       this.cursor--
       this.data[this.cursor].status = NONE
@@ -89,11 +94,13 @@ class TypingBoard {
   }
 
   typeAt(char, i, updateCursor = false) {
-    let orig = this.data[i]
-    orig.status = char === orig.char ? GOOD : char
+    if (i >= 0 && i < this.data.length) {
+      let orig = this.data[i]
+      orig.status = char === orig.char ? GOOD : char
 
-    if (updateCursor) {
-      this.cursor = i++
+      if (updateCursor) {
+        this.cursor = i++
+      }
     }
   }
 

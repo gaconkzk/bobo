@@ -12,7 +12,7 @@
   let fingers = {}
 
   export const fingerAt = ( key, opt_code) => {
-    if (key.code === 0) {
+    if (!key || key.code === 0) {
       reset(true)
     } else {
       reset()

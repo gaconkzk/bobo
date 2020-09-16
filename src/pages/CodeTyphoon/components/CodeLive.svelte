@@ -152,8 +152,13 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
           default:
         }
 
-        next = keyCode(board.char())
-        keyboard.fingerAt(next)
+        let current_char = board.char()
+        if (current_char) {
+          next = keyCode(current_char)
+          keyboard.fingerAt(next)
+        } else {
+          keyboard.fingerAt({ code: 0 })
+        }
         render()
 
         dispatch('message', {
