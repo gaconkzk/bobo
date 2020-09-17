@@ -165,10 +165,9 @@
       <h3 class="my-4 text-2xl text-white">
         Get yourself a shitty shiny slug
       </h3>
-      <button
-        class="bg-white font-bold rounded-full mt-6 py-4 px-8 shadow-lg uppercase tracking-wider"
-      >
-        &rarr;
+      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
+        <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
+        <span>Try</span>
       </button>
     </div>
   </section>
