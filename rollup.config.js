@@ -73,7 +73,7 @@ export default {
       // a separate file - better for performance
       css: (css) => {
         css.write('public/build/bundle.css', !production)
-      },
+      }
     }),
     svg(),
     replacement({

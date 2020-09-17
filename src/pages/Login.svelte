@@ -7,12 +7,19 @@
   import { Login } from 'svelte-hero-icons'
 
   import { auth as astore } from 'services/auth'
-  import { redirect } from 'components/pager'
+
+  import { navigateTo } from 'yrv'
 
   let unsubscribe
   let unsub = astore.subscribe((auth) => {
     if (auth.user) {
-      redirect('/')
+      // TODO make this
+      // updateUserData().catch(() => {
+      //   logout()
+      // }).finally(() => {
+      //   navigateTo('/')
+      // })
+      navigateTo('/')
     }
   })
 
@@ -33,22 +40,20 @@
 
 </script>
 
-<template lang="pug">
-.flex.w-full.h-screen
-  .container.mx-auto.max-w-xs.self-center.inline-flex.items-center
-    //- form.bg-white.shadow-md.rounded.px-8.pt-6.pb-8.mb-4
-    //-   .mb-4
-    //-     label.block.text-gray-700.text-sm.font-bold.mb-2(for="username") Username
-    //-     input#username.shadow.appearance-none.border.rounded.w-full.py-2.px-3.text-gray-700.leading-tight.focus_outline-none(type="text" placeholder="Username")
-    //-   .mb-6
-    //-     label.block.text-gray-700.text-sm.font-bold.mb-2(for="password") Password
-    //-     input#password.shadow.appearance-none.border.border-red-500.rounded.w-full.py-2.px-3.text-gray-700.mb-3.leading-tight.focus_outline-none(type="password" placeholder="******************")
-    //-     p.text-red-500.text-xs.italic Please choose a password.
-    //-   .flex.items-center.justify-between
-    //-     button.bg-blue-500.text-white.font-bold.py-2.px-4.rounded.hover_bg-blue-700.focus_outline-none(type="button") Sign In
-    //-     a.inline-block.align-baseline.font-bold.text-sm.text-blue-500.hover_text-blue-800(href="/#") Forgot Password?
-    button.rounded.inline-flex.items-center.bg-red-700.hover_bg-red-800.text-white.font-bold.py-2.px-4.my-2.focus_outline-none.focus_shadow-outline(type="button" "on:click"="{login}")
-      Login.mr-2(size="24")
-      span Google
-    p.text-center.text-gray-500.text-xs &copy;2020 The Flies. All rights reserved.
-</template>
+<div class="flex w-full h-screen">
+  <div class=" container flex flex-col mx-auto max-w-xs self-center inline-flex items-center">
+    <button class=" rounded inline-flex items-center bg-red-700 hover_bg-red-800 text-white font-bold py-2 px-4 my-2 focus_outline-none focus_shadow-outline"
+     type="button" on:click="{login}">
+      <Login class="mr-2" size="24" />
+      <span>Google</span>
+    </button>
+
+    <p class=" text-center text-gray-500 text-xs mt-2">
+      &copy;2020 The Flies.  Built with
+      <span class="inline-block h-3 w-3 ml-1 -mt-1">
+        <span class="animate-ping absolute inline-flex self-center h-3 w-3 text-base text-red-400 opacity-75">&#10084;</span>
+        <span class="relative inline-flex self-center h-3 w-3 text-lg text-red-500 ">&#10084;</span>
+      </span>
+    </p>
+  </div>
+</div>

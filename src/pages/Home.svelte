@@ -1,6 +1,6 @@
 <script>
+  import { Link, navigateTo } from 'yrv'
   import { onMount, onDestroy } from 'svelte'
-  import { redirect } from 'components/pager'
 
   const star = '<svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-yellow-600 inline -ml-1 -mt-1" width="15px" height="15px" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>'
 
@@ -73,7 +73,7 @@
       <div class="hidden lg_block">
         <ul class="inline-flex">
           <li><a class="px-4 font-bold" href="/">Home</a></li>
-          <li><a class="px-4 hover_text-gray-800" href="/ct">Code Typhoon</a></li>
+          <li><Link class="px-4 hover_text-gray-800" href="/ct">Code Typhoon</Link>
         </ul>
       </div>
     </div>
@@ -88,7 +88,7 @@
         Slow or fast! Fast slug might not good, but slow slug don't make a good coder.
       </h3>
 
-      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => redirect('/ct')}>
+      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
         <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
         <span>Try</span>
       </button>
