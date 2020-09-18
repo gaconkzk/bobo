@@ -8,6 +8,7 @@
   import CodeTyphoon from './pages/CodeTyphoon'
 
   import NotSupport from './pages/NotSupport'
+  import NotFound from './pages/NotFound'
 
   const desktop = () => {
     return !window.isMobileOrTablet()
@@ -21,8 +22,6 @@
   <!-- <Route path="/codetypoon" exact component={CodeTyphoon} condition={() => guard()} redirect='/login'/> -->
   <Route path="/ct" component={CodeTyphoon} redirect='/mobile' condition={desktop} />
   <Route path="/mobile" exact component={NotSupport}/>
-  <Route fallback>
-    <h2>Sorry. Page not found.</h2>
-  </Route>
+  <Route fallback component={NotFound} />
 </Router>
 <!-- </main> -->

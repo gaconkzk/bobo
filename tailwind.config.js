@@ -3,7 +3,10 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {},
+  variants: {
+    display: ['responsive', 'hover', 'focus', 'group-hover'],
+    rotate: ['responsive', 'hover', 'focus', 'group-hover'],
+  },
   plugins: [],
   future: {
     removeDeprecatedGapUtilities: true,

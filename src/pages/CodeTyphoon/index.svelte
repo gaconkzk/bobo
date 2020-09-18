@@ -29,9 +29,16 @@
       <Link href="/ct" class="font-semibold text-xl tracking-tight">Code Typhoon</Link>
     </div>
   {#if user}
-    <div>
-      <button on:click={logoutClicked}>Logout</button>
+  <div class="w-8 h-8 relative mb">
+    <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
+      <span class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400">KR</span>
+      <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png" alt="lovely avatar"
+        class="object-cover object-center w-full h-full visible group-hover_rotate-45" />
     </div>
+  </div>
+    <!-- <div>
+      <button on:click={logoutClicked}>Logout</button>
+    </div> -->
   {/if}
   </nav>
   <Router path="/">
