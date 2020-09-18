@@ -5,6 +5,7 @@
   const lang = () => `devicon-${langs[Math.floor(Math.random() * 5)]}`;
 
   export let data
+  let random_seed = Math.random() * 5
 </script>
 
 <style>
@@ -30,7 +31,7 @@
 </style>
 
 <div class="p-4 md_mb-0 mb-6 flex flex-col justify-center items-center max-w-sm mx-auto w-full">
-  <div class="bg-gray-300 h-40 w-full rounded-lg shadow-md bg-cover bg-center" style="background-image: url(https://picsum.photos/seed/{Math.random() * 5}/352/160)"></div>
+  <div class="bg-gray-300 h-40 w-full rounded-lg shadow-md bg-cover bg-center" style="background-image: url(https://picsum.photos/seed/{random_seed}/352/160)"></div>
 
   <div class="bg-white -mt-20 shadow-lg rounded-lg overflow-hidden p-4 w-5/6">
     

@@ -20,7 +20,10 @@ So what should I do???
 - [ ] Capsual Multiplayer (game state sync, chat, p2p or server/client)
 - [ ] Admin - List/Add/Edit/Remove challenges/practices (BE/FE)
 - [ ] Blind mode - Not hightlight typed and error, display both original and input, when stop/done typing, all result will be updated
-- [ ] Listing page
+- [x] Listing page
+- [ ] Create new user when logged in but not existed
+- [ ] Default anonymous user
+- [ ] List online users (starting cooler)
 
 ### In Progress
 
