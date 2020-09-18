@@ -22,7 +22,6 @@
     padding: 5px;
     display: block;
     display: -webkit-box;
-    max-width: 400px;
     -webkit-line-clamp: 3; /* max line number */
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -45,7 +44,7 @@
     
 
     <div class="summary-post text-base text-justify font-small max-h-6 pb-2 block-with-text">
-      <span class="italic">Short description Short description Short description Short description Short description</span>
+      <span class="text-sm italic normal">Short description Short description Short description Short description Short description</span>
     </div>
 
     <button class="bg-green-500 text-white mt-4 block rounded py-1 px-2 text-sm " on:click={() => navigateTo(`/ct/${data}`)}>
