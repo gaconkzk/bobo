@@ -33,7 +33,7 @@
     <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
       <span class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400">KR</span>
       <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png" alt="lovely avatar"
-        class="object-cover object-center w-full h-full visible group-hover_rotate-45" />
+        class="object-cover object-center w-full h-full visible group-hover_hidden" />
     </div>
   </div>
     <!-- <div>
