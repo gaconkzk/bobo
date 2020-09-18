@@ -12,14 +12,15 @@ So what should I do???
 
 ### Todo now (CT)
 
-- [ ] Errors, time, accuracy, wpm calculation
-- [ ] Hands show on keyboard
+- [x] Errors, time, accuracy, wpm calculation
+- [x] Hands show on keyboard
 - [ ] Arena mode, multiplayer layout
-- [ ] User login/logout state
+- [x] User login/logout state
 - [ ] BE prepare (DB/Server hosting - functional or vpn)
 - [ ] Capsual Multiplayer (game state sync, chat, p2p or server/client)
 - [ ] Admin - List/Add/Edit/Remove challenges/practices (BE/FE)
 - [ ] Blind mode - Not hightlight typed and error, display both original and input, when stop/done typing, all result will be updated
+- [ ] Listing page
 
 ### In Progress
 

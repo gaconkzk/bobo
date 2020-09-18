@@ -1,6 +1,6 @@
 <script>
+  import { Link, navigateTo } from 'yrv'
   import { onMount, onDestroy } from 'svelte'
-  import { redirect } from 'components/pager'
 
   const star = '<svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-yellow-600 inline -ml-1 -mt-1" width="15px" height="15px" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>'
 
@@ -22,25 +22,6 @@
     window.removeEventListener('scroll', handleScroll)
   })
 </script>
-
-<!-- <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
-  <div class="flex items-center flex-shrink-0 text-white mr-6">
-    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http_//www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-    <span class="font-semibold text-xl tracking-tight">Bobo</span>
-  </div>
-  <div class="block lg_hidden">
-    <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover_text-white hover_border-white">
-      <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http_//www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-    </button>
-  </div>
-  <div class="w-full block flex-grow lg_flex lg_items-center lg_w-auto">
-    <div class="text-sm lg_flex-grow">
-      <a href="/ct" class="block mt-4 lg_inline-block lg_mt-0 text-teal-200 hover_text-white mr-4">
-        Code Typhoon
-      </a>
-    </div>
-  </div>
-</nav> -->
 
 <style lang="scss">
   #homepage {
@@ -73,7 +54,7 @@
       <div class="hidden lg_block">
         <ul class="inline-flex">
           <li><a class="px-4 font-bold" href="/">Home</a></li>
-          <li><a class="px-4 hover_text-gray-800" href="/ct">Code Typhoon</a></li>
+          <li><Link class="px-4 hover_text-gray-800" href="/ct">Code Typhoon</Link>
         </ul>
       </div>
     </div>
@@ -88,7 +69,7 @@
         Slow or fast! Fast slug might not good, but slow slug don't make a good coder.
       </h3>
 
-      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => redirect('/ct')}>
+      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
         <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
         <span>Try</span>
       </button>
@@ -165,10 +146,9 @@
       <h3 class="my-4 text-2xl text-white">
         Get yourself a shitty shiny slug
       </h3>
-      <button
-        class="bg-white font-bold rounded-full mt-6 py-4 px-8 shadow-lg uppercase tracking-wider"
-      >
-        &rarr;
+      <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
+        <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
+        <span>Try</span>
       </button>
     </div>
   </section>

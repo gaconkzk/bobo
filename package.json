@@ -39,11 +39,12 @@
     "stylelint": "^13.6.1",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-scss": "^3.18.0",
-    "svelte": "^3.0.0",
+    "svelte": "^3.25.1",
     "svelte-hero-icons": "^1.0.5",
     "svelte-local-storage-store": "^0.1.3",
     "svelte-preprocess": "^4.1.1",
-    "tailwindcss": "^1.7.3"
+    "tailwindcss": "^1.7.3",
+    "yrv": "^0.0.30"
   },
   "dependencies": {
     "nprogress": "^0.2.0",

@@ -152,8 +152,13 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
           default:
         }
 
-        next = keyCode(board.char())
-        keyboard.fingerAt(next)
+        let current_char = board.char()
+        if (current_char) {
+          next = keyCode(current_char)
+          keyboard.fingerAt(next)
+        } else {
+          keyboard.fingerAt({ code: 0 })
+        }
         render()
 
         dispatch('message', {
@@ -192,8 +197,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     } else {
       board.blinking = false
       keyboard.fingerAt({code: 0 })
-      all_words = current.split(' ')
-      codelive.innerHTML = all_words.join(' ').replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')
+      codelive.innerHTML = board.html()
 
       dispatch('stop')
     }
@@ -214,9 +218,9 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
     @apply text-red-500 bg-red-200 bg-opacity-50;
   }
   :global(em) {
-    @apply text-black bg-green-200 not-italic;
-    animation: blink-animation 0.5s steps(5, start) infinite;
-    -webkit-animation: blink-animation 0.5s steps(5, start) infinite;
+    @apply text-black bg-green-200 bg-opacity-75 not-italic;
+    animation: blink-animation 1.5s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1.5s steps(5, start) infinite;
   }
 
   @keyframes blink-animation {
