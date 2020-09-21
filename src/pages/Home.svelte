@@ -66,12 +66,14 @@
   <div class="py-20 mt-10" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold mb-2 text-white">
-        Smart But Bored!
+        Slow or fast!
       </h2>
-      <h3 class="text-2xl mb-8 text-gray-200">
-        Slow or fast! Fast slug might not good, but slow slug don't make a good coder.
+      <h3 class="text-3xl font-mono italic font-bold mb-2 text-white">
+        It's just a matter between two and nine fingers.
       </h3>
-
+      <h4 class="text-xl mb-8 text-gray-200">
+        Good typing speed! It doesn't make you a good coder, but a good coder should be fast!
+      </h4>
       <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
         <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
         <span>Try</span>
@@ -85,7 +87,7 @@
     <div class="flex items-center flex-wrap mb-20">
       <div class="w-full md:w-1/2">
         <h4 class="text-3xl text-gray-800 font-bold mb-3">Exercise Metric</h4>
-        <p class="text-gray-600 mb-8">Build ur muscles... Yay.</p>
+        <p class="text-gray-600 mb-8">Build ur muscles... Yay. Daily practices make strong fingers and sharp eyes</p>
       </div>
       <div class="w-full md:w-1/2">
         <img src="imgs/health.svg" alt="Monitoring" />
@@ -144,10 +146,10 @@
   <section style="background-color: #667eea">
     <div class="container mx-auto px-6 text-center py-20">
       <h2 class="mb-6 text-4xl font-bold text-center text-white">
-        Limited in THIS Winter
+        Limited in THIS WINTER
       </h2>
       <h3 class="my-4 text-2xl text-white">
-        Get yourself a shitty shiny slug
+        Get your fingers dirty!
       </h3>
       <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
         <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
