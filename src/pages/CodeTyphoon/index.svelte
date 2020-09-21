@@ -9,7 +9,18 @@
   import Typhoons from './Typhoons'
   import Typhoon from './Typhoon'
 
-  export let router = null;
+  export let router = null
+
+  let showProfile = false
+  let userMenu
+
+  const avatarClick = (e) => {
+    showProfile = !showProfile
+    e.stopPropagation()
+  }
+
+  $: avatarClass = showProfile ? 'transition ease-out duration-100 transform opacity-100 scale-100' :
+      'transition ease-in duration-75 transform opacity-0 scale-95'
 
   // we might show anonymous/guest user or logged in user
   let current = get(auth)
@@ -21,10 +32,19 @@
     }
     fauth.signOut().then(() => {
       logout()
-      navigateTo('/', { replace: true })
+      navigateTo(router.path, { replace: true })
     })
   }
+
+  const handleClick = (e) => {
+    let isMenu = 'menuitem' === e.target.getAttribute('role')
+    if (!isMenu && showProfile){
+      showProfile = false
+    }
+  }
 </script>
+
+<svelte:window on:click={handleClick}/>
 
 <main class="flex flex-col h-screen max-h-full space-y-6">
   <nav class="flex-initial flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -34,14 +54,25 @@
       </svg>
       <Link href="/ct" class="font-semibold text-xl tracking-tight">Code Typhoon</Link>
     </div>
-  <!-- {#if current.user} -->
-  <div class="w-8 h-8 relative mb" on:click={logoutClicked}>
-    <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
-      <span class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400">KR</span>
-      <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png" alt="lovely avatar"
-        class="object-cover object-center w-full h-full visible group-hover_hidden" />
+    <!-- {#if current.user} -->
+    <div class="w-8 h-8 relative mb" on:click={avatarClick} bind:this={userMenu}>
+      <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
+        <span class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400">KR</span>
+        <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png" alt="lovely avatar"
+          class="object-cover object-center w-full h-full visible group-hover_hidden" />
+      </div>
+      <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg {avatarClass}">
+        <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
+          <a href="/profile" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Your Profile</a>
+          <a href="/settings" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Settings</a>
+{#if current.user}
+          <Link class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem" on:click={logoutClicked}>Sign out</Link>
+{:else}
+          <Link href="/login?redirect={router.path}" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Signin</Link>
+{/if}
+        </div>
+      </div>
     </div>
-  </div>
     <!-- <div>
       <button on:click={logoutClicked}>Logout</button>
     </div> -->
