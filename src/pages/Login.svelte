@@ -10,22 +10,26 @@
 
   import { navigateTo } from 'yrv'
 
+  import { getParams } from 'utils/common'
+
+  import { makeUser } from 'services/users'
+
   let unsubscribe
   let unsub = astore.subscribe((auth) => {
+    console.log(auth)
     if (auth.user) {
-      // TODO make this
-      // updateUserData().catch(() => {
-      //   logout()
-      // }).finally(() => {
-      //   navigateTo('/')
-      // })
-      navigateTo('/')
+      let redirect = getParams().get('redirect')
+      if (redirect) {
+        navigateTo(redirect)
+      } else {
+        navigateTo('/')
+      }
     }
   })
 
   function login() {
     auth.signInWithPopup(googleProvider).then(() => {
-      unsubscribe = authState(auth).subscribe(u => astore.set({ user: auth }))
+      unsubscribe = authState(auth).subscribe(u => astore.set({ user: makeUser(u) }))
     })
   }
 

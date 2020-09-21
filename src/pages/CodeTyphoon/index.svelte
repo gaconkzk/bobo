@@ -4,15 +4,19 @@
 
   import { auth as fauth } from 'components/firebase'
 
-  import { Router, Route, Link, navigateTo } from 'yrv'
+  import { Router, Route, Link, navigateTo, router } from 'yrv'
 
   import Typhoons from './Typhoons'
   import Typhoon from './Typhoon'
 
   // we might show anonymous/guest user or logged in user
-  let user = get(auth)
+  let current = get(auth)
 
   const logoutClicked = () => {
+    if (!current.user) {
+      navigateTo('/login?redirect=' + $router.path)
+      return
+    }
     fauth.signOut().then(() => {
       logout()
       navigateTo('/', { replace: true })
@@ -28,8 +32,8 @@
       </svg>
       <Link href="/ct" class="font-semibold text-xl tracking-tight">Code Typhoon</Link>
     </div>
-  {#if user}
-  <div class="w-8 h-8 relative mb">
+  <!-- {#if current.user} -->
+  <div class="w-8 h-8 relative mb" on:click={logoutClicked}>
     <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
       <span class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400">KR</span>
       <img src="https://pickaface.net/gallery/avatar/unr_random_180410_1905_z1exb.png" alt="lovely avatar"
@@ -39,7 +43,7 @@
     <!-- <div>
       <button on:click={logoutClicked}>Logout</button>
     </div> -->
-  {/if}
+  <!-- {/if} -->
   </nav>
   <Router path="/">
     <Route exact component={Typhoons} />

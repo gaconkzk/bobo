@@ -90,6 +90,10 @@ export default {
             find: 'services',
             replacement: path.resolve(projectRootDir, 'src/services')
           },
+          {
+            find: 'utils',
+            replacement: path.resolve(projectRootDir, 'src/utils')
+          },
         ],
         customResolver
     }),
