@@ -4,17 +4,19 @@
 
   import { auth as fauth } from 'components/firebase'
 
-  import { Router, Route, Link, navigateTo, router } from 'yrv'
+  import { Router, Route, Link, navigateTo } from 'yrv'
 
   import Typhoons from './Typhoons'
   import Typhoon from './Typhoon'
+
+  export let router = null;
 
   // we might show anonymous/guest user or logged in user
   let current = get(auth)
 
   const logoutClicked = () => {
     if (!current.user) {
-      navigateTo('/login?redirect=' + $router.path)
+      navigateTo('/login?redirect=' + router.path)
       return
     }
     fauth.signOut().then(() => {

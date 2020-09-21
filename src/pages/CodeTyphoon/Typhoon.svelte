@@ -11,6 +11,9 @@ import CodeLive from './components/CodeLive'
 
 import Slug, { rndInt } from 'components/Slug'
 
+export let router = null
+console.log('Stupid unuse and warning on svelte, ', router)
+
 let status = { error: 0, accuracy: 0.00, typed: 0 }
 
 let statusBar

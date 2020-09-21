@@ -3,6 +3,9 @@
 
   import Card from 'components/Card'
 
+  export let router = null
+  console.log('Stupid unuse and warning on svelte, ', router)
+
   // should be top 3
   let trend = [1,2,3]
   // should be top 10
