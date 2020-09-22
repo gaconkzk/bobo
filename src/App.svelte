@@ -10,6 +10,8 @@
   import NotSupport from './pages/NotSupport'
   import NotFound from './pages/NotFound'
 
+  import Profile from './pages/Profile'
+
   const desktop = () => {
     return !window.isMobileOrTablet()
   }
@@ -19,9 +21,9 @@
   <Route path="/" exact component={Home} />
   <Route path="/login" exact component={Login} />
   <Route path="/about" exact component={About} />
-  <!-- <Route path="/codetypoon" exact component={CodeTyphoon} condition={() => guard()} redirect='/login'/> -->
   <Route path="/ct" component={CodeTyphoon} redirect='/mobile' condition={desktop} />
-  <Route path="/mobile" exact component={NotSupport}/>
+  <Route path="/profile" exact component={Profile} />
+  <Route path="/mobile" exact component={NotSupport} />
   <Route fallback component={NotFound} />
 </Router>
-<!-- </main> -->
+

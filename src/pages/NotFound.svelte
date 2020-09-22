@@ -13,8 +13,8 @@ console.log('Stupid unuse and warning on svelte notfound, ', router)
       		<div class="text-5xl font-dark font-bold">404</div>
             <p
               class="text-2xl md_text-3xl font-light leading-normal"
-            >Sorry we couldn't find this page, meow</p>
-          <p class="mb-8">But dont worry, you can find plenty of other things on our homepage.</p>
+            >Sorry we couldn't find your page, meow</p>
+          <p class="mb-8">But dont worry, there are plenty of other things in our homepage.</p>
           
           <button class="px-4 inline py-2 text-sm font-medium leading-5 shadow text-white transition-colors duration-150 border border-transparent rounded-lg focus_outline-none focus_shadow-outline-blue bg-blue-600 active_bg-blue-600 hover_bg-blue-700" on:click={() => navigateTo('/')}>back to homepage</button>
     </div>
