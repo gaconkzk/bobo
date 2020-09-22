@@ -2,9 +2,6 @@
   import { Link, navigateTo } from 'yrv'
   import { onMount, onDestroy } from 'svelte'
 
-  export let router = null
-  console.log('Stupid unuse and warning on svelte, ', router)
-
   const star = '<svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-yellow-600 inline -ml-1 -mt-1" width="15px" height="15px" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>'
 
   let atTopOfPage = true
@@ -66,14 +63,12 @@
   <div class="py-20 mt-10" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%)">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-bold mb-2 text-white">
-        Slow or fast!
+        Smart But Bored!
       </h2>
-      <h3 class="text-3xl font-mono italic font-bold mb-2 text-white">
-        It's just a matter between two and nine fingers.
+      <h3 class="text-2xl mb-8 text-gray-200">
+        Slow or fast! Fast slug might not good, but slow slug don't make a good coder.
       </h3>
-      <h4 class="text-xl mb-8 text-gray-200">
-        Good typing speed! It doesn't make you a good coder, but a good coder should be fast!
-      </h4>
+
       <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
         <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
         <span>Try</span>
@@ -87,7 +82,7 @@
     <div class="flex items-center flex-wrap mb-20">
       <div class="w-full md:w-1/2">
         <h4 class="text-3xl text-gray-800 font-bold mb-3">Exercise Metric</h4>
-        <p class="text-gray-600 mb-8">Build ur muscles... Yay. Daily practices make strong fingers and sharp eyes</p>
+        <p class="text-gray-600 mb-8">Build ur muscles... Yay.</p>
       </div>
       <div class="w-full md:w-1/2">
         <img src="imgs/health.svg" alt="Monitoring" />
@@ -146,10 +141,10 @@
   <section style="background-color: #667eea">
     <div class="container mx-auto px-6 text-center py-20">
       <h2 class="mb-6 text-4xl font-bold text-center text-white">
-        Limited in THIS WINTER
+        Limited in THIS Winter
       </h2>
       <h3 class="my-4 text-2xl text-white">
-        Get your fingers dirty!
+        Get yourself a shitty shiny slug
       </h3>
       <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider" on:click={() => navigateTo('/ct')}>
         <img class="float-left mr-2" width="24px" height="24px" src="/imgs/slug.png" alt="slug"/>
