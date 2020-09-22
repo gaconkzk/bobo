@@ -15,7 +15,7 @@
   import { makeUser } from 'services/users'
 
   export let router = null
-  console.log('Stupid unuse and warning on svelte notfound, ', router)
+  console.log('Stupid unuse and warning on svelte, ', router)
 
   let unsubscribe
   let unsub = astore.subscribe((auth) => {

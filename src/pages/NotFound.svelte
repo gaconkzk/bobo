@@ -2,7 +2,7 @@
 import { navigateTo } from "yrv";
 
 export let router = null
-console.log('Stupid unuse and warning on svelte notfound, ', router)
+console.log('Stupid unuse and warning on svelte, ', router)
 
 </script>
 
