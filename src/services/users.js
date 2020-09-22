@@ -28,11 +28,15 @@ export const currentUser = () => {
 
 export const shortName = (name) => {
   // split by ' '
-  const words = name.split(' ') 
-  if (words.length >= 2) {
-    const {0: first, [words.length - 1]: last} = words
-    return first[0] + last[0]
-  } else {
-    return name.substr(0, 2)
+  if (name) {
+    const words = name.split(' ') 
+    if (words.length >= 2) {
+      const {0: first, [words.length - 1]: last} = words
+      return first[0] + last[0]
+    } else {
+      return name.substr(0, 2)
+    }
   }
+
+  return 'G'
 }

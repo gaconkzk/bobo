@@ -59,7 +59,7 @@
       <div class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer">
         <span class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400">{shortName(user.name)}</span>
         <img src={user.avatar} alt="lovely avatar"
-          class="object-cover object-center w-full h-full visible group-hover_hidden" />
+          class="object-fill object-center w-full h-8 visible group-hover_hidden" />
       </div>
       <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg {avatarClass}">
         <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
