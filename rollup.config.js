@@ -94,6 +94,10 @@ export default {
             find: 'utils',
             replacement: path.resolve(projectRootDir, 'src/utils')
           },
+          {
+            find: 'layouts',
+            replacement: path.resolve(projectRootDir, 'src/layouts')
+          },
         ],
         customResolver
     }),
