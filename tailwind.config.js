@@ -1,7 +1,11 @@
 module.exports = {
   purge: ["./src/**/*.svelte", "./src/**/*.html"],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '1/2': '50vh',
+      }
+    },
   },
   variants: {
     display: ['responsive', 'hover', 'focus', 'group-hover'],
