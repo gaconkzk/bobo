@@ -1,7 +1,6 @@
 <script>
   import { Link } from 'yrv'
   import { Home } from 'svelte-hero-icons'
-  import { logout } from 'services/auth'
   import { currentUser } from 'services/users'
 
   import { onMount } from 'svelte'
@@ -9,39 +8,48 @@
   export let router
   console.log('Stupid unuse and warning on svelte, ', router)
 
+  let main
   let toggle
   let profile
 
-  let user = currentUser()
-  
-  const init = () => {
-    //Toggle mode
-    // TODO do this use svelte way
-		const body = document.querySelector('body')
-		toggle.addEventListener('click', () => {
-		  if (body.classList.contains('text-gray-900')) {
-        toggle.innerHTML = "☀️"
-        body.classList.remove('text-gray-900')
-        body.classList.add('text-gray-100')
-        profile.classList.remove('bg-white')
-        profile.classList.add('bg-gray-900')
-		  } else {
-        toggle.innerHTML = "🌙"
-        body.classList.remove('text-gray-100')
-        body.classList.add('text-gray-900')
-        profile.classList.remove('bg-gray-900')
-        profile.classList.add('bg-white')
-		  }
-    })
-  }
+  let mode = 'night'
 
-  onMount(init)
+  let user = currentUser()
+
+  const changeMode = () => {
+    if (mode === 'night') {
+      mode = 'day'
+    } else {
+      mode = 'night'
+    }
+  }
 </script>
 
-<main class="max-w-4xl flex items-center h-auto lg_h-screen flex-wrap mx-auto my-32 lg_my-0">
+<style lang="scss">
+  main{
+    &.night {
+      @apply text-gray-100;
+    }
+    &.day {
+      @apply text-gray-900;
+    }
+  }
+
+  .profile {
+    &.night {
+      @apply bg-gray-900;
+    }
+    &.day {
+      @apply bg-white;
+    }
+  }
+
+</style>
+
+<main bind:this={main} class="max-w-4xl flex items-center h-auto lg_h-screen flex-wrap mx-auto my-32 lg_my-0 {mode}">
   
   <!--Main Col-->
-  <div bind:this={profile} class="w-full lg_w-3/5 rounded-lg lg_rounded-l-lg lg_rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg_mx-0">
+  <div bind:this={profile} class="profile w-full lg_w-3/5 rounded-lg lg_rounded-l-lg lg_rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg_mx-0 {mode}">
     <div class="p-4 md_p-12 text-center lg_text-left">
       <!-- Image for mobile view-->
       <div class="block lg_hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style="background-image: url('{user.avatar}')"></div>
@@ -70,18 +78,18 @@
   </div>
   
   <div class="w-full lg_w-2/5">
-    <img src={user.avatar} class="rounded-none lg_rounded-lg shadow-2xl hidden lg_block" alt="noimg">  
+    <img src={user.avatar} class="rounded-none lg_rounded-lg shadow-2xl hidden lg_block" alt="noimg">
   </div>
 
   <div class="absolute top-0 right-0 h-12 w-18 p-4">
-    <button bind:this={toggle} class="focus_outline-none">🌙</button>
+    <button bind:this={toggle} class="focus_outline-none" on:click={changeMode}>{mode === 'night' ? '☀️' : '🌙'}</button>
   </div>
 </main>
 
 <svelte:head>
   <style>
     body {
-      @apply font-sans antialiased text-gray-900 leading-normal tracking-wider bg-cover;
+      @apply font-sans antialiased leading-normal tracking-wider bg-cover bg-gray-900;
       background-image: url('https://source.unsplash.com/1L71sPT5XKc');
     }
   </style>
