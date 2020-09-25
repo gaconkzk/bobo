@@ -3,26 +3,36 @@ import { auth, logout } from 'services/auth'
 
 import { db } from 'components/firebase'
 
+const defaultUser = (google_u) => ({
+  avatar: google_u.photoURL,
+  name: google_u.displayName,
+  email: google_u.email,
+  username: takeUsername(google_u.email),
+  isguest: false,
+})
+
 function takeUsername(email) {
   return email.split('@')[0]
 }
 
-export const makeUser = (google_u) => {
-  // user already in db?
+// Get user in db, if can't try created a new one - I don't care about error, so
+// u guys might got some weird errors if it not worked on your machine
+export const makeUser = async (google_u) => {
   let userRef = db.collection('users').doc(google_u.email)
-  userRef.get().then((doc) => {
-    console.log('user', user)
-  }).catch(err => {
-    console.log('err', err)
-  })
-  
-  return {
-    avatar: google_u.photoURL,
-    name: google_u.displayName,
-    email: google_u.email,
-    username: takeUsername(google_u.email),
-    isguest: false,
+  let user
+
+  try {
+    // user already in db?
+    let userDoc = await userRef.get()
+    user = userDoc.data()
+  } catch(err) {
+    // well, trying making a new one
+    user = defaultUser(google_u)
+    await userRef.set(user)
   }
+  
+  // if this error - u r unlucky
+  return user || defaultUser(google_u)
 }
 
 export const currentUser = () => {

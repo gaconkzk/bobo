@@ -28,10 +28,9 @@
     }
   })
 
-  function login() {
-    auth.signInWithPopup(googleProvider).then(() => {
-      unsubscribe = authState(auth).subscribe(u => astore.set({ user: makeUser(u) }))
-    })
+  async function login() {
+    await auth.signInWithPopup(googleProvider)
+    unsubscribe = authState(auth).subscribe(async u => astore.set({ user: await makeUser(u) }))
   }
 
   onDestroy(() => {
