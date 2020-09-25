@@ -3,7 +3,7 @@ import { auth, logout } from 'services/auth'
 
 import { db } from 'components/firebase'
 
-const defaultUser = (google_u) => ({
+const extractUser = (google_u) => ({
   avatar: google_u.photoURL,
   name: google_u.displayName,
   email: google_u.email,
@@ -27,12 +27,12 @@ export const makeUser = async (google_u) => {
     user = userDoc.data()
   } catch(err) {
     // well, trying making a new one
-    user = defaultUser(google_u)
+    user = extractUser(google_u)
     await userRef.set(user)
   }
   
   // if this error - u r unlucky
-  return user || defaultUser(google_u)
+  return user || extractUser(google_u)
 }
 
 export const currentUser = () => {
@@ -41,6 +41,7 @@ export const currentUser = () => {
     isguest: true,
     username: 'slug',
     avatar: 'https://source.unsplash.com/MP0IUfwrn0A',
+    // avatar: '/imgs/naruto_right.gif',
   }
 
   return user

@@ -3,8 +3,6 @@
   import { Home } from 'svelte-hero-icons'
   import { currentUser } from 'services/users'
 
-  import { onMount } from 'svelte'
-
   export let router
   console.log('Stupid unuse and warning on svelte, ', router)
 
