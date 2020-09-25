@@ -1,6 +1,8 @@
 <script>
   import { fade, fly } from 'svelte/transition'
 
+  import RoomStatus from 'components/RoomStatus'
+
   let random_seed = () => Math.random() * 5
 
   export let data = [{
@@ -51,10 +53,14 @@
   <div class="w-full md_w-3/5 h-full flex items-center bg-gray-100 rounded-lg">
     <div class="p-12 md_pr-24 md_pl-16 md_py-12">
       {@html item.desc}
-      <a class="flex items-baseline mt-3 text-indigo-600 hover_text-indigo-900 focus_text-indigo-900" href="/ct/{item.name}">
-        <span>Join now</span>
-        <span class="text-xs ml-1">&#x279c;</span>
-      </a>
+      <div class="flex flex-row w-full place-items-center justify-between mt-3">
+        <a class="flex items-baseline text-indigo-600 hover_text-indigo-900 focus_text-indigo-900" href="/ct/{item.name}">
+          <span>Join now</span>
+          <span class="text-xs ml-1">&#x279c;</span>
+        </a>
+
+        <RoomStatus players="0" maxPlayers="16" views="1M" />
+    </div>
     </div>
     <svg class="hidden md_block absolute inset-y-0 h-full w-24 fill-current text-gray-100 -ml-12" viewBox="0 0 100 100" preserveAspectRatio="none">
       <polygon points="50,0 100,0 50,100 0,100" />

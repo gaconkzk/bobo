@@ -1,6 +1,5 @@
 <script>
   import { onDestroy } from 'svelte'
-  import { get }   from 'svelte/store'
   import { auth, googleProvider } from 'components/firebase'
   import { authState } from 'rxfire/auth'
 

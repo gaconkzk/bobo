@@ -1,11 +1,21 @@
 import { get } from 'svelte/store'
 import { auth, logout } from 'services/auth'
 
+import { db } from 'components/firebase'
+
 function takeUsername(email) {
   return email.split('@')[0]
 }
 
 export const makeUser = (google_u) => {
+  // user already in db?
+  let userRef = db.collection('users').doc(google_u.email)
+  userRef.get().then((doc) => {
+    console.log('user', user)
+  }).catch(err => {
+    console.log('err', err)
+  })
+  
   return {
     avatar: google_u.photoURL,
     name: google_u.displayName,

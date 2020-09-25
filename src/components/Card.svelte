@@ -2,6 +2,8 @@
   import { navigateTo } from "yrv";
   import langs from 'components/devicon'
 
+  import RoomStatus from 'components/RoomStatus'
+
   const lang = () => `devicon-${langs[Math.floor(Math.random() * 5)]}`;
 
   export let data
@@ -47,9 +49,11 @@
       <span class="text-sm italic normal">Short description Short description Short description Short description Short description</span>
     </div>
 
-    <button class="bg-green-500 text-white mt-4 block rounded py-1 px-2 text-sm " on:click={() => navigateTo(`/ct/${data}`)}>
-      <span class="">Join</span>
-    </button>
-    
+    <div class="flex flex-row w-full place-items-center justify-between">
+      <button class="bg-green-500 text-white block rounded py-1 px-2 text-sm " on:click={() => navigateTo(`/ct/${data}`)}>
+        <span class="">Join</span>
+      </button>
+      <RoomStatus views={data.views} players={data.players} maxPlayers={data.maxPlayer}/>
+    </div>
   </div>
 </div>
