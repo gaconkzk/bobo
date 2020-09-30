@@ -47,6 +47,15 @@ export const currentUser = () => {
   return user
 }
 
+export const allow = (perm, u) => {
+  // TODO hi, for now it's me can do everything
+  if (u.username === 'gaconkzk') {
+    return true
+  }
+
+  return false
+}
+
 export const shortName = (name) => {
   // split by ' '
   if (name) {
