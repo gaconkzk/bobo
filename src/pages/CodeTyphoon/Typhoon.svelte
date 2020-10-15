@@ -55,7 +55,12 @@ let slugs = [createSlug(), createSlug()]
 
 <div class="flex-1 flex flex-col w-full items-center pt-2">
   <StatusBar bind:this={statusBar} {...status}/>
-  <svelte:component this={CodeLive} on:message={handleMessage} on:start={handleStart} on:stop={handleStop}/>
+  <div class="flex flex-row h-full">
+    <svelte:component this={CodeLive} on:message={handleMessage} on:start={handleStart} on:stop={handleStop}/>
+    <div class="w-20">
+      Ano
+    </div>
+  </div>
 </div>
 
 <div class="race">

@@ -1,9 +1,9 @@
 <script>
   import Footer from 'layouts/Footer.svelte'
 
-  import Card from 'components/Card'
-
   import Carousel from 'components/Carousel'
+
+  import TyphoonItem from 'components/TyphoonItem'
 
   export let router = null
   console.log('Stupid unuse and warning on svelte, ', router)
@@ -24,25 +24,28 @@
   <Carousel />
 </div>
 
-<div class="container mx-auto border-none">
-  <section class="shadow mb-6">
+<div class="intro-y grid grid-cols-12 gap-6 mt-5">
+  {#each fighting as item, i}
+    <TyphoonItem introDelay={i}/>
+  {/each}
+  <!-- <section class="mb-6">
     <h3 class="cat">Fighting</h3>
 
-    <div class="grid grid-flow-row md_grid-cols-3 lg_grid-cols-4 gap-4 sm_grid-cols-1 px-2">
+    <div class="grid grid-flow-row md_grid-cols-2 gap-2 sm_grid-cols-1 px-2">
       {#each fighting as item}
         <Card data={item}/>
       {/each}
     </div>
   </section>
 
-  <section class="shadow mb-6">
+  <section class="mb-6">
     <h3 class="cat">Practice</h3>
 
-    <div class="grid grid-flow-row md_grid-cols-3 lg_grid-cols-4 gap-4 sm_grid-cols-1 px-2">
+    <div class="grid grid-flow-row md_grid-cols-2 gap-2 sm_grid-cols-1 px-2">
       {#each data as item}
         <Card data={item}/>
       {/each}
     </div>
-  </section>
+  </section> -->
 </div>
 <Footer />

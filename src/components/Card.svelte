@@ -31,7 +31,7 @@
   }
 </style>
 
-<div class="p-4 md_mb-0 mb-6 flex flex-col justify-center items-center max-w-sm mx-auto w-full">
+<div class="p-4 md_mb-0 mb-6 flex flex-col justify-center items-center max-w-sm mx-auto w-full zoom-in">
   <div class="bg-gray-300 h-40 w-full rounded-lg shadow-md bg-cover bg-center" style="background-image: url(https://picsum.photos/seed/{random_seed}/352/160)"></div>
 
   <div class="bg-white -mt-20 shadow-lg rounded-lg overflow-hidden p-4 w-5/6">
@@ -46,7 +46,7 @@
     
 
     <div class="summary-post text-base text-justify font-small max-h-6 pb-2 block-with-text">
-      <span class="text-sm italic normal">Short description Short description Short description Short description Short description</span>
+      <span class="text-sm italic normal">Short description Short description Short description Short description Short description Short description Short description Short description Short description Short description</span>
     </div>
 
     <div class="flex flex-row w-full place-items-center justify-between">

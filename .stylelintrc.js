@@ -28,6 +28,7 @@ module.exports = {
       "px",
       "%",
       "deg",
+      "ms",
     ],
   },
   "declaration-block-trailing-semicolon": null,

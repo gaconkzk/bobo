@@ -238,15 +238,11 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
 
 <svelte:window on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div class="flex flex-col overflow-hidden h-full items-center">
+<div class="px-2 rounded-lg shadow flex flex-col overflow-hidden h-full items-center bg-opacity-50 bg-purple-200">
   <!-- <div id="codelive" class="h-32 min-h-0  overflow-auto font-mono rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html current.replace(/\n/g, '&larrhk;<br/>').replace(/\s/g, '&nbsp;')}</div> -->
   <div id="codelive" class="h-32 min-h-0  overflow-auto font-mono rounded border-2 border-black-400 px-2 py-2 shadow my-10" bind:this={codelive}>{@html board.html()}</div>
 
-  <button class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
-
-  <!-- <div>{typed}</div> -->
-  <!-- <div>{next}</div> -->
-  <br/>
-
+  <button class="mb-5 transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold" on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button>
+  
   <Keyboard bind:this={keyboard}/>
 </div>
