@@ -1,8 +1,9 @@
 <script>
+  import { onMount } from 'svelte'
+  import { colors } from 'utils/tailwind'
+
   let me
   let loaded = false
-
-  import { onMount } from 'svelte'
   
   let className
   export { className as class }
@@ -27,16 +28,11 @@
   img.loaded {
     opacity: 1;
   }
-
-  :global(.circle) {
-    @apply mx-auto my-auto;
-    z-index: 22;
-  }
 </style>
 
 {#if !loaded && loading}
-<div class="flex w-full h-full justify-center">
-  <svelte:component this={loading}/>
+<div class="flex w-full h-full">
+  <svelte:component this={loading} color={colors.purple['500']} size="24"/>
 </div>
 {/if}
 
