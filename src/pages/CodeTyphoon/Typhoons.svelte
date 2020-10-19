@@ -3,6 +3,8 @@
 
   import Carousel from 'components/Carousel'
 
+  import Slider from 'components/Slider'
+
   import TyphoonItem from 'components/TyphoonItem'
 
   export let router = null
@@ -21,7 +23,8 @@
 </style>
 
 <div class="px-6">
-  <Carousel />
+  <!-- <Carousel /> -->
+  <Slider />
 </div>
 
 <div class="intro-y grid grid-cols-12 gap-6 mt-5">

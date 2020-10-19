@@ -14,6 +14,9 @@ module.exports = {
   plugins: [],
   future: {
     removeDeprecatedGapUtilities: true,
+    defaultLineHeights: true,
+    standardFontWeights: true,
+    purgeLayersByDefault: true,
   },
   separator: "_",
 };

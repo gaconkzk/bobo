@@ -1,3 +1,1 @@
-<template lang="pug">
-h1 About page
-</template>
+<h1>About page</h1>

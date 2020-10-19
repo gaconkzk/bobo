@@ -1,4 +1,5 @@
 <style global>
+  @import 'tiny-slider/dist/tiny-slider.css';
   @import '../assets/global.pcss';
   @import 'animate.css';
 
