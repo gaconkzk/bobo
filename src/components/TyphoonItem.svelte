@@ -6,14 +6,11 @@
 
   import { SyncLoader } from 'svelte-loading-spinners'
 
-  import { UserGroup } from 'svelte-hero-icons'
+  import { UserGroup, ChatAlt2, Eye, ThumbUp, Share, Login } from 'svelte-hero-icons'
 
   import Image from './Image'
 
   export let introDelay = 0
-  let className = ''
-  export { className as class }
-
   dayjs.extend(relativeTime)
   // TODO remove default
   const ran = Math.round(Math.random() * 30)
@@ -56,6 +53,16 @@
   .animate__animated.animate__slideInUp {
     --animate-duration: 400ms;
     --animate-delay: var(--intro-delay);
+  }
+
+  .truncate_full {
+    display: -webkit-box;
+    margin: 0 auto;
+    -webkit-line-clamp: var(--max-line);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @apply max-h-full text-sm leading-5;
   }
 </style>
 
@@ -114,10 +121,12 @@
         src={data.img}
         loading={SyncLoader} />
     </div>
-    <a href="/ct/{data.id}" class="block font-medium text-base mt-5 select-none">
-      {data.title}
-    </a>
-    <div class="text-gray-700 mt-2 select-none">{data.desc}</div>
+    <div class="my-5">
+      <a href="/ct/{data.id}" class="block font-medium text-base select-none text-gray-900 truncate_full" style="--max-line: 1">
+        {data.title}
+      </a>
+    </div>
+    <div class="text-gray-700 mt-2 select-none truncate_full font-light" style="--max-line: 3">{data.desc}</div>
   </div>
   <div
     class="flex items-center px-5 py-3 border-t border-gray-200">
@@ -142,31 +151,30 @@
     <a
       href=""
       class="intro-x w-8 h-8 flex items-center justify-center rounded-full
-      bg-theme-14 dark:bg-dark-5 dark:text-gray-300 text-theme-10 ml-auto
-      tooltip"
+      bg-purple-200 text-purple-600 ml-auto tooltip"
       title="Share">
-      <i data-feather="share-2" class="w-3 h-3" />
+      <Share class="w-3 h-3" />
     </a>
     <a
       href=""
       class="intro-x w-8 h-8 flex items-center justify-center rounded-full
-      bg-theme-1 text-white ml-2 tooltip"
-      title="Download PDF">
-      <i data-feather="share" class="w-3 h-3" />
+      bg-purple-700 text-white ml-2 tooltip"
+      title="Join">
+      <Login class="w-3 h-3" />
     </a>
   </div>
   <div class="px-5 pt-3 pb-5 border-t border-gray-200 dark:border-dark-5">
     <div class="w-full flex text-gray-600 text-xs sm:text-sm">
       <div class="mr-2">
-        Comments:
+        <ChatAlt2 class="w-4 h-4" />
         <span class="font-medium">40</span>
       </div>
       <div class="mr-2">
-        Views:
+        <Eye class="w-4 h-4" />
         <span class="font-medium">66k</span>
       </div>
       <div class="ml-auto">
-        Likes:
+        <ThumbUp solid class="w-4 h-4" />
         <span class="font-medium">87k</span>
       </div>
     </div>
