@@ -9,6 +9,8 @@
 
   import { navigateTo } from 'yrv'
 
+  import { animation } from 'components/Animation'
+
   import { getParams } from 'utils/common'
 
   import { makeUser } from 'services/users'
@@ -60,8 +62,9 @@
     <p class=" text-center text-gray-500 text-xs mt-2">
       &copy;2020 The Flies.  Built with
       <span class="inline-block h-3 w-3 ml-1 -mt-1">
-        <span class="animate-ping absolute inline-flex self-center h-3 w-3 text-base text-red-400 opacity-75">&#10084;</span>
-        <span class="relative inline-flex self-center h-3 w-3 text-lg text-red-500 ">&#10084;</span>
+        <span use:animation={{ animation: 'heartBeat', infinite: true}} class="text-red-500">&#10084;</span>
+        <!-- <span class="animate-ping absolute inline-flex self-center h-3 w-3 text-base text-red-400 opacity-75">&#10084;</span>
+        <span class="relative inline-flex self-center h-3 w-3 text-lg text-red-500 ">&#10084;</span> -->
       </span>
     </p>
   </div>

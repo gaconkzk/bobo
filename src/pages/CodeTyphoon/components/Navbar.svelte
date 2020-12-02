@@ -64,6 +64,9 @@
       <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
         <Link href="/profile" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Your Profile</Link>
         <Link href="/settings" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Settings</Link>
+{#if user.roles.indexOf('admin') >= 0}
+        <Link href="/admin" class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem">Admin</Link>
+{/if}
 {#if !user.isguest}
         <Link class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out" role="menuitem" on:click={logoutClicked}>Sign out</Link>
 {:else}

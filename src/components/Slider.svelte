@@ -8,7 +8,7 @@ let random_seed = () => Math.random() * 5
   let me
   onMount(() => {
     tns({
-      // mode: 'gallery',
+      mode: 'gallery',
       container: me,
       slideBy: 'page',
       mouseDrag: true,
@@ -91,9 +91,9 @@ let random_seed = () => Math.random() * 5
   <div bind:this={me} class="single-item h-64">
     {#each data as item}
     <CarouselItem>
-      <div class="relative rounded-lg block md_flex items-center h-full bg-gray-100 shadow-xl">
-        <div class="relative w-full h-full overflow-hidden rounded-t-lg md_rounded-t-none md_rounded-l-lg">
-          <img class="absolute inset-0 w-full h-full object-cover object-center" src={item.img} alt="">
+      <div class="relative rounded-lg block md_flex items-center h-full bg-gray-100 shadow-xl overflow-hidden">
+        <!-- <div class="relative w-full h-full overflow-hidden rounded-t-lg md_rounded-t-none md_rounded-l-lg"> -->
+          <img class="absolute inset-0 w-full h-full object-cover object-center opacity-50" src={item.img} alt="">
           <!-- <div class="absolute inset-0 w-full h-full bg-indigo-900 opacity-75"></div>
           <div class="absolute inset-0 w-full h-full flex items-center justify-center fill-current text-white">
             {#if item.logoImg}
@@ -104,7 +104,7 @@ let random_seed = () => Math.random() * 5
               </svg>
             {/if}
           </div> -->
-        </div>
+        <!-- </div> -->
         <!-- <div class="w-full md_w-3/5 h-full flex items-center bg-gray-100 rounded-lg">
           <div class="p-12 md_pr-24 md_pl-16 md_py-12">
             {@html item.desc}
@@ -112,8 +112,8 @@ let random_seed = () => Math.random() * 5
           <svg class="hidden md_block absolute inset-y-0 h-full w-24 fill-current text-gray-100 -ml-12" viewBox="0 0 100 100" preserveAspectRatio="none">
             <polygon points="50,0 100,0 50,100 0,100" />
           </svg>
-        </div>
-      </div> -->
+        </div> -->
+      </div>
     </CarouselItem>
     {/each}
       <!-- <div class="h-full px-2">

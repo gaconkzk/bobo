@@ -9,6 +9,7 @@ const extractUser = (google_u) => ({
   email: google_u.email,
   username: takeUsername(google_u.email),
   isguest: false,
+  roles: ['admin'],
 })
 
 function takeUsername(email) {
@@ -42,6 +43,7 @@ export const currentUser = () => {
     username: 'slug',
     avatar: 'https://source.unsplash.com/MP0IUfwrn0A',
     // avatar: '/imgs/naruto_right.gif',
+    roles: [],
   }
 
   return user
