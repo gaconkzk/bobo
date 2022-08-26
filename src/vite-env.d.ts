@@ -41,7 +41,3 @@ type TypingEvent = {
   shiftKey: boolean
   metaKey: boolean
 }
-
-enum CharacterEnum {
-  CAT = 'imgs/ccat_right.gif',
-}
