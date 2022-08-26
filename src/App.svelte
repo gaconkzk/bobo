@@ -14,6 +14,7 @@
   import NotFound from './pages/NotFound.svelte'
 
   import Profile from './pages/Profile.svelte'
+  import Testing from './pages/Testing.svelte'
 
   const desktop = () => {
     return !window.isMobileOrTablet()
@@ -31,6 +32,7 @@
     condition={desktop}
   />
   <Route path="/profile" exact component={Profile} />
+  <Route path="/test" exact component={Testing} />
   <Route path="/mobile" exact component={NotSupport} />
   <Route fallback component={NotFound} />
 </Router>

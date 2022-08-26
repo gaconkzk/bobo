@@ -2,7 +2,6 @@
   import { Link } from 'yrv'
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Home } from '@steeze-ui/heroicons'
-  import { logout } from '$services/auth'
   import { currentUser } from '$services/users'
 
   import { onMount } from 'svelte'
