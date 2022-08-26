@@ -1,8 +1,8 @@
 import page from 'page'
 
-import Router from './Router'
-import Route from './Route'
-import NotFound from './NotFound'
+import Router from './Router.svelte'
+import Route from './Route.svelte'
+import NotFound from './NotFound.svelte'
 
 const redirect = (path) => page.redirect(path)
 

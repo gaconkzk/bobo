@@ -258,5 +258,4 @@ const VarKeyboardmap = [
   'WinOemClear', //[254]
   '', //[255]
 ]
-
-module.exports = VarKeyboardmap
+export default VarKeyboardmap

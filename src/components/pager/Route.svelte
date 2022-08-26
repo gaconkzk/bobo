@@ -1,5 +1,5 @@
-<script>
-  import { register, activeRoute } from './Router'
+<script lang="ts">
+  import { register, activeRoute } from './Router.svelte'
 
   export let path = '/'
   export let component = null
@@ -20,7 +20,8 @@
     <svelte:component
       this={$activeRoute.component}
       {...$$restProps}
-      {...params} />
+      {...params}
+    />
   {:else}
     <slot {params} />
   {/if}

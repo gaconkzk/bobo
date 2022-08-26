@@ -1,5 +1,5 @@
-<script>
-  import { register, activeRoute } from './Router'
+<script lang="ts">
+  import { register, activeRoute } from './Router.svelte'
   // page.js catch all handler
   export let path = '*'
   export let component = null

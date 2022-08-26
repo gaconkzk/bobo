@@ -7,7 +7,7 @@ const isError = (c) => {
   return c.status && c.status !== 0 && c.status !== 1
 }
 
-const htmlChar = (c) => {
+const htmlChar = (c: string) => {
   switch (c) {
     case '\n':
       return '&larrhk;'
@@ -18,45 +18,55 @@ const htmlChar = (c) => {
   }
 }
 
+type KeyboardType = {
+  char: string
+  status: 0 | 1
+}
+
 class TypingBoard {
-  constructor(text) {
+  data: KeyboardType[]
+  tabspace: number
+  cursor: number
+  blinking: boolean
+
+  constructor(text: string) {
     if (!text || !text.length) {
       throw new Error('Hey gimme some real text')
     }
-    this.data = text.split('').map(c => ({
+    this.data = text.split('').map((c) => ({
       char: c,
       status: NONE,
     }))
-    
+
     this.tabspace = 2
     this.cursor = 0
     this.blinking = false
   }
 
   reset() {
-    this.data.forEach(c => c.status = NONE)
+    this.data.forEach((c) => (c.status = NONE))
     this.cursor = 0
   }
 
   accuracy() {
     let corrected = this.data.length - this.errors()
-    return (corrected * 100 / this.data.length)
+    return (corrected * 100) / this.data.length
   }
 
   lines() {
-    return this.data.filter(d => d.char === '\n').length
+    return this.data.filter((d) => d.char === '\n').length
   }
 
   line() {
-    return this.data.slice(0, this.cursor).filter(d => d.char === '\n').length
+    return this.data.slice(0, this.cursor).filter((d) => d.char === '\n').length
   }
 
   progress() {
-    return this.cursor * 100 / this.data.length
+    return (this.cursor * 100) / this.data.length
   }
 
   errors() {
-    return this.data.filter(d => isError(d)).length
+    return this.data.filter((d) => isError(d)).length
   }
 
   type(char) {
@@ -86,7 +96,7 @@ class TypingBoard {
   tab() {
     // for tab - it is the easiest way :D, tab = a fixed number of spaces
     // i'll correct this if having more time
-    [...Array(this.tabspace).keys()].forEach(s => {
+    ;[...Array(this.tabspace).keys()].forEach((s) => {
       this.typeAt(' ', this.cursor + s)
     })
 
@@ -105,7 +115,7 @@ class TypingBoard {
   }
 
   _close(op) {
-    return op === GOOD ? '</span>' : (op === NONE ? '' : '</mark>')
+    return op === GOOD ? '</span>' : op === NONE ? '' : '</mark>'
   }
 
   html() {
@@ -114,7 +124,7 @@ class TypingBoard {
     // a caching mechanism - not sure how for now
 
     let currentOpen = NONE
-    
+
     let html = ''
     for (let i = 0; i < this.data.length; i++) {
       if (this.blinking && i === this.cursor) {
@@ -136,7 +146,7 @@ class TypingBoard {
           if (currentOpen !== GOOD) {
             html += this._close(currentOpen)
             html += '<span>'
-            
+
             currentOpen = GOOD
           }
           html += htmlChar(item.char)

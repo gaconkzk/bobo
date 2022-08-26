@@ -1,7 +1,11 @@
-<script context="module">
+<script context="module" lang="ts">
   import { writable } from 'svelte/store'
 
-  export const activeRoute = writable({})
+  export const activeRoute = writable({
+    path: '',
+    params: [],
+    component: undefined,
+  })
   const routes = {}
 
   export function register(route) {

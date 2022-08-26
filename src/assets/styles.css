@@ -1,0 +1,4 @@
+body {
+  @apply w-full;
+  min-width: 400px;
+}

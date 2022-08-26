@@ -1,4 +1,4 @@
-<svelte:options accessors/>
+<svelte:options accessors />
 
 <script>
   export let left = false
