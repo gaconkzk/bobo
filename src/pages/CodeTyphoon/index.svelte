@@ -1,10 +1,10 @@
 <script>
   import { Router, Route } from 'yrv'
 
-  import Navbar from './components/Navbar'
+  import Navbar from './components/Navbar.svelte'
 
-  import Typhoons from './Typhoons'
-  import Typhoon from './Typhoon'
+  import Typhoons from './Typhoons.svelte'
+  import Typhoon from './Typhoon.svelte'
 
   export let router
   console.log('Stupid unuse and warning on svelte, ', router)

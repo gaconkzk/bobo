@@ -1,4 +1,4 @@
-module.exports = [
+const keymaps: CodeKeyType[][] = [
   [
     {
       keyCode: 192,
@@ -70,11 +70,12 @@ module.exports = [
       backspace: true,
       bottom: '&larr;',
     },
-  ],[
+  ],
+  [
     {
       keyCode: 9,
       tab: true,
-      bottom: '&rarrb;'
+      bottom: '&rarrb;',
     },
     {
       keyCode: 81,
@@ -138,7 +139,8 @@ module.exports = [
     //   top: '&larrhk;',
     //   bottom: '',
     // },
-  ],[
+  ],
+  [
     {
       keyCode: 20,
       capslck: true,
@@ -192,7 +194,7 @@ module.exports = [
     {
       keyCode: 222,
       top: '"',
-      bottom: '\'',
+      bottom: "'",
     },
     {
       keyCode: 13,
@@ -200,12 +202,13 @@ module.exports = [
       top: '&larrhk;',
       bottom: '',
     },
-  ],[
+  ],
+  [
     {
       keyCode: 'l_16',
       left: true,
       shift: true,
-      bottom: 'shift'
+      bottom: 'shift',
     },
     {
       keyCode: 90,
@@ -254,19 +257,20 @@ module.exports = [
       keyCode: 'r_16',
       right: true,
       shift: true,
-      bottom: 'shift'
+      bottom: 'shift',
     },
-  ],[
+  ],
+  [
     {
       keyCode: 'l_17',
       left: true,
-      bottom: 'ctrl'
+      bottom: 'ctrl',
     },
     {
       keyCode: 'l_92',
       command: true,
       left: true,
-      bottom: 'W',
+      bottom: '䷸',
     },
     {
       keyCode: 'l_18',
@@ -291,7 +295,7 @@ module.exports = [
     {
       keyCode: 'r_17',
       left: true,
-      bottom: 'ctrl'
+      bottom: 'ctrl',
     },
     {
       keyCode: 37,
@@ -317,5 +321,7 @@ module.exports = [
       right: true,
       data: '&rtrif;',
     },
-  ]
+  ],
 ]
+
+export default keymaps

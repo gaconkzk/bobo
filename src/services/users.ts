@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { auth, logout } from 'services/auth'
+import { auth, logout } from '$services/auth'
 
 function takeUsername(email) {
   return email.split('@')[0]
@@ -29,9 +29,9 @@ export const currentUser = () => {
 export const shortName = (name) => {
   // split by ' '
   if (name) {
-    const words = name.split(' ') 
+    const words = name.split(' ')
     if (words.length >= 2) {
-      const {0: first, [words.length - 1]: last} = words
+      const { 0: first, [words.length - 1]: last } = words
       return first[0] + last[0]
     } else {
       return name.substr(0, 2)

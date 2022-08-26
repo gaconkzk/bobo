@@ -1,10 +1,8 @@
-
-
-module.exports = [
-// hacking these two for neutral_left and neutral_right
+export default [
+  // hacking these two for neutral_left and neutral_right
   '', //[0]
   '', //[1]
-// --------------
+  // --------------
 
   '', //[2]
   'Cancel', //[3]
