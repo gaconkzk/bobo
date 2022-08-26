@@ -6,6 +6,8 @@
 
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte'
+  import { tweened } from 'svelte/motion'
+  import { quadIn } from 'svelte/easing'
 
   function getBorder(step?: number) {
     var px = radius + 'px '
@@ -23,7 +25,7 @@
   // for controlling timeline
   let tl
 
-  let me
+  let me: HTMLDivElement
 
   let eyes = '()<>[]',
     pupils = "oO*.°´`'+x"
@@ -72,40 +74,43 @@
     }
   }
 
-  // function animateSlug() {
-  //   let gsTransform = me && me['_gsTransform']
+  const position = tweened(-170, {
+    duration: 0,
+    easing: quadIn,
+  })
 
-  //   if (gsTransform && gsTransform.x > screen.width) {
-  //     TweenMax.set(me, {
-  //       x: -170,
-  //     })
-  //   }
-
-  //   if (me) {
-  //     tl = new TimelineMax()
-  //     tl.to(me, speed, {
-  //       x: '+=' + radius,
-  //       borderRadius: getBorder(true),
-  //     })
-  //       .to(me, speed * 0.25, {
-  //         rotation: -5,
-  //         ease: Quad.easeOut,
-  //       })
-  //       .to(me, speed * 0.25, {
-  //         rotation: 0,
-  //         ease: Quad.easeIn,
-  //       })
-  //       .to(
-  //         me,
-  //         speed * 0.5,
-  //         {
-  //           borderRadius: getBorder(false),
-  //         },
-  //         speed
-  //       )
-  //       .addCallback(animateSlug, speed * 1.5, [])
-  //   }
-  // }
+  function animateSlug() {
+    //   let gsTransform = me && me['_gsTransform']
+    //   if (gsTransform && gsTransform.x > screen.width) {
+    //     TweenMax.set(me, {
+    //       x: -170,
+    //     })
+    //   }
+    //   if (me) {
+    //     tl = new TimelineMax()
+    //     tl.to(me, speed, {
+    //       x: '+=' + radius,
+    //       borderRadius: getBorder(true),
+    //     })
+    //       .to(me, speed * 0.25, {
+    //         rotation: -5,
+    //         ease: Quad.easeOut,
+    //       })
+    //       .to(me, speed * 0.25, {
+    //         rotation: 0,
+    //         ease: Quad.easeIn,
+    //       })
+    //       .to(
+    //         me,
+    //         speed * 0.5,
+    //         {
+    //           borderRadius: getBorder(false),
+    //         },
+    //         speed
+    //       )
+    //       .addCallback(animateSlug, speed * 1.5, [])
+    //   }
+  }
 
   onMount(() => {
     blinkSlug()

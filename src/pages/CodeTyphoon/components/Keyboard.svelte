@@ -102,21 +102,15 @@
   $keyboard-spacing: 16px;
 
   .keyboard-container {
-    display: flex;
+    @apply flex;
   }
   .keyboard {
+    @apply rounded text-base antialiased font-light grid justify-center tracking-1px origin-top-left;
     background-color: $color-keyboard;
     color: $color-text;
-    display: grid;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
     grid-template-columns: repeat(58, calc(($key-size + $key-gutter) / 4));
     grid-template-rows: repeat(10, calc(($key-size + $key-gutter) / 2));
-    justify-content: center;
-    letter-spacing: 1px;
-    line-height: 24px;
     padding: $keyboard-spacing;
-    transform-origin: top left;
+    font-family: 'Roboto', sans-serif;
   }
 </style>

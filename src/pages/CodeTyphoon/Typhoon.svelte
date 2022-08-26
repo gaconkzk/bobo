@@ -9,7 +9,7 @@
   //   .catch(err => console.error(err))
   import CodeLive from './components/CodeLive.svelte'
 
-  import Slug, { rndInt } from '$components/Slug.svelte'
+  // import Slug, { rndInt } from '$components/Slug.svelte'
 
   export let router = null
   console.log('Stupid unuse and warning on svelte, ', router)
@@ -30,36 +30,34 @@
     statusBar.stop()
   }
 
-  let race
-  function createSlug() {
-    let hue = rndInt(360)
-    let z = rndInt(15)
-    let speed = Math.random() * 3 + 0.25
-    let bottom = `${(264 * (25 - z)) / 100}px`
-    // TODO size of the slug
+  // let race
+  // function createSlug() {
+  //   let hue = rndInt(360)
+  //   let z = rndInt(15)
+  //   let speed = Math.random() * 3 + 0.25
+  //   let bottom = `${(264 * (25 - z)) / 100}px`
+  //   // TODO size of the slug
 
-    return { hue, z, speed, bottom }
-  }
+  //   return { hue, z, speed, bottom }
+  // }
 
-  let slugs = [createSlug(), createSlug()]
+  // let slugs = [createSlug(), createSlug()]
 </script>
 
 <div class="flex-1 flex flex-col w-full items-center pt-2">
   <StatusBar bind:this={statusBar} {...status} />
-  <svelte:component
-    this={CodeLive}
+  <CodeLive
     on:message={handleMessage}
     on:start={handleStart}
     on:stop={handleStop}
   />
 </div>
 
-<div class="race">
+<!-- <div class="race">
   {#each slugs as slug}
     <Slug {...slug} />
   {/each}
-</div>
-
+</div> -->
 <style lang="scss">
   .race {
     @apply absolute w-full overflow-hidden bg-gradient-to-b from-white via-gray-100 to-black;

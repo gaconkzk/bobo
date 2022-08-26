@@ -270,7 +270,7 @@ const keymaps: CodeKeyType[][] = [
       keyCode: 'l_92',
       command: true,
       left: true,
-      bottom: 'W',
+      bottom: '䷸',
     },
     {
       keyCode: 'l_18',
