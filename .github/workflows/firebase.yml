@@ -51,6 +51,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_THEFLIES_CFF90 }}'
           projectId: theflies-cff90
+          channelID: live
   #     - name: Archive Production Artifact
   #       uses: actions/upload-artifact@master
   #       with:
