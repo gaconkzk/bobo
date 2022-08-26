@@ -5,7 +5,7 @@
 </script>
 
 <script lang="ts">
-  // import { onDestroy, onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
 
   function getBorder(step?: number) {
     var px = radius + 'px '
@@ -50,23 +50,27 @@
     //   )
   }
 
-  // function getEyes() {
-  //   var idx = rndInt(eyes.length * 0.5) * 2
-  //   var pupil = pupils.charAt(rndInt(pupils.length))
-  //   var inner = Math.random() > 0.5 ? ' ' + pupil : pupil + ' '
-  //   var eye = eyes.charAt(idx) + inner + eyes.charAt(idx + 1)
-  //   return eye + ' ' + eye
-  // }
+  function getEyes() {
+    var idx = rndInt(eyes.length * 0.5) * 2
+    var pupil = pupils.charAt(rndInt(pupils.length))
+    var inner = Math.random() > 0.5 ? ' ' + pupil : pupil + ' '
+    var eye = eyes.charAt(idx) + inner + eyes.charAt(idx + 1)
+    return eye + ' ' + eye
+  }
 
-  // function blinkSlug(close) {
-  //   if (me) {
-  //     if (close) me.innerText = '---- ----'
-  //     else me.innerText = getEyes()
-  //     TweenMax.delayedCall(close ? 0.25 : Math.random() * 20, blinkSlug, [
-  //       !close,
-  //     ])
-  //   }
-  // }
+  function blinkSlug(close?: boolean) {
+    if (me) {
+      if (close) me.innerText = '---- ----'
+      else me.innerText = getEyes()
+
+      setTimeout(
+        () => {
+          blinkSlug(!close)
+        },
+        close ? 550 : Math.random() * 1000
+      )
+    }
+  }
 
   // function animateSlug() {
   //   let gsTransform = me && me['_gsTransform']
@@ -103,16 +107,16 @@
   //   }
   // }
 
-  // onMount(() => {
-  //   blinkSlug()
-  //   animateSlug()
-  // })
+  onMount(() => {
+    blinkSlug()
+    // animateSlug()
+  })
 
-  // onDestroy(() => {
-  //   if (me) {
-  //     TweenMax.set(me, { clearProps: 'all' })
-  //   }
-  // })
+  onDestroy(() => {
+    if (me) {
+      // TweenMax.set(me, { clearProps: 'all' })
+    }
+  })
 </script>
 
 <div
@@ -125,13 +129,7 @@
 
 <style>
   .slug {
-    font-family: monospace;
-    position: absolute;
-    border: 2px solid;
-    width: 170px;
-    height: 95px;
-    text-align: right;
-    padding: 5px 15px;
+    @apply font-mono absolute border-2 w-170px h-95px text-right py-5px px-15px;
 
     border-color: hsl(var(--slug-border-color), 100%, 50%);
     color: hsl(var(--slug-color), 100%, 50%);

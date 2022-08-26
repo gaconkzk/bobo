@@ -55,9 +55,12 @@
         style="fill:#FFFFFF;"
       />
     </svg>
-    <Link href="/ct" class="font-semibold text-xl tracking-tight"
-      >Code Typhoon</Link
+    <Link
+      href="/ct"
+      class="font-semibold text-xl tracking-tight text-white font-sans decoration-none hover:text-orange-300"
     >
+      Code Typhoon
+    </Link>
   </div>
 
   <div class="w-8 h-8 relative mb" on:click={avatarClick}>
@@ -65,13 +68,13 @@
       class="group w-full h-full rounded-full overflow-hidden shadow-inner text-center bg-purple table cursor-pointer"
     >
       <span
-        class="hidden group-hover_table-cell rounded-full text-white font-bold align-middle bg-gray-400 select-none"
+        class="hidden group-hover:table-cell rounded-full text-white font-bold align-middle bg-gray-400 select-none"
         >{shortName(user.name)}</span
       >
       <img
         src={user.avatar}
         alt="lovely avatar"
-        class="object-fill object-center w-full h-8 visible group-hover_hidden"
+        class="object-fill object-center w-full h-8 visible group-hover:hidden"
       />
     </div>
     {#if menuDisplay}
@@ -87,24 +90,24 @@
         >
           <Link
             href="/profile"
-            class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out"
+            class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
             role="menuitem">Your Profile</Link
           >
           <Link
             href="/settings"
-            class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out"
+            class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
             role="menuitem">Settings</Link
           >
           {#if !user.isguest}
             <Link
-              class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out"
+              class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
               role="menuitem"
               on:click={logoutClicked}>Sign out</Link
             >
           {:else}
             <Link
               href="/login?redirect={$router.path}"
-              class="block px-4 py-2 text-sm leading-5 text-gray-700 hover_bg-gray-100 focus_outline-none focus_bg-gray-100 transition duration-150 ease-in-out"
+              class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
               role="menuitem">Signin</Link
             >
           {/if}
@@ -115,6 +118,8 @@
 </nav>
 
 <style>
+  .group {
+  }
   .naviga {
     background-color: #291c52;
   }

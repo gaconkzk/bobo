@@ -226,7 +226,7 @@ var x = getOffset( document.getElementById('yourElId') ).left;`
   </div>
 
   <button
-    class="transition duration-500 ease-in-out bg-green-500 hover_bg-red-500 transform hover_-translate-y-1 hover_scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold"
+    class="transition duration-500 ease-in-out bg-green-500 hover:bg-red-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg w-24 h-12 text-white text-2xl antialiased font-bold"
     on:click={handleStart}>{isStarted ? 'Stop' : 'Start'}</button
   >
 

@@ -45,7 +45,7 @@
       </h3>
 
       <button
-        class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider"
+        class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider flex flex-row items-center"
         on:click={() => navigateTo('/ct')}
       >
         <img
@@ -140,7 +140,7 @@
       </h2>
       <h3 class="my-4 text-2xl text-white">Get yourself a shitty shiny slug</h3>
       <button
-        class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider"
+        class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider flex flex-row items-center"
         on:click={() => navigateTo('/ct')}
       >
         <img

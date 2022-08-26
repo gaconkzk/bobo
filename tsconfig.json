@@ -20,7 +20,8 @@
       "$components/*": ["./src/components/*"],
       "$services/*": ["./src/services/*"],
       "$layouts/*": ["./src/layouts/*"],
-      "$utils/*": ["./src/utils/*"]
+      "$utils/*": ["./src/utils/*"],
+      "$assets/*": ["./src/assets/*"]
     }
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],

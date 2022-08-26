@@ -40,26 +40,26 @@
 </script>
 
 <main
-  class="max-w-4xl flex items-center h-auto lg_h-screen flex-wrap mx-auto my-32 lg_my-0"
+  class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0"
 >
   <!--Main Col-->
   <div
     bind:this={profile}
-    class="w-full lg_w-3/5 rounded-lg lg_rounded-l-lg lg_rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg_mx-0"
+    class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0"
   >
-    <div class="p-4 md_p-12 text-center lg_text-left">
+    <div class="p-4 md:p-12 text-center lg:text-left">
       <!-- Image for mobile view-->
       <div
-        class="block lg_hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
+        class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
         style="background-image: url('{user.avatar}')"
       />
 
-      <h1 class="text-3xl font-bold pt-8 lg_pt-0">{user.username}</h1>
+      <h1 class="text-3xl font-bold pt-8 lg:pt-0">{user.username}</h1>
       <div
-        class="mx-auto lg_mx-0 w-4/5 pt-3 border-b-2 border-teal-500 opacity-25"
+        class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-teal-500 opacity-25"
       />
       <p
-        class="pt-4 text-base font-bold flex items-center justify-center lg_justify-start"
+        class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start"
       >
         <svg
           class="h-4 fill-current text-teal-700 pr-4"
@@ -71,7 +71,7 @@
         > What you do
       </p>
       <p
-        class="pt-2 text-gray-600 text-xs lg_text-sm flex items-center justify-center lg_justify-start"
+        class="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start"
       >
         <svg
           class="h-4 fill-current text-teal-700 pr-4"
@@ -88,17 +88,17 @@
       </p>
       <div class="pt-12 pb-8">
         <button
-          class="bg-teal-700 hover_bg-teal-900 text-white font-bold py-2 px-4 rounded-full"
+          class="bg-teal-700 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-full"
         >
           Get In Touch
         </button>
       </div>
       <div
-        class="mt-6 pb-16 lg_pb-0 w-4/5 lg_w-full mx-auto flex flex-wrap items-center justify-between"
+        class="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between"
       >
         <a class="link" href="/profile" data-tippy-content="@facebook_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@
         >
         <a class="link" href="/profile" data-tippy-content="@twitter_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@
         >
         <a class="link" href="/profile" data-tippy-content="@github_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@
         >
         <a class="link" href="/profile" data-tippy-content="@unsplash_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +142,7 @@
         >
         <a class="link" href="/profile" data-tippy-content="@dribble_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@
         >
         <a class="link" href="/profile" data-tippy-content="@instagram_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +164,7 @@
         >
         <a class="link" href="/profile" data-tippy-content="@youtube_handle"
           ><svg
-            class="h-6 fill-current text-gray-600 hover_text-teal-700"
+            class="h-6 fill-current text-gray-600 hover:text-teal-700"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -178,23 +178,23 @@
             src={Home}
             size="24"
             solid
-            class="h-6 fill-current text-white bg-green-600 hover_bg-green-800 rounded"
+            class="h-6 fill-current text-white bg-green-600 hover:bg-green-800 rounded"
           /></Link
         >
       </div>
     </div>
   </div>
 
-  <div class="w-full lg_w-2/5">
+  <div class="w-full lg:w-2/5">
     <img
       src={user.avatar}
-      class="rounded-none lg_rounded-lg shadow-2xl hidden lg_block"
+      class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
       alt="noimg"
     />
   </div>
 
   <div class="absolute top-0 right-0 h-12 w-18 p-4">
-    <button bind:this={toggle} class="focus_outline-none">🌙</button>
+    <button bind:this={toggle} class="focus:outline-none">🌙</button>
   </div>
 </main>
 

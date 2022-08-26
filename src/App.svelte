@@ -1,5 +1,8 @@
 <script>
+  import '@unocss/reset/eric-meyer.css'
   import 'uno.css'
+
+  import '$assets/styles.css'
   import { Router, Route } from 'yrv'
 
   import Home from './pages/Home.svelte'
@@ -19,7 +22,7 @@
 
 <Router>
   <Route path="/" exact component={Home} />
-  <Route path="/login" exact component={Login} />
+  <Route path="/login" component={Login} />
   <Route path="/about" exact component={About} />
   <Route
     path="/ct"

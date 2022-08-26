@@ -9,7 +9,7 @@
 </script>
 
 <div
-  class="p-4 md_mb-0 mb-6 flex flex-col justify-center items-center max-w-sm mx-auto w-full"
+  class="p-4 md:mb-0 mb-6 flex flex-col justify-center items-center max-w-sm mx-auto w-full"
 >
   <div
     class="bg-gray-300 h-40 w-full rounded-lg shadow-md bg-cover bg-center"

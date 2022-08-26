@@ -116,44 +116,26 @@
 
   .key__bottom,
   .key__top {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    @apply flex flex-col justify-end;
   }
   .key__bottom {
-    flex-grow: 1;
+    @apply flex-grow-1;
   }
   .key {
-    align-items: center;
+    @apply items-center cursor-pointer flex flex-col justify-center select-none;
     background-color: $color-key;
     border-radius: $key-radius;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
     grid-column-end: span 4;
     grid-row-end: span 2;
     grid-template-columns: repeat(2, calc($key-size / 2));
     grid-template-rows: repeat(2, calc($key-size / 2));
-    justify-content: center;
     padding: $key-spacing-vertical $key-spacing-horizontal;
     margin: calc($key-gutter / 2);
 
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
     &.is-home {
-      text-decoration: none;
-      position: relative;
+      @apply decoration-none relative;
       &:after {
-        content: '';
-        width: 20%;
-        position: absolute;
-        left: 40%;
-        bottom: 5px;
+        @apply content-empty w-1/5 absolute left-2/5 bottom-5px;
         border-width: 0 0 3px;
         border-style: solid;
         border-color: green;
@@ -189,7 +171,7 @@
       grid-column-end: span 6;
     }
     &.is-backspace {
-      align-items: flex-end;
+      @apply items-end;
     }
     &.is-capslock {
       grid-column-end: span 7;
@@ -270,13 +252,13 @@
       grid-column-end: span 24;
     }
     &.is-tab {
-      align-items: flex-start;
+      @apply items-start;
     }
     &.is-down {
       @apply bg-blue-400;
     }
     &:hover {
-      background-color: green;
+      @apply bg-green-600;
     }
   }
 </style>

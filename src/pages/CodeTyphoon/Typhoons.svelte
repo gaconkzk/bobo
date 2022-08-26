@@ -23,7 +23,7 @@
     <h3 class="cat">Fighting</h3>
 
     <div
-      class="grid grid-flow-row md_grid-cols-3 lg_grid-cols-4 gap-4 sm_grid-cols-1 px-2"
+      class="grid grid-flow-row md:grid-cols-3 lg:grid-cols-4 gap-4 sm_grid-cols-1 px-2"
     >
       {#each fighting as item}
         <Card data={item} />
@@ -35,7 +35,7 @@
     <h3 class="cat">Practice</h3>
 
     <div
-      class="grid grid-flow-row md_grid-cols-3 lg_grid-cols-4 gap-4 sm_grid-cols-1 px-2"
+      class="grid grid-flow-row md:grid-cols-3 lg:grid-cols-4 gap-4 sm_grid-cols-1 px-2"
     >
       {#each data as item}
         <Card data={item} />

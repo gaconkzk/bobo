@@ -54,7 +54,7 @@
   >
     <div class="flex flex-row items-center">
       <button
-        class=" rounded inline-flex items-center bg-red-700 hover_bg-red-800 text-white font-bold py-2 px-4 my-2 mx-2 focus_outline-none focus_shadow-outline"
+        class=" rounded inline-flex items-center bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 my-2 mx-2 focus:outline-none focus:shadow-outline"
         type="button"
         on:click={login}
       >
@@ -62,7 +62,7 @@
         <span>Google</span>
       </button>
       <button
-        class="bg-blue-500 hover_bg-blue-400 text-white font-bold py-2 px-4 my-2 mx-2 rounded w-16"
+        class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 my-2 mx-2 rounded w-16"
         on:click={() => navigateTo('/')}
       >
         <Icon src={Home} class="mx-1" size="24" />
