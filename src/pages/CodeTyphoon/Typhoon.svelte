@@ -59,10 +59,10 @@
   {/each}
 </div> -->
 <style lang="scss">
-  .race {
-    @apply absolute w-full overflow-hidden bg-gradient-to-b from-white via-gray-100 to-black;
-    height: 264px;
-    bottom: 0;
-    z-index: -10;
-  }
+  // .race {
+  //   @apply absolute w-full overflow-hidden bg-gradient-to-b from-white via-gray-100 to-black;
+  //   height: 264px;
+  //   bottom: 0;
+  //   z-index: -10;
+  // }
 </style>
