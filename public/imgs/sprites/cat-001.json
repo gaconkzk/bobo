@@ -1,0 +1,13 @@
+{
+  "textures": [
+    {
+      "image": "cat-001.png",
+      "format": "RGBA8888",
+      "size": {
+        "w": 400,
+        "h": 225
+      },
+      "scale": 1
+    }
+  ]
+}

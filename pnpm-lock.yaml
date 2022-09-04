@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@phaserjs/phaser': ^0.2.2
   '@steeze-ui/heroicons': ^1.1.1
   '@steeze-ui/svelte-icon': ^1.3.1
   '@sveltejs/vite-plugin-svelte': ^1.0.4
@@ -12,6 +13,7 @@ specifiers:
   '@unocss/transformer-directives': ^0.45.14
   '@unocss/transformer-variant-group': ^0.45.14
   autoprefixer: ^9.8.8
+  bitecs: ^0.3.38
   concurrently: ^5.3.0
   cross-env: ^7.0.3
   dotenv: ^8.6.0
@@ -34,6 +36,7 @@ specifiers:
   yrv: ^0.0.57
 
 devDependencies:
+  '@phaserjs/phaser': 0.2.2
   '@steeze-ui/heroicons': 1.1.1
   '@steeze-ui/svelte-icon': 1.3.1
   '@sveltejs/vite-plugin-svelte': 1.0.4_svelte@3.50.0+vite@3.0.9
@@ -45,6 +48,7 @@ devDependencies:
   '@unocss/transformer-directives': 0.45.14
   '@unocss/transformer-variant-group': 0.45.14
   autoprefixer: 9.8.8
+  bitecs: 0.3.38
   concurrently: 5.3.0
   cross-env: 7.0.3
   dotenv: 8.6.0
@@ -689,6 +693,10 @@ packages:
       fastq: 1.13.0
     dev: true
 
+  /@phaserjs/phaser/0.2.2:
+    resolution: {integrity: sha512-6XIRVRyJnmPxIatcffS90qqEqTPDOC7iiprNL837FPtAfmXdIkSD2m1czw2wXo8fcy2SQVfZESDFryCZO9Jp4g==}
+    dev: true
+
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
@@ -1035,6 +1043,10 @@ packages:
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
+    dev: true
+
+  /bitecs/0.3.38:
+    resolution: {integrity: sha512-vfz6wjPElg/0O7c06Ttb/BeWMInBspSuekRvNoLqPyEZV87tLWipxqpjtGPKZBhin8jv4OuQkrkZZfZpaqOndQ==}
     dev: true
 
   /brace-expansion/1.1.11:

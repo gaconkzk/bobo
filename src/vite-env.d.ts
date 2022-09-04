@@ -41,3 +41,9 @@ type TypingEvent = {
   shiftKey: boolean
   metaKey: boolean
 }
+
+type SceneContext = {
+  getScene: () => any
+  getWorld: () => any
+  getLoader: () => any
+}

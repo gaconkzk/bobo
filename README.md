@@ -9,3 +9,7 @@ Trying to work with:
 - tailwindcss
 
 ## (WIP) A speed typing playing ground
+
+
+## Phaser
+- need bitecs
