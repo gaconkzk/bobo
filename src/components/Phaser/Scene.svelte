@@ -9,6 +9,9 @@
   import { removeUndefined } from '$utils/remove-undefined'
   import { AddChild, RemoveChild } from '@phaserjs/phaser/display'
   import { getResource } from '$utils/phaserResources'
+  import { Key, Keyboard } from '@phaserjs/phaser/input/keyboard'
+  import { LeftKey, RightKey } from '@phaserjs/phaser/input/keyboard/keys'
+  import { On } from '@phaserjs/phaser/events'
 
   export let type: 'static' | 'base' | undefined = 'static'
   /**
@@ -19,13 +22,16 @@
    */
   export let key: string
 
-  let world: StaticWorld | BaseWorld | World
-  let instance: Scene
-
   export let resources: {
     key: string
     url: string
   }[] = []
+
+  export let keys: { key: string; instance: Key; isDown: () => void }[] = []
+
+  let world: StaticWorld | BaseWorld | World
+  let instance: Scene
+  let keyboard: Keyboard
 
   const { getGame } = getContext<{ getGame: () => Game }>('game')
   const game = getGame()
@@ -49,6 +55,11 @@
         world = new World(instance)
       }
     }
+
+    if (keys) {
+      keyboard = new Keyboard()
+      keyboard.addKeys(...keys.map((k) => k.instance))
+    }
   }
 
   export let preload: { url: string; key: string } = undefined
@@ -65,8 +76,6 @@
     loader.add(...resources.map((r) => getResource(r)))
 
     await loader.start()
-
-    setTimeout(() => {}, 1500)
 
     let logo
     if (preload && world) {
@@ -90,6 +99,7 @@
     getWorld: () => world,
     getScene: () => instance,
     getLoader: () => loader,
+    getKeyboard: () => keyboard,
   })
 </script>
 

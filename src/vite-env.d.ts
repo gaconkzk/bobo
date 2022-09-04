@@ -46,4 +46,5 @@ type SceneContext = {
   getScene: () => any
   getWorld: () => any
   getLoader: () => any
+  getKeyboard: () => any
 }

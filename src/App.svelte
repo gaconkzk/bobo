@@ -14,7 +14,7 @@
   import NotFound from './pages/NotFound.svelte'
 
   import Profile from './pages/Profile.svelte'
-  import Testing from './pages/Testing.svelte'
+  import Testing from './pages/Testing/index.svelte'
 
   const desktop = () => {
     return !window.isMobileOrTablet()

@@ -7,12 +7,13 @@
   export let height: number
   export let key: string
   export let frame: string | number = undefined
+  export let instance: Sprite = undefined
 
   const { getWorld } = getContext<SceneContext>('scene')
 
   const world = getWorld()
 
-  const instance = new Sprite(width, height, key, frame)
+  instance = new Sprite(width, height, key, frame)
 
   AddChildren(world, instance)
 </script>
