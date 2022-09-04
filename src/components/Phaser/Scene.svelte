@@ -10,8 +10,6 @@
   import { AddChild, RemoveChild } from '@phaserjs/phaser/display'
   import { getResource } from '$utils/phaserResources'
   import { Key, Keyboard } from '@phaserjs/phaser/input/keyboard'
-  import { LeftKey, RightKey } from '@phaserjs/phaser/input/keyboard/keys'
-  import { On } from '@phaserjs/phaser/events'
 
   export let type: 'static' | 'base' | undefined = 'static'
   /**

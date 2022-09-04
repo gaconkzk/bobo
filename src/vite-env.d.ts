@@ -1,6 +1,8 @@
 /// <reference types="svelte" />
 /// <reference types="vite/client" />
 
+declare type Keyboard = import('@phaserjs/phaser/input/keyboard').Keyboard
+
 declare module 'yrv'
 
 interface Window {
@@ -46,5 +48,5 @@ type SceneContext = {
   getScene: () => any
   getWorld: () => any
   getLoader: () => any
-  getKeyboard: () => any
+  getKeyboard: () => Keyboard
 }
