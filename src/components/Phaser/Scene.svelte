@@ -5,9 +5,9 @@
   import { Loader } from '@phaserjs/phaser/loader'
   import { ImageFile } from '@phaserjs/phaser/loader/files'
   import { Sprite } from '@phaserjs/phaser/gameobjects'
-  import { getContext, setContext } from 'svelte'
+  import { getContext, onMount, setContext } from 'svelte'
   import { removeUndefined } from '$utils/remove-undefined'
-  import { AddChild } from '@phaserjs/phaser/display'
+  import { AddChild, RemoveChild } from '@phaserjs/phaser/display'
   import { getResource } from '$utils/phaserResources'
 
   export let type: 'static' | 'base' | undefined = 'static'
@@ -51,7 +51,7 @@
     }
   }
 
-  export let preload: false | { url: string; key: string }
+  export let preload: { url: string; key: string } = undefined
 
   let loader: Loader
   let loading = true
@@ -66,14 +66,25 @@
 
     await loader.start()
 
+    setTimeout(() => {}, 1500)
+
+    let logo
     if (preload && world) {
-      const logo = new Sprite(400, 300, preload.key)
+      logo = new Sprite(400, 300, preload.key)
 
       AddChild(world, logo)
+      await setTimeout(() => {
+        loading = false
+        RemoveChild(world, logo)
+      }, 1500)
+    } else {
+      loading = false
     }
-    loading = false
   }
-  pref()
+
+  onMount(async () => {
+    await pref()
+  })
 
   setContext('scene', {
     getWorld: () => world,

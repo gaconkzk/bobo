@@ -6,7 +6,7 @@
   export let width: number
   export let height: number
   export let key: string
-  export let frame: any = undefined
+  export let frame: string | number = undefined
 
   const { getWorld } = getContext<SceneContext>('scene')
 
