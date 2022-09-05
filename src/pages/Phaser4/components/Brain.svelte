@@ -3,17 +3,17 @@
   import Sprite from '$components/Phaser/Sprite.svelte'
   import { getContext } from 'svelte'
   import { On } from '@phaserjs/phaser/events'
-  export let player = null
+  export let instance = null
 
   const left = () => {
-    if (player) {
-      player.x -= 4
+    if (instance) {
+      instance.x -= 4
     }
   }
 
   const right = () => {
-    if (player) {
-      player.x += 4
+    if (instance) {
+      instance.x += 4
     }
   }
 
@@ -42,4 +42,4 @@
   On(world, 'update', update)
 </script>
 
-<Sprite width={400} height={300} key="brain" bind:instance={player} />
+<Sprite width={400} height={300} key="brain" bind:instance={instance} />

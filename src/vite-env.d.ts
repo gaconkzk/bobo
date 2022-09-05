@@ -50,3 +50,15 @@ type SceneContext = {
   getLoader: () => any
   getKeyboard: () => Keyboard
 }
+
+type ResourceFile = {
+  key: string
+  url: string
+  spriteSheet?: SpriteSheetType
+  atlas?: string
+}
+
+type SpriteSheetType = {
+  frameWidth: number
+  frameHeight: number
+}

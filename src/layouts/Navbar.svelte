@@ -1,5 +1,25 @@
 <script lang="ts">
-  import { Link } from 'yrv'
+  import NavbarRightMenu from './NavbarMenu.svelte'
+
+  export let actived: string
+
+  const rightMenuItems = [
+    {
+      href: '/',
+      label: 'Home',
+      actived: actived === '/',
+    },
+    {
+      href: '/ct',
+      label: 'Code Typhoon',
+      actived: actived === '/ct',
+    },
+    {
+      href: '/phaser4',
+      label: 'Phaser Playground',
+      actived: actived === '/phaser4',
+    },
+  ]
 
   let atTopOfPage = true
 
@@ -20,6 +40,7 @@
     <div class="block lg:hidden">
       <button
         class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-teal-500 appearance-none focus:outline-none"
+        on:click={() => {}}
       >
         <svg
           class="fill-current h-3 w-3"
@@ -31,14 +52,7 @@
         </svg>
       </button>
     </div>
-    <div class="hidden lg:block">
-      <ul class="inline-flex list-none">
-        <li><a class="px-4 font-bold" href="/">Home</a></li>
-        <li>
-          <Link class="px-4 hover:text-gray-800" href="/ct">Code Typhoon</Link>
-        </li>
-      </ul>
-    </div>
+    <NavbarRightMenu items={rightMenuItems} />
   </div>
 </nav>
 

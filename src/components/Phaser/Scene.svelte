@@ -20,10 +20,7 @@
    */
   export let key: string
 
-  export let resources: {
-    key: string
-    url: string
-  }[] = []
+  export let resources: ResourceFile[] = []
 
   export let keys: { key: string; instance: Key; isDown: () => void }[] = []
 
