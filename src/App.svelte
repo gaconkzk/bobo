@@ -15,6 +15,7 @@
 
   import Profile from './pages/Profile.svelte'
   import Phaser4 from './pages/Phaser4/index.svelte'
+  import FCGen from './pages/FCGen/index.svelte'
 
   const desktop = () => {
     return !window.isMobileOrTablet()
@@ -33,6 +34,7 @@
   />
   <Route path="/profile" exact component={Profile} />
   <Route path="/phaser4" exact component={Phaser4} />
+  <Route path="/fcgen" exact component={FCGen} />
   <Route path="/mobile" exact component={NotSupport} />
   <Route fallback component={NotFound} />
 </Router>
