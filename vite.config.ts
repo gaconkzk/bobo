@@ -98,6 +98,6 @@ export default defineConfig({
     chunkSizeWarningLimit: 2048,
   },
   optimizeDeps: {
-    exclude: ['phaser'],
+    include: ['phaser'],
   },
 })

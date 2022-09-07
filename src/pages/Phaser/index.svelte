@@ -14,14 +14,16 @@
     <Character model={CharacterEnum.CAT} direction="right" />
     <Back2HomeBtn />
   </div>
-  <Game parent="testingPhaser" backgroundColor={0xffffff}>
-    <Scene
-      key="testScene"
-      preload={() => ({ key: 'splash', url: 'imgs/phaser4.png' })}
-    >
-      <!-- <Background key="background" /> -->
-      <Brain />
-      <Cat />
-    </Scene>
-  </Game>
+  <div id="testingPhaser">
+    <Game parent="testingPhaser" backgroundColor={0xffffff}>
+      <Scene
+        key="testScene"
+        preload={() => ({ key: 'splash', url: 'imgs/phaser4.png' })}
+      >
+        <!-- <Background key="background" /> -->
+        <Brain />
+        <Cat />
+      </Scene>
+    </Game>
+  </div>
 </div>
