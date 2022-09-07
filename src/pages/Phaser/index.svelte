@@ -2,8 +2,7 @@
   import { CharacterEnum } from '$components/Character'
   import Character from '$components/Character.svelte'
 
-  import Game from '$components/Phaser/Game.svelte'
-  import Scene from '$components/Phaser/Scene.svelte'
+  import { Game, Scene } from 'svelte-phaser'
   import Back2HomeBtn from '../common/Back2HomeBtn.svelte'
   import Background from './components/Background.svelte'
   import Brain from './components/Brain.svelte'
@@ -15,23 +14,10 @@
     <Character model={CharacterEnum.CAT} direction="right" />
     <Back2HomeBtn />
   </div>
-  <Game
-    containerId="testingPhaser"
-    globalVars="Phaser4"
-    backgroundColor={0xffffff}
-  >
+  <Game parent="testingPhaser" backgroundColor={0xffffff}>
     <Scene
       key="testScene"
-      preload={{ key: 'splash', url: 'imgs/phaser4.png' }}
-      resources={[
-        { key: 'background', url: 'imgs/farm-background.png' },
-        { key: 'brain', url: 'imgs/brain.png' },
-        {
-          key: 'cat01',
-          url: 'imgs/sprites/cat-001.png',
-          atlas: 'imgs/sprites/cat-001.json',
-        },
-      ]}
+      preload={() => ({ key: 'splash', url: 'imgs/phaser4.png' })}
     >
       <!-- <Background key="background" /> -->
       <Brain />

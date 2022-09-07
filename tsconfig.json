@@ -4,7 +4,9 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
+    "lib": ["ESNext", "DOM", "scripthost"],
     "moduleResolution": "node",
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "baseUrl": ".",
     /**
@@ -14,7 +16,7 @@
      * of JS in `.svelte` files.
      */
     "allowJs": true,
-    "checkJs": true,
+    "checkJs": false,
     "isolatedModules": true,
     "paths": {
       "$components/*": ["./src/components/*"],

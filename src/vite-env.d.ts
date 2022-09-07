@@ -1,5 +1,6 @@
 /// <reference types="svelte" />
 /// <reference types="vite/client" />
+/// <reference types="phaser" />
 
 declare type Keyboard = import('@phaserjs/phaser/input/keyboard').Keyboard
 
@@ -44,8 +45,12 @@ type TypingEvent = {
   metaKey: boolean
 }
 
+type GameContext = {
+  getGame: () => Phaser.Game
+}
+
 type SceneContext = {
-  getScene: () => any
+  getScene: () => Phaser.Scene
   getWorld: () => any
   getLoader: () => any
   getKeyboard: () => Keyboard

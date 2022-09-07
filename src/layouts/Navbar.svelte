@@ -15,10 +15,15 @@
       actived: actived === '/ct',
     },
     {
-      href: '/phaser4',
-      label: 'Phaser Playground',
-      actived: actived === '/phaser4',
+      href: '/fcgen',
+      label: 'Sprites',
+      actived: actived === '/fcgen',
     },
+    // {
+    //   href: '/phaser4',
+    //   label: 'Phaser Playground',
+    //   actived: actived === '/phaser4',
+    // },
   ]
 
   let atTopOfPage = true

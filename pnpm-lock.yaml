@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@phaserjs/phaser': ^0.2.2
   '@steeze-ui/heroicons': ^1.1.1
   '@steeze-ui/svelte-icon': ^1.3.1
   '@sveltejs/vite-plugin-svelte': ^1.0.4
@@ -19,6 +18,7 @@ specifiers:
   dotenv: ^8.6.0
   firebase: ^9.9.4
   page: ^1.11.6
+  phaser: ^3.55.2
   pug: ^3.0.2
   rxfire: ^6.0.3
   rxjs: ^6.6.7
@@ -26,6 +26,7 @@ specifiers:
   svelte: ^3.50.0
   svelte-check: ^2.9.0
   svelte-local-storage-store: ^0.3.1
+  svelte-phaser: 0.1.0-beta.2
   svelte-preprocess: ^4.10.7
   tippy.js: ^6.3.7
   tslib: ^2.4.0
@@ -36,7 +37,6 @@ specifiers:
   yrv: ^0.0.57
 
 devDependencies:
-  '@phaserjs/phaser': 0.2.2
   '@steeze-ui/heroicons': 1.1.1
   '@steeze-ui/svelte-icon': 1.3.1
   '@sveltejs/vite-plugin-svelte': 1.0.4_svelte@3.50.0+vite@3.0.9
@@ -54,6 +54,7 @@ devDependencies:
   dotenv: 8.6.0
   firebase: 9.9.4
   page: 1.11.6
+  phaser: 3.55.2
   pug: 3.0.2
   rxfire: 6.0.3_firebase@9.9.4+rxjs@6.6.7
   rxjs: 6.6.7
@@ -61,6 +62,7 @@ devDependencies:
   svelte: 3.50.0
   svelte-check: 2.9.0_fnwxuvitp23tgsf4wmmawkuqke
   svelte-local-storage-store: 0.3.1_svelte@3.50.0
+  svelte-phaser: 0.1.0-beta.2_phaser@3.55.2
   svelte-preprocess: 4.10.7_5v4dionvut27624hm4ghth42z4
   tippy.js: 6.3.7
   tslib: 2.4.0
@@ -691,10 +693,6 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
-    dev: true
-
-  /@phaserjs/phaser/0.2.2:
-    resolution: {integrity: sha512-6XIRVRyJnmPxIatcffS90qqEqTPDOC7iiprNL837FPtAfmXdIkSD2m1czw2wXo8fcy2SQVfZESDFryCZO9Jp4g==}
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -1533,6 +1531,10 @@ packages:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
 
+  /eventemitter3/4.0.7:
+    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
+    dev: true
+
   /execa/5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
     engines: {node: '>=10'}
@@ -1754,6 +1756,10 @@ packages:
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
+    dev: true
+
+  /inherits/2.0.3:
+    resolution: {integrity: sha512-x00IRNXNy63jwGkJmzPigoySHbaqpNuzKbBOmzK+g2OdZpQ9w+sxCN+VSB3ja7IAge2OP2qpfxTjeNcyjmW1uw==}
     dev: true
 
   /inherits/2.0.4:
@@ -2166,12 +2172,26 @@ packages:
       isarray: 0.0.1
     dev: true
 
+  /path/0.12.7:
+    resolution: {integrity: sha512-aXXC6s+1w7otVF9UletFkFcDsJeO7lSZBPUQhtb5O0xJe8LtYhj/GxldoL09bBj9+ZmE2hNoHqQSFMN5fikh4Q==}
+    dependencies:
+      process: 0.11.10
+      util: 0.10.4
+    dev: true
+
   /pathe/0.3.5:
     resolution: {integrity: sha512-grU/QeYP0ChuE5kjU2/k8VtAeODzbernHlue0gTa27+ayGIu3wqYBIPGfP9r5xSqgCgDd4nWrjKXEfxMillByg==}
     dev: true
 
   /perfect-debounce/0.1.3:
     resolution: {integrity: sha512-NOT9AcKiDGpnV/HBhI22Str++XWcErO/bALvHCuhv33owZW/CjH8KAFLZDCmu3727sihe0wTxpDhyGc6M8qacQ==}
+    dev: true
+
+  /phaser/3.55.2:
+    resolution: {integrity: sha512-amKXsbb2Ht29dGPKvt1edq3yGGYKtq8373GpJYGKPNPnneYY6MtVTOgjHDuZwtmUyK4v86FugkT3hzW/N4tjxQ==}
+    dependencies:
+      eventemitter3: 4.0.7
+      path: 0.12.7
     dev: true
 
   /picocolors/0.2.1:
@@ -2215,6 +2235,11 @@ packages:
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
+    dev: true
+
+  /process/0.11.10:
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    engines: {node: '>= 0.6.0'}
     dev: true
 
   /promise/7.3.1:
@@ -2708,6 +2733,14 @@ packages:
       svelte: 3.50.0
     dev: true
 
+  /svelte-phaser/0.1.0-beta.2_phaser@3.55.2:
+    resolution: {integrity: sha512-VI+Zkz4f9uWPMYFp8B0r6jPE3oWUUiHxlugg+tLACLKx5R+FLBlRVJFX+Ae+ffnVIkOO4EkKN+06UB0u3qSYZg==}
+    peerDependencies:
+      phaser: ^3.23.0
+    dependencies:
+      phaser: 3.55.2
+    dev: true
+
   /svelte-preprocess/4.10.7_5v4dionvut27624hm4ghth42z4:
     resolution: {integrity: sha512-sNPBnqYD6FnmdBrUmBCaqS00RyCsCpj2BG58A1JBswNF7b0OKviwxqVrOL/CKyJrLSClrSeqQv5BXNg2RUbPOw==}
     engines: {node: '>= 9.11.2'}
@@ -2893,6 +2926,12 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: true
+
+  /util/0.10.4:
+    resolution: {integrity: sha512-0Pm9hTQ3se5ll1XihRic3FDIku70C+iHUdT/W926rSgHV5QgXsYbKZN8MSC3tJtSkhuROzvsQjAaFENRXr+19A==}
+    dependencies:
+      inherits: 2.0.3
     dev: true
 
   /validate-npm-package-license/3.0.4:
