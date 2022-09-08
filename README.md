@@ -6,10 +6,10 @@ This is a dashboard, and may be other things included (yah, another reason to ab
 
 Trying to work with:
 - svelte
-- tailwindcss
+- unocss
+- pixijs
+
 
 ## (WIP) A speed typing playing ground
 
-
-## Phaser
-- need bitecs
+## (WIP) Pixi - racing when type preparing
