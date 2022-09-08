@@ -1,6 +1,5 @@
 <script>
   import { onDestroy } from 'svelte'
-  import { get } from 'svelte/store'
   import { auth, googleProvider, signInWithPopup } from '$components/firebase'
   import { authState } from 'rxfire/auth'
 
@@ -14,6 +13,7 @@
   import { getParams } from '$utils/common'
 
   import { makeUser } from '$services/users'
+  import PuppyForm from './PuppyForm.svelte'
 
   export let router = null
   console.log('Stupid unuse and warning on svelte, ', router)
@@ -48,8 +48,9 @@
   })
 </script>
 
-<div class="flex w-full h-screen">
-  <div
+<!-- <div class="flex w-full h-screen"> -->
+<PuppyForm />
+<!-- <div
     class=" container flex flex-col mx-auto max-w-xs self-center inline-flex items-center"
   >
     <div class="flex flex-row items-center">
@@ -82,5 +83,5 @@
         >
       </span>
     </p>
-  </div>
-</div>
+  </div> -->
+<!-- </div> -->

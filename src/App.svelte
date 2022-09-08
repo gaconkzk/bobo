@@ -7,7 +7,7 @@
 
   import Home from './pages/Home.svelte'
   import About from './pages/About.svelte'
-  import Login from './pages/Login.svelte'
+  import Login from './pages/Login/index.svelte'
   import CodeTyphoon from './pages/CodeTyphoon/index.svelte'
 
   import NotSupport from './pages/NotSupport.svelte'
