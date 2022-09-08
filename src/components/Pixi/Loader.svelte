@@ -72,7 +72,7 @@
    * The number of resources to load concurrently.
    * @type {number}
    */
-  export let concurrency: $$Props['concurrency'] = 10
+  export let concurrency: $$Props['concurrency'] = 8
 
   /**
    * The PIXI.Loader instance. Can be set or bound to.
