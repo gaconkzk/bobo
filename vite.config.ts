@@ -98,6 +98,6 @@ export default defineConfig({
     chunkSizeWarningLimit: 2048,
   },
   optimizeDeps: {
-    include: ['phaser', 'pixi.js'],
+    include: ['pixi.js'],
   },
 })

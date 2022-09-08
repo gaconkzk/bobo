@@ -1,29 +1,44 @@
-<script lang="ts" context="module">
-  interface ApplicationContext<T extends PIXI.Application> {
-    app: T
+<script context="module" lang="ts">
+  export interface RendererContext<
+    T extends PIXI.Renderer | PIXI.AbstractRenderer
+  > {
+    renderer: T
+    invalidate: () => void
+  }
+
+  export function getRenderer<
+    T extends PIXI.Renderer | PIXI.AbstractRenderer
+  >(): RendererContext<T> {
+    return getContext('pixi/renderer')
   }
 </script>
 
 <script lang="ts">
-  import { setContext } from 'svelte'
+  import * as PIXI from 'pixi.js'
+  import {
+    createEventDispatcher,
+    getContext,
+    onMount,
+    setContext,
+  } from 'svelte'
   import { removeUndefined } from '$utils/remove-undefined'
 
-  import * as PIXI from 'pixi.js'
-  import Renderer from './Renderer.svelte'
-  import Ticker from './Ticker.svelte'
-  import Container from './Container.svelte'
-
-  type T = $$Generic<PIXI.Application>
-  type $$Props = PIXI.IApplicationOptions & {
+  type T = $$Generic<PIXI.Renderer | PIXI.AbstractRenderer>
+  type $$Props = PIXI.IRendererOptionsAuto & {
     instance?: T
-    render?: 'auto' | 'demand'
+    stage?: PIXI.Container
   }
 
-  /**
-   * Automatically starts the rendering
-   *
-   */
-  export let autoStart: $$Props['autoStart'] = true
+  type $$Slots = {
+    default: {
+      view: (node: HTMLElement) => void
+    }
+    view: {
+      view: (node: HTMLElement) => void
+    }
+  }
+
+  const dispatch = createEventDispatcher()
 
   /**
    * The width of the renderers view.
@@ -102,34 +117,11 @@
   export let powerPreference: $$Props['powerPreference'] = undefined
 
   /**
-   * Element to automatically resize stage to.
-   *
-   * @type {Window | HTMLElement}
+   * The PIXI.Renderer instance. Can be set or bound to. By default
+   * it uses PIXI.autoDetectRenderer()
    */
-  export let resizeTo: $$Props['resizeTo'] = undefined
-
-  /**
-   * Changes the rendering method
-   *
-   * auto - render on each tick at the target FPS
-   * demand - render only when components have been updated
-   *
-   * @type {'auto' | 'demand' | false}
-   */
-  export let render: 'auto' | 'demand' | false = 'auto'
-
-  /**
-   * The PIXI.Application instance. This can be manually set or bound to.
-   *
-   * Note: if manually set, props will not be applied.
-   *
-   * @type {PIXI.Application}
-   */
-  export let instance: T = new PIXI.Application(
-    // some props being explicitly undefined different behaviour than implicit
-    // undefined
+  export let instance: T = PIXI.autoDetectRenderer(
     removeUndefined({
-      autoStart,
       width,
       height,
       useContextAlpha,
@@ -142,48 +134,36 @@
       backgroundAlpha,
       clearBeforeRender,
       powerPreference,
-      resizeTo,
     })
   ) as T
 
-  let invalidated = true
-  setContext<ApplicationContext<T>>('pixi/app', { app: instance })
+  setContext('pixi/renderer', {
+    renderer: instance,
+    invalidate: () => {
+      dispatch('invalidate')
+    },
+  })
 
-  // remove rendering on tick
-  if (render) {
-    instance.ticker.remove(instance.render, instance)
+  function view(node: HTMLElement): void {
+    if (node.childNodes.length) {
+      node.childNodes[0].appendChild(instance.view)
+    } else {
+      node.appendChild(instance.view)
+    }
   }
+
+  onMount(() => {
+    instance.on('prerender', (ev) => dispatch('prerender', ev))
+    instance.on('postrender', (ev) => dispatch('postrender', ev))
+  })
 </script>
 
-<Renderer
-  instance={instance.renderer}
-  on:invalidate={() => {
-    invalidated = true
-  }}
-  on:prerender
-  on:postrender
->
-  <slot name="view" slot="view">
-    <div />
-  </slot>
+{#if $$slots.view}
+  <div use:view>
+    <slot name="view" />
+  </div>
+{:else}
+  <div use:view />
+{/if}
 
-  {#if render}
-    <Ticker
-      on:tick={() => {
-        if (render === 'demand') {
-          if (invalidated) {
-            invalidated = false
-            instance.renderer.render(instance.stage)
-          }
-        } else if (render === 'auto') {
-          instance.renderer.render(instance.stage)
-        }
-      }}
-    />
-  {/if}
-  <Ticker instance={instance.ticker}>
-    <Container instance={instance.stage}>
-      <slot />
-    </Container>
-  </Ticker>
-</Renderer>
+<slot />

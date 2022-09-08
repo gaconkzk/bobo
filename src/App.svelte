@@ -14,7 +14,7 @@
   import NotFound from './pages/NotFound.svelte'
 
   import Profile from './pages/Profile.svelte'
-  import Phaser from './pages/Phaser/index.svelte'
+  import pixiPage from './pages/PIXI/index.svelte'
   import FCGen from './pages/FCGen/index.svelte'
 
   const desktop = () => {
@@ -33,7 +33,7 @@
     condition={desktop}
   />
   <Route path="/profile" exact component={Profile} />
-  <Route path="/phaser" exact component={Phaser} />
+  <Route path="/pixi" exact component={pixiPage} />
   <Route path="/fcgen" exact component={FCGen} />
   <Route path="/mobile" exact component={NotSupport} />
   <Route fallback component={NotFound} />
