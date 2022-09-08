@@ -14,7 +14,8 @@
   import NotFound from './pages/NotFound.svelte'
 
   import Profile from './pages/Profile.svelte'
-  import Testing from './pages/Testing.svelte'
+  import pixiPage from './pages/PIXI/index.svelte'
+  import FCGen from './pages/FCGen/index.svelte'
 
   const desktop = () => {
     return !window.isMobileOrTablet()
@@ -32,7 +33,8 @@
     condition={desktop}
   />
   <Route path="/profile" exact component={Profile} />
-  <Route path="/test" exact component={Testing} />
+  <Route path="/pixi" exact component={pixiPage} />
+  <Route path="/fcgen" exact component={FCGen} />
   <Route path="/mobile" exact component={NotSupport} />
   <Route fallback component={NotFound} />
 </Router>

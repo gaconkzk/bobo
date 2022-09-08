@@ -86,11 +86,18 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // if (id.includes('phaser')) {
+          //   return 'phaser'
+          // }
           if (id.includes('node_modules')) {
             return 'vendor'
           }
         },
       },
     },
+    chunkSizeWarningLimit: 2048,
+  },
+  optimizeDeps: {
+    include: ['pixi.js'],
   },
 })

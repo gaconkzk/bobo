@@ -31,7 +31,7 @@
 </script>
 
 <div id="homepage" class="text-gray-700 bg-white font-sans">
-  <Navbar />
+  <Navbar actived={router.path} />
 
   <div
     class="py-20 mt-10"
