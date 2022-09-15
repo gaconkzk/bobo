@@ -2,28 +2,41 @@
   import Back2HomeBtn from '../common/Back2HomeBtn.svelte'
 
   import { onDestroy, onMount } from 'svelte'
-  import { makeWalk, walk } from './walk/index'
-  import { heads } from './head'
-  import { bodies } from './body'
-  import { hands } from './hand'
+  import { makeWalk, walk } from '$components/FCGenerator/walk'
+  import { makeIdle } from '$components/FCGenerator/idle'
+  import { data } from '$components/FCGenerator'
+
+  let currentFrame = 0
+  let currentAction = 'walk'
+  let currentChar = data[0]
 
   const actions = {
-    walk: () => makeWalk(currentHead, currentHand),
+    walk: () =>
+      makeWalk(
+        currentChar.name,
+        currentChar.src,
+        currentChar.hand[0],
+        currentChar.body[0]
+      ),
+    idle: () =>
+      makeIdle(
+        currentChar.name,
+        currentChar.src,
+        currentChar.hand[0],
+        currentChar.body[0]
+      ),
     // run,
     // pass,
     // stop,
   }
 
-  let currentFrame = 0
-  let currentAction = 'walk'
-  let currentHead = heads.yoritsune
-  let currentBody = bodies.default
-  let currentHand = hands.default
+  console.log('ac', actions, currentAction)
 
   let interv
   onMount(() => {
     interv = setInterval(() => {
-      currentFrame = currentFrame === 3 ? 0 : currentFrame + 1
+      currentFrame =
+        currentFrame < actions[currentAction]()[1] - 1 ? currentFrame + 1 : 0
     }, 1000 / 4)
   })
   onDestroy(() => {
@@ -40,82 +53,72 @@
       >
         <img
           alt=""
-          src={actions[currentAction]()[0][currentFrame]}
+          src={actions[currentAction]()[0][0][currentFrame]}
           class="w-120px h-120px absolute top-0 left-0"
         />
         <img
           alt=""
-          src={actions[currentAction]()[1][currentFrame]}
+          src={actions[currentAction]()[0][1][currentFrame]}
           class="w-120px h-120px absolute top-0 left-0"
         />
         <img
           alt=""
-          src={actions[currentAction]()[2][currentFrame]}
+          src={actions[currentAction]()[0][2][currentFrame]}
           class="w-120px h-120px absolute top-0 left-0"
         />
       </div>
       <div class="flex flex-row">
         Select head
-        <div
-          class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
-          on:click={() => (currentHead = heads.kunio)}
-        >
-          <img
-            src={heads.kunio}
-            alt="broken"
-            width="120"
-            height="120"
-            class="-ml-40px -mt-23px"
-          />
-        </div>
-        <div
-          class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
-          on:click={() => (currentHead = heads.yoritsune)}
-        >
-          <img
-            src={heads.yoritsune}
-            alt="broken"
-            width="120"
-            height="120"
-            class="-ml-40px -mt-23px"
-          />
-        </div>
-        <div
-          class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
-          on:click={() => (currentHead = heads.horibata)}
-        >
-          <img
-            src={heads.horibata}
-            alt="broken"
-            width="120"
-            height="120"
-            class="-ml-40px -mt-23px"
-          />
-        </div>
+        {#each data as character}
+          <div
+            class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
+            on:click={() => {
+              currentFrame = 0
+              currentChar = character
+              currentAction = currentChar.animation[0]
+            }}
+          >
+            <img
+              src={character.src}
+              alt="broken"
+              width="120"
+              height="120"
+              class="-ml-40px -mt-23px"
+            />
+          </div>
+        {/each}
       </div>
       <div class="">
         Select hands
-        <div class="w-40px h-40px overflow-hidden border-1 border-blue rounded">
-          <img
-            src={currentHand}
-            alt="broken"
-            width="120"
-            height="120"
-            class="-ml-40px -mt-40px"
-          />
-        </div>
+        {#each currentChar.hand as hand}
+          <div
+            class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
+          >
+            <img
+              src={hand}
+              alt="broken"
+              width="120"
+              height="120"
+              class="-ml-40px -mt-40px"
+            />
+          </div>
+        {/each}
       </div>
       <div class="">
         Select body
-        <div class="w-40px h-40px overflow-hidden border-1 border-blue rounded">
-          <img
-            src={currentBody}
-            alt="broken"
-            width="120"
-            height="120"
-            class="-ml-40px -mt-52px"
-          />
-        </div>
+        {#each currentChar.body as body}
+          <div
+            class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
+          >
+            <img
+              src={body}
+              alt="broken"
+              width="120"
+              height="120"
+              class="-ml-40px -mt-52px"
+            />
+          </div>
+        {/each}
       </div>
     </div>
     <div class="right">
