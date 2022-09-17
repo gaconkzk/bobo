@@ -67,3 +67,19 @@ type SpriteSheetType = {
   frameWidth: number
   frameHeight: number
 }
+
+type PromiseSprite = {
+  name: string
+  src: Promise<string>
+  body: Promise<string>[]
+  hand: Promise<string>[]
+  animation: string[]
+}
+
+type Sprite = {
+  name: string
+  src: string
+  body: string[]
+  hand: string[]
+  animation: string[]
+}

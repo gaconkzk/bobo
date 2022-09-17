@@ -11,7 +11,7 @@
   import { makeIdle } from '$components/FCGenerator/idle'
 
   let currentFrame
-  let currentAction
+  let currentAction = 'walk'
   let currentChar
   let currentCharAnimation
 
@@ -45,10 +45,6 @@
   onDestroy(() => {
     // clearInterval(interv)
   })
-
-  $: {
-    console.log('chars: ', chars)
-  }
 </script>
 
 <div class="flex flex-col w-full h-full justify-center">
@@ -65,7 +61,8 @@
             class="w-120px h-120px border-1 border-blue-200 m-4 relative bg-gray-200"
           >
             <AnimationRender
-              frames={currentCharAnimation ?? []}
+              char={currentChar || chars[0].name}
+              action={currentAction}
               class="w-128px h-128px"
             />
             <!--

@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
   let characters: Sprite[] = []
+  let animations = []
 
   export function getCharacters() {
     return characters
@@ -13,11 +14,14 @@
     )
     return sprs
   }
+
+  export async function loadAnimations() {
+    return []
+  }
 </script>
 
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte'
-  import type { PromiseSprite, Sprite } from '.'
   import { data, processPromiseSprite } from '.'
 
   const dispatch = createEventDispatcher()
@@ -25,8 +29,10 @@
   let loading = true
   let imgs = loadImages(data)
 
+  let anms = loadAnimations()
   onMount(async () => {
     characters = await imgs
+    animations = await anms
     loading = false
     dispatch('loaded')
   })
