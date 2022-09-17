@@ -1,5 +1,8 @@
-import defaultImg from './default.png?url'
-import abel from './abel.png?url'
+import { fetchImg } from '$utils/images'
+
+const defaultImg = fetchImg('imgs/sprites/body/default.png?url')
+const abel = fetchImg('imgs/sprites/body/abel.png?url')
+
 export const bodies = {
   default: defaultImg,
   abel: abel,
