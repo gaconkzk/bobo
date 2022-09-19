@@ -5,12 +5,7 @@
       hands = []
     switch (action) {
       case CharacterAction.WALK:
-        return makeWalk(
-          character.name,
-          character.src,
-          character.hand[0],
-          character.body[0]
-        )
+        return makeWalk(character)
       case CharacterAction.IDLE:
       default:
         const head0 = character.src
@@ -64,17 +59,14 @@
 <!--  svelte-ignore a11y-missing-attribute-->
 <div class="relative">
   {#if animation}
-    <img
-      src={heads[currentFrame]}
-      class="absolute w-128px h-128px top-0 left-0"
-    />
-    <img
-      src={bodies[currentFrame]}
-      class="absolute w-128px h-128px top-0 left-0"
-    />
-    <img
-      src={hands[currentFrame]}
-      class="absolute w-128px h-128px top-0 left-0"
-    />
+    <img src={heads[currentFrame]} class={`anim-img ${cls}`} />
+    <img src={bodies[currentFrame]} class={`anim-img ${cls}`} />
+    <img src={hands[currentFrame]} class={`anim-img ${cls}`} />
   {/if}
 </div>
+
+<style>
+  .anim-img {
+    @apply absolute top-0 left-0;
+  }
+</style>

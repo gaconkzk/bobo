@@ -22,18 +22,14 @@ export const walk = {
 
 let cache_walk = {}
 
-export const makeWalk = (
-  name: string,
-  head: string,
-  hand: string,
-  body: string
-) => {
-  if (!cache_walk[name]) {
-    const heads = [head, head, head, head]
-    const hands = [hand, hand, hand, hand]
-    const bodies = [body, body1, body2, body3]
+export const makeWalk = (character: Sprite) => {
+  if (!cache_walk[character.name]) {
+    const { name, src: head, body, hand } = character
+    const heads = [head, head, head, head] // walk not change head
+    const bodies = [...body] // getting body from animation
+    const hands = [...hand] // getting hand from animation
     cache_walk[name] = [[heads, bodies, hands], 4]
   }
 
-  return cache_walk[name]
+  return cache_walk[character.name]
 }

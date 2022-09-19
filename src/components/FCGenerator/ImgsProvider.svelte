@@ -1,6 +1,6 @@
 <script context="module" lang="ts">
   let characters: Sprite[] = []
-  let animations = []
+  let animations = {}
 
   export function getCharacters() {
     return characters
