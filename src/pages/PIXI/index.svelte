@@ -8,7 +8,7 @@
 </script>
 
 <Application width={400} height={400} antialias backgroundColor={0xffffff}>
-  <Loader let:progress resources={['/imgs/brain.png', 'brain']}>
+  <Loader let:progress resources={[['brain', '/imgs/brain.png']]}>
     <slot slot="loading">
       <Text text={`Loading... ${progress}`} x={200} y={200} anchor={0.5} />
     </slot>
