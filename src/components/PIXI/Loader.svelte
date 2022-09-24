@@ -47,7 +47,9 @@
   type T = $$Generic<PIXI.Loader>
   type $$Props = {
     instance?: T
-    resources?: string[] | Array<[string, string, PIXI.IAddOptions, () => any]>
+    resources?:
+      | string[]
+      | Array<[string, string, PIXI.IAddOptions?, (() => any)?]>
     baseUrl?: string
     concurrency?: number
   }
@@ -59,7 +61,7 @@
    */
   export let resources:
     | string[]
-    | Array<[string, string, PIXI.IAddOptions, () => any]> = []
+    | Array<[string, string, PIXI.IAddOptions?, (() => any)?]> = []
 
   /**
    * The base url for all resources loaded by this loader.

@@ -27,6 +27,7 @@
      * enable source maps by default.
      */
     "sourceMap": true,
+    "importsNotUsedAsValues": "preserve",
     "isolatedModules": true,
     "skipLibCheck": true,
     "paths": {
