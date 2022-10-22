@@ -1,10 +1,10 @@
 import { fetchImg } from '$utils/images'
-const abel_head0 = fetchImg('imgs/sprites/idle/head_abel_1.png')
-const abel_body0 = fetchImg('imgs/sprites/idle/body_abel_1.png')
-const abel_hand0 = fetchImg('imgs/sprites/idle/hand_abel_1.png')
-const abel_head1 = fetchImg('imgs/sprites/idle/head_abel_2.png')
-const abel_body1 = fetchImg('imgs/sprites/idle/body_abel_2.png')
-const abel_hand1 = fetchImg('imgs/sprites/idle/hand_abel_2.png')
+const abel_head0 = fetchImg('imgs/sprites/idle/abel/head_abel_1.png')
+const abel_body0 = fetchImg('imgs/sprites/idle/abel/body_abel_1.png')
+const abel_hand0 = fetchImg('imgs/sprites/idle/abel/hand_abel_1.png')
+const abel_head1 = fetchImg('imgs/sprites/idle/abel/head_abel_2.png')
+const abel_body1 = fetchImg('imgs/sprites/idle/abel/body_abel_2.png')
+const abel_hand1 = fetchImg('imgs/sprites/idle/abel/hand_abel_2.png')
 const abel_heads = [abel_head0, abel_head1]
 const abel_bodies = [abel_body0, abel_body1]
 const abel_hands = [abel_hand0, abel_hand1]
@@ -19,7 +19,7 @@ export const idle = {
 
 export const makeIdle = (character: Sprite, animation: any) => {
   if (!cache_idle[character.name]) {
-    const { name, head } = character
+    const { name } = character
     const heads = [...animation[0]] // walk not change head
     const bodies = [...animation[1]] // getting body from animation
     const hands = [...animation[2]] // getting hand from animation
