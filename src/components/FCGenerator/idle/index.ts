@@ -1,16 +1,30 @@
-import head from './head_abel_1.png'
-import body from './body_abel_1.png'
-import hand from './hand_abel_1.png'
-import head1 from './head_abel_2.png'
-import body1 from './body_abel_2.png'
-import hand1 from './hand_abel_2.png'
+import { fetchImg } from '$utils/images'
+const abel_head0 = fetchImg('imgs/sprites/idle/head_abel_1.png')
+const abel_body0 = fetchImg('imgs/sprites/idle/body_abel_1.png')
+const abel_hand0 = fetchImg('imgs/sprites/idle/hand_abel_1.png')
+const abel_head1 = fetchImg('imgs/sprites/idle/head_abel_2.png')
+const abel_body1 = fetchImg('imgs/sprites/idle/body_abel_2.png')
+const abel_hand1 = fetchImg('imgs/sprites/idle/hand_abel_2.png')
+const abel_heads = [abel_head0, abel_head1]
+const abel_bodies = [abel_body0, abel_body1]
+const abel_hands = [abel_hand0, abel_hand1]
 
-const heads = [head, head1]
-const bodys = [body, body1]
-const hands = [hand, hand1]
+const IDLE_FRAMES_LENGTH = 2
 
-export const idle = [heads, bodys, hands]
+const cache_idle = {}
 
-export const makeIdle = (name: string, head, hand, body) => {
-  return [idle, 2]
+export const idle = {
+  abel: [abel_heads, abel_bodies, abel_hands],
+}
+
+export const makeIdle = (character: Sprite, animation: any) => {
+  if (!cache_idle[character.name]) {
+    const { name, head } = character
+    const heads = [...animation[0]] // walk not change head
+    const bodies = [...animation[1]] // getting body from animation
+    const hands = [...animation[2]] // getting hand from animation
+    cache_idle[name] = [[heads, bodies, hands], IDLE_FRAMES_LENGTH]
+  }
+
+  return cache_idle[character.name]
 }

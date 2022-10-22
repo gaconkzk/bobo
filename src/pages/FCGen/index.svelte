@@ -5,45 +5,10 @@
   import AnimationRender from '$components/FCGenerator/AnimationRender.svelte'
   import Back2HomeBtn from '../common/Back2HomeBtn.svelte'
 
-  import { onDestroy, onMount } from 'svelte'
-
-  import { makeWalk, walk } from '$components/FCGenerator/walk'
-  import { makeIdle } from '$components/FCGenerator/idle'
-
   let chars
   let currentFrame
   let currentAction = 'walk'
   let currentChar
-  let currentCharAnimation
-
-  // const actions = {
-  //   walk: () =>
-  //     makeWalk(
-  //       currentChar.name,
-  //       currentChar.src,
-  //       currentChar.hand[0],
-  //       currentChar.body[0]
-  //     ),
-  //   idle: () =>
-  //     makeIdle(
-  //       currentChar.name,
-  //       currentChar.src,
-  //       currentChar.hand[0],
-  //       currentChar.body[0]
-  //     ),
-  //   // run,
-  //   // pass,
-  //   // stop,
-  // }
-  onMount(() => {
-    // interv = setInterval(() => {
-    //   currentFrame =
-    //     currentFrame < actions[currentAction]()[1] - 1 ? currentFrame + 1 : 0
-    // }, 1000 / 4)
-  })
-  onDestroy(() => {
-    // clearInterval(interv)
-  })
 </script>
 
 <div class="flex flex-col w-full h-full justify-center">
@@ -67,22 +32,6 @@
               action={currentAction}
               class="w-128px h-128px"
             />
-            <!--
-          <img
-          alt=""
-          src={actions[currentAction]()[0][0][currentFrame]}
-          class="w-120px h-120px absolute top-0 left-0"
-        />
-        <img
-          alt=""
-          src={actions[currentAction]()[0][1][currentFrame]}
-          class="w-120px h-120px absolute top-0 left-0"
-        />
-        <img
-          alt=""
-          src={actions[currentAction]()[0][2][currentFrame]}
-          class="w-120px h-120px absolute top-0 left-0"
-        /> -->
           </div>
           <div class="flex flex-row">
             Select head
@@ -94,7 +43,6 @@
                   currentFrame = 0
                   currentChar = character
                   currentAction = currentAction ?? currentChar.animation[0]
-                  // currentCharAnimation = actions[currentAction]()
                 }}
               >
                 <img
@@ -107,38 +55,8 @@
               </div>
             {/each}
           </div>
-          <div class="">
-            Select hands
-            <!-- {#each currentChar.hand as hand}
-          <div
-            class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
-          >
-            <img
-              src={hand}
-              alt="broken"
-              width="120"
-              height="120"
-              class="-ml-40px -mt-40px"
-            />
-          </div>
-        {/each} -->
-          </div>
-          <div class="">
-            Select body
-            <!-- {#each currentChar.body as body}
-          <div
-            class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
-          >
-            <img
-              src={body}
-              alt="broken"
-              width="120"
-              height="120"
-              class="-ml-40px -mt-52px"
-            />
-          </div>
-        {/each} -->
-          </div>
+          <div class="">Select hands</div>
+          <div class="">Select body</div>
         </div>
         <div class="right">
           <div class="">Select animation</div>

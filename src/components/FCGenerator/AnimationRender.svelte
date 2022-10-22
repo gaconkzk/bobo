@@ -1,18 +1,24 @@
 <script context="module" lang="ts">
   export function getAnimation(action: CharacterAction, character: Sprite) {
-    let heads,
-      bodies,
-      hands = []
-
     let act = action
     if (!character.animation.includes(action)) {
       act = CharacterAction.DEFAULT
     }
-    switch (action) {
+    const animation = animationLoad(act, character.name)
+    if (!animation) {
+      act = CharacterAction.DEFAULT
+    }
+
+    switch (act) {
       case CharacterAction.WALK:
-        return makeWalk(character, animationLoad(action))
+        return makeWalk(character, animation)
       case CharacterAction.IDLE:
-      default:
+        return makeIdle(character, animation)
+      default: {
+        let heads,
+          bodies,
+          hands = []
+
         const head0 = character.head
         const body0 = character.body
         const hand0 = character.hand
@@ -21,7 +27,8 @@
         bodies = [body0]
         hands = [hand0]
 
-        return [[[heads, bodies, hands], 1]]
+        return [[heads, bodies, hands], 1]
+      }
     }
   }
 </script>
@@ -34,6 +41,7 @@
   import { CharacterAction } from '$components/FCGenerator/types'
   import { onDestroy, onMount } from 'svelte'
   import { makeWalk } from './walk'
+  import { makeIdle } from './idle'
 
   export let char: string
   export let action: CharacterAction.WALK
@@ -73,9 +81,13 @@
     if (interv) {
       clearInterval(interv)
     }
-    interv = setInterval(() => {
-      currentFrame = currentFrame < totalFrame - 1 ? currentFrame + 1 : 0
-    }, 1000 / 4)
+    if (totalFrame > 1) {
+      interv = setInterval(() => {
+        currentFrame = currentFrame < totalFrame - 1 ? currentFrame + 1 : 0
+      }, 1000 / 4)
+    } else {
+      interv = null
+    }
   }
   // END - - -
 

@@ -2,12 +2,28 @@
   let characters: Sprite[] = []
   let animations: Record<string, unknown> = {}
 
+  const processAction = async (act) => {
+    const ret = {}
+    for (let k in act) {
+      const actions = await Promise.all(
+        act[k].map(async (i: Promise<String>[]) => await Promise.all(i))
+      )
+      ret[k] = actions
+    }
+
+    return ret
+  }
+
   export function getCharacters() {
     return characters
   }
 
-  export function getAnimation(name: string) {
-    return animations[name]
+  export function getAnimation(action: CharacterAction, name: string) {
+    const anim = animations[action]
+    if (anim?.[name]) {
+      return anim[name]
+    }
+    return anim?.['default']
   }
 
   export async function loadImages(
@@ -16,12 +32,16 @@
     const sprs = await Promise.all(
       spritesData.map(async (psd) => processPromiseSprite(psd))
     )
-    console.log('loaded', sprs)
     return sprs
   }
 
-  export async function loadAnimations() {
-    return { walk }
+  export async function loadAnimations(data) {
+    const result = {}
+    for (let k in data) {
+      const resolved = await processAction(data[k])
+      result[k] = resolved
+    }
+    return result
   }
 </script>
 
@@ -29,13 +49,15 @@
   import { createEventDispatcher, onMount } from 'svelte'
   import { data, processPromiseSprite } from '.'
   import { walk } from './walk'
+  import { idle } from './idle'
+  import { CharacterAction } from './types'
 
   const dispatch = createEventDispatcher()
 
   let loading = true
   let imgs = loadImages(data)
 
-  let anms = loadAnimations()
+  let anms = loadAnimations({ walk, idle })
   onMount(async () => {
     characters = await imgs
     animations = await anms
