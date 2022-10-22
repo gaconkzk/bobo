@@ -1,4 +1,5 @@
 <script>
+  import Dropdown from './../../components/Dropdown.svelte'
   import ImgsProvider, {
     getCharacters,
   } from './../../components/FCGenerator/ImgsProvider.svelte'
@@ -60,6 +61,10 @@
         </div>
         <div class="right">
           <div class="">Select animation</div>
+          <Dropdown
+            bind:selectedValue={currentAction}
+            options={['walk', 'idle']}
+          />
         </div>
       </div>
     {/if}
