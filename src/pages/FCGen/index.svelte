@@ -10,6 +10,7 @@
   import { makeWalk, walk } from '$components/FCGenerator/walk'
   import { makeIdle } from '$components/FCGenerator/idle'
 
+  let chars
   let currentFrame
   let currentAction = 'walk'
   let currentChar
@@ -34,8 +35,6 @@
   //   // pass,
   //   // stop,
   // }
-
-  let chars
   onMount(() => {
     // interv = setInterval(() => {
     //   currentFrame =
@@ -61,7 +60,7 @@
             class="w-120px h-120px border-1 border-blue-200 m-4 relative bg-gray-200"
           >
             <AnimationRender
-              char={currentChar || chars[0].name}
+              char={currentChar?.name}
               action={currentAction}
               class="w-128px h-128px"
             />
@@ -86,8 +85,10 @@
             Select head
             {#each chars as character}
               <div
+                role="presentation"
                 class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
                 on:click={() => {
+                  console.log('char', character)
                   currentFrame = 0
                   currentChar = character
                   currentAction = currentAction ?? currentChar.animation[0]

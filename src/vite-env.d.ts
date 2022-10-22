@@ -40,3 +40,19 @@ type TypingEvent = {
   shiftKey: boolean
   metaKey: boolean
 }
+
+type Sprite = {
+  name: string
+  src: string
+  body: string[]
+  hand: string[]
+  animation: string[]
+}
+
+type PromiseSprite = {
+  name: string
+  src: Promise<string>
+  body: Promise<string>[]
+  hand: Promise<string>[]
+  animation: string[]
+}

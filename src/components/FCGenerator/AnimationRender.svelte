@@ -38,22 +38,30 @@
 
   let heads, bodies, hands
   let interv
-  onMount(async () => {
+
+  onDestroy(() => {
+    if (interv) {
+      clearInterval(interv)
+    }
+  })
+
+  $: {
+    console.log('caaalll')
     let currentChar = chars.find((c) => c.name === char)
     if (currentChar) {
       animation = getAnimation(action, currentChar)
       const [frames, totalFrame] = animation
       ;[heads, bodies, hands] = frames
 
+      if (interv) {
+        clearInterval(interv)
+      }
+
       interv = setInterval(() => {
         currentFrame = currentFrame < totalFrame - 1 ? currentFrame + 1 : 0
       }, 1000 / 4)
     }
-  })
-
-  onDestroy(() => {
-    clearInterval(interv)
-  })
+  }
 </script>
 
 <!--  svelte-ignore a11y-missing-attribute-->

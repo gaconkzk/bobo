@@ -12,6 +12,7 @@
     const sprs = await Promise.all(
       spritesData.map(async (psd) => processPromiseSprite(psd))
     )
+    console.log('loaded', sprs)
     return sprs
   }
 
