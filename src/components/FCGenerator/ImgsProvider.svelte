@@ -1,9 +1,13 @@
 <script context="module" lang="ts">
   let characters: Sprite[] = []
-  let animations = {}
+  let animations: Record<string, unknown> = {}
 
   export function getCharacters() {
     return characters
+  }
+
+  export function getAnimation(name: string) {
+    return animations[name]
   }
 
   export async function loadImages(
@@ -17,13 +21,14 @@
   }
 
   export async function loadAnimations() {
-    return []
+    return { walk }
   }
 </script>
 
 <script lang="ts">
   import { createEventDispatcher, onMount } from 'svelte'
   import { data, processPromiseSprite } from '.'
+  import { walk } from './walk'
 
   const dispatch = createEventDispatcher()
 

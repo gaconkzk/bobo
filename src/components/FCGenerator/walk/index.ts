@@ -20,26 +20,19 @@ export const walk = {
   default: [heads, bodies, hands],
 }
 
-let cache_walk = {}
+const cache_walk = {}
 
 const WALK_FRAMES_LENGTH = 4
 
-export const makeWalk = (character: Sprite) => {
-  // for now only support walk for default char
-  // kunio, horibata, yoritsune
-  if (!['kunio', 'horibata', 'yoritsune'].includes(character.name)) {
-    console.log('c', character.src)
-    return [[character.src, character.body, character.hand], 1]
-  }
+export const makeWalk = (character: Sprite, animation: any) => {
+  console.log(animation)
   if (!cache_walk[character.name]) {
-    const { name, src: head, body, hand } = character
+    const { name, head, body, hand } = character
     const heads = [head, head, head, head] // walk not change head
-    const bodies = [...body] // getting body from animation
-    const hands = [...hand] // getting hand from animation
+    const bodies = [body, body, body, body] // getting body from animation
+    const hands = [hand, hand, hand, hand] // getting hand from animation
     cache_walk[name] = [[heads, bodies, hands], WALK_FRAMES_LENGTH]
-    console.log('eeeee', cache_walk[name])
   }
-  console.log('cache walk', character.name, cache_walk[character.name])
 
   return cache_walk[character.name]
 }

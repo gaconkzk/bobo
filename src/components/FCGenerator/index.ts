@@ -7,30 +7,30 @@ const [kunio, horibata, yoritsune, abel] = heads
 const data: PromiseSprite[] = [
   {
     name: 'kunio',
-    src: kunio,
-    body: [bodies.default],
-    hand: [hands.default],
-    animation: ['walk'],
+    head: kunio,
+    body: bodies.default,
+    hand: hands.default,
+    animation: ['walk', 'idle'],
   },
   {
     name: 'horibata',
-    src: horibata,
-    body: [bodies.default],
-    hand: [hands.default],
-    animation: ['walk'],
+    head: horibata,
+    body: bodies.default,
+    hand: hands.default,
+    animation: ['walk', 'idle'],
   },
   {
     name: 'yoritsune',
-    src: yoritsune,
-    body: [bodies.default],
-    hand: [hands.default],
-    animation: ['walk'],
+    head: yoritsune,
+    body: bodies.default,
+    hand: hands.default,
+    animation: ['walk', 'idle'],
   },
   {
     name: 'abel',
-    src: abel,
-    body: [bodies.abel],
-    hand: [hands.abel],
+    head: abel,
+    body: bodies.abel,
+    hand: hands.abel,
     animation: ['idle'],
   },
 ]
@@ -40,13 +40,13 @@ export { data }
 export async function processPromiseSprite(
   spr: PromiseSprite
 ): Promise<Sprite> {
-  let src = await spr.src
-  let body = await Promise.all(spr.body)
-  let hand = await Promise.all(spr.hand)
+  let head = await spr.head
+  let body = await spr.body
+  let hand = await spr.hand
 
   return {
     ...spr,
-    src,
+    head,
     body,
     hand,
   }

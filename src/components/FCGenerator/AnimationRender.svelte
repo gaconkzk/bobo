@@ -3,14 +3,19 @@
     let heads,
       bodies,
       hands = []
+
+    let act = action
+    if (!character.animation.includes(action)) {
+      act = CharacterAction.DEFAULT
+    }
     switch (action) {
       case CharacterAction.WALK:
-        return makeWalk(character)
+        return makeWalk(character, animationLoad(action))
       case CharacterAction.IDLE:
       default:
-        const head0 = character.src
-        const body0 = character.body[0]
-        const hand0 = character.hand[0]
+        const head0 = character.head
+        const body0 = character.body
+        const hand0 = character.hand
 
         heads = [head0]
         bodies = [body0]
@@ -22,13 +27,18 @@
 </script>
 
 <script lang="ts">
-  import { getCharacters } from '$components/FCGenerator/ImgsProvider.svelte'
+  import {
+    getCharacters,
+    getAnimation as animationLoad,
+  } from '$components/FCGenerator/ImgsProvider.svelte'
   import { CharacterAction } from '$components/FCGenerator/types'
   import { onDestroy, onMount } from 'svelte'
   import { makeWalk } from './walk'
 
   export let char: string
   export let action: CharacterAction.WALK
+  let prevChar = { value: null }
+  let prevAction = { value: null }
   let cls = ''
   export { cls as class }
 
@@ -39,27 +49,47 @@
   let heads, bodies, hands
   let interv
 
+  let mounted = false
+  onMount(() => {
+    mounted = true
+  })
   onDestroy(() => {
     if (interv) {
       clearInterval(interv)
     }
   })
 
+  // START move here for not infinite loop
+  function valueDifferent() {
+    return prevChar.value !== char || prevAction.value !== action
+  }
+
+  function updatePreviousValue() {
+    prevChar['value'] = char
+    prevAction['value'] = action
+  }
+
+  function updateInterval(totalFrame) {
+    if (interv) {
+      clearInterval(interv)
+    }
+    interv = setInterval(() => {
+      currentFrame = currentFrame < totalFrame - 1 ? currentFrame + 1 : 0
+    }, 1000 / 4)
+  }
+  // END - - -
+
   $: {
-    console.log('caaalll')
-    let currentChar = chars.find((c) => c.name === char)
-    if (currentChar) {
-      animation = getAnimation(action, currentChar)
-      const [frames, totalFrame] = animation
-      ;[heads, bodies, hands] = frames
-
-      if (interv) {
-        clearInterval(interv)
+    if (valueDifferent()) {
+      let currentChar = chars.find((c) => c.name === char)
+      if (currentChar) {
+        currentFrame = 0
+        animation = getAnimation(action, currentChar)
+        const [frames, totalFrame] = animation
+        ;[heads, bodies, hands] = frames
+        updateInterval(totalFrame)
       }
-
-      interv = setInterval(() => {
-        currentFrame = currentFrame < totalFrame - 1 ? currentFrame + 1 : 0
-      }, 1000 / 4)
+      updatePreviousValue()
     }
   }
 </script>

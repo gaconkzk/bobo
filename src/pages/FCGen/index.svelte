@@ -51,9 +51,12 @@
   <ImgsProvider
     on:loaded={() => {
       chars = getCharacters()
+
+      currentChar = chars[0]
+      currentAction = currentAction ?? currentChar.animation[0]
     }}
   >
-    {#if chars?.length > 0}
+    {#if chars.length > 0}
       <div class="border-1 rounded border-red-200 flex flex-row p-2">
         <div class="w-170px left-panel flex flex-col">
           <div
@@ -88,7 +91,6 @@
                 role="presentation"
                 class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
                 on:click={() => {
-                  console.log('char', character)
                   currentFrame = 0
                   currentChar = character
                   currentAction = currentAction ?? currentChar.animation[0]
@@ -96,7 +98,7 @@
                 }}
               >
                 <img
-                  src={character.src}
+                  src={character.head}
                   alt="broken"
                   width="120"
                   height="120"
