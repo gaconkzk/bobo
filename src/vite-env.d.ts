@@ -1,9 +1,5 @@
 /// <reference types="svelte" />
 /// <reference types="vite/client" />
-/// <reference types="phaser" />
-
-declare type Keyboard = import('@phaserjs/phaser/input/keyboard').Keyboard
-
 declare module 'yrv'
 
 interface Window {
@@ -45,25 +41,18 @@ type TypingEvent = {
   metaKey: boolean
 }
 
-type GameContext = {
-  getGame: () => Phaser.Game
+type Sprite = {
+  name: string
+  head: string
+  body: string
+  hand: string
+  animation: string[]
 }
 
-type SceneContext = {
-  getScene: () => Phaser.Scene
-  getWorld: () => any
-  getLoader: () => any
-  getKeyboard: () => Keyboard
-}
-
-type ResourceFile = {
-  key: string
-  url: string
-  spriteSheet?: SpriteSheetType
-  atlas?: string
-}
-
-type SpriteSheetType = {
-  frameWidth: number
-  frameHeight: number
+type PromiseSprite = {
+  name: string
+  head: Promise<string>
+  body: Promise<string>
+  hand: Promise<string>
+  animation: string[]
 }

@@ -62,6 +62,17 @@ export default defineConfig({
             }
           },
         ],
+        [
+          'bg-chessboard-transparent',
+          {
+            'background-image':
+              "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUAQMAAAC3R49OAAAABlBMVEX////09PQtDxrOAAAAE0lEQVQI12P4f4CBKMxg/4EYDAAFkR1NiYvv7QAAAABJRU5ErkJggg==')",
+            // 'background-image':
+            //   'linear-gradient(45deg, #f0f0f0 25%, transparent 25%), linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f0f0f0 75%), linear-gradient(-45deg, transparent 75%, #f0f0f0 75%)',
+            'background-size': '20px 20px',
+            'background-position': '0 0, 0 10px, 10px -10px, -10px 0px',
+          },
+        ],
       ],
       shortcuts: {
         'a-highlight':
@@ -86,9 +97,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // if (id.includes('phaser')) {
-          //   return 'phaser'
-          // }
           if (id.includes('node_modules')) {
             return 'vendor'
           }

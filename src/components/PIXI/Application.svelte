@@ -7,7 +7,6 @@
 <script lang="ts">
   import { setContext } from 'svelte'
   import { removeUndefined } from '$utils/remove-undefined'
-
   import * as PIXI from 'pixi.js'
   import Renderer from './Renderer.svelte'
   import Ticker from './Ticker.svelte'

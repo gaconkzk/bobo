@@ -1,14 +1,10 @@
 <script context="module" lang="ts">
-  export interface RendererContext<
-    T extends PIXI.Renderer | PIXI.AbstractRenderer
-  > {
+  export interface RendererContext<T extends PIXI.IRenderer> {
     renderer: T
     invalidate: () => void
   }
 
-  export function getRenderer<
-    T extends PIXI.Renderer | PIXI.AbstractRenderer
-  >(): RendererContext<T> {
+  export function getRenderer<T extends PIXI.IRenderer>(): RendererContext<T> {
     return getContext('pixi/renderer')
   }
 </script>
@@ -23,7 +19,7 @@
   } from 'svelte'
   import { removeUndefined } from '$utils/remove-undefined'
 
-  type T = $$Generic<PIXI.Renderer | PIXI.AbstractRenderer>
+  type T = $$Generic<PIXI.IRenderer>
   type $$Props = PIXI.IRendererOptionsAuto & {
     instance?: T
     stage?: PIXI.Container
@@ -31,10 +27,10 @@
 
   type $$Slots = {
     default: {
-      view: (node: HTMLElement) => void
+      view?: (node: HTMLElement) => void
     }
     view: {
-      view: (node: HTMLElement) => void
+      view?: (node: HTMLElement) => void
     }
   }
 
