@@ -9,7 +9,7 @@ const abel_heads = [abel_head0, abel_head1]
 const abel_bodies = [abel_body0, abel_body1]
 const abel_hands = [abel_hand0, abel_hand1]
 
-const IDLE_FRAMES_LENGTH = 2
+export const IDLE_FRAMES_LENGTH = 2
 
 const cache_idle = {}
 

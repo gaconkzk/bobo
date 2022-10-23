@@ -1,6 +1,9 @@
 import { heads } from './head'
 import { bodies } from './body'
 import { hands } from './hand'
+import { CharacterAction } from './types'
+import { IDLE_FRAMES_LENGTH } from './idle'
+import { WALK_FRAMES_LENGTH } from './walk'
 
 const [kunio, horibata, yoritsune, abel] = heads
 
@@ -10,21 +13,21 @@ const data: PromiseSprite[] = [
     head: kunio,
     body: bodies.default,
     hand: hands.default,
-    animation: ['walk', 'idle'],
+    animation: ['walk'],
   },
   {
     name: 'horibata',
     head: horibata,
     body: bodies.default,
     hand: hands.default,
-    animation: ['walk', 'idle'],
+    animation: ['walk'],
   },
   {
     name: 'yoritsune',
     head: yoritsune,
     body: bodies.default,
     hand: hands.default,
-    animation: ['walk', 'idle'],
+    animation: ['walk'],
   },
   {
     name: 'abel',
@@ -35,7 +38,11 @@ const data: PromiseSprite[] = [
   },
 ]
 
-export { data }
+const actionSupported = (char: String, action: CharacterAction): boolean => {
+  return data.some((c) => c.name === char && c.animation.includes(action))
+}
+
+export { data, actionSupported }
 
 export async function processPromiseSprite(
   spr: PromiseSprite
@@ -49,5 +56,16 @@ export async function processPromiseSprite(
     head,
     body,
     hand,
+  }
+}
+
+export const getFramesLength = (action: CharacterAction) => {
+  switch (action) {
+    case CharacterAction.IDLE:
+      return IDLE_FRAMES_LENGTH
+    case CharacterAction.WALK:
+      return WALK_FRAMES_LENGTH
+    default:
+      return 1
   }
 }

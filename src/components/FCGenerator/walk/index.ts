@@ -19,7 +19,7 @@ export const walk = {
 
 const cache_walk = {}
 
-const WALK_FRAMES_LENGTH = 4
+export const WALK_FRAMES_LENGTH = 4
 
 export const makeWalk = (character: Sprite, animation: any) => {
   if (!cache_walk[character.name]) {

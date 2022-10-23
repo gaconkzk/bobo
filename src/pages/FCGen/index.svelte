@@ -6,6 +6,17 @@
   import AnimationRender from '$components/FCGenerator/AnimationRender.svelte'
   import Back2HomeBtn from '../common/Back2HomeBtn.svelte'
 
+  // Replacing with pixi
+  import Application from '$components/PIXI/Application.svelte'
+  import Assets from '$components/PIXI/Assets.svelte'
+  import Text from '$components/PIXI/Text.svelte'
+  import { getFramesLength } from '$components/FCGenerator'
+
+  import PixiCharacter from './components/PixiCharacter.svelte'
+
+  import spriteData from './sprites.json'
+  import { CharacterAction } from '$components/FCGenerator/types'
+
   let chars
   let currentFrame
   let currentAction = 'walk'
@@ -24,7 +35,7 @@
   >
     {#if chars.length > 0}
       <div class="border-1 rounded border-red-200 flex flex-row p-2">
-        <div class="w-170px left-panel flex flex-col">
+        <div class="w-370px left-panel flex flex-col gap-y-2">
           <div
             class="w-120px h-120px border-1 border-blue-200 m-4 relative bg-gray-200"
           >
@@ -39,7 +50,7 @@
             {#each chars as character}
               <div
                 role="presentation"
-                class="w-40px h-40px overflow-hidden border-1 border-blue rounded"
+                class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
                 on:click={() => {
                   currentFrame = 0
                   currentChar = character
@@ -58,13 +69,44 @@
           </div>
           <div class="">Select hands</div>
           <div class="">Select body</div>
+          <div class="">
+            <div class="mb-1">Select animation</div>
+            <Dropdown
+              bind:selectedValue={currentAction}
+              options={['walk', 'idle']}
+            />
+          </div>
         </div>
-        <div class="right">
-          <div class="">Select animation</div>
-          <Dropdown
-            bind:selectedValue={currentAction}
-            options={['walk', 'idle']}
-          />
+        <div class="bg-chessboard-transparent">
+          <Application width={400} height={400} antialias backgroundAlpha={0}>
+            <Assets resources={spriteData}>
+              <slot slot="loading">
+                <Text text={`Loading... `} x={200} y={200} anchor={0.5} />
+              </slot>
+              {#each Array(getFramesLength(CharacterAction.WALK)) as _, i}
+                <PixiCharacter
+                  name={currentChar?.name ?? 'kunio'}
+                  action={CharacterAction.WALK}
+                  frame={i}
+                  x={i * 64}
+                  y="0"
+                  width="64"
+                  height="64"
+                />
+              {/each}
+              {#each Array(getFramesLength(CharacterAction.IDLE)) as _, i}
+                <PixiCharacter
+                  name={currentChar?.name ?? 'kunio'}
+                  action={CharacterAction.IDLE}
+                  frame={i}
+                  x={i * 64}
+                  y="64"
+                  width="64"
+                  height="64"
+                />
+              {/each}
+            </Assets>
+          </Application>
         </div>
       </div>
     {/if}

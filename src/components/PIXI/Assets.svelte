@@ -34,15 +34,15 @@
     }
   }
 
+  type AssetResource =
+    | string
+    | [string | string[], string | (string | PIXI.ResolveAsset)[], unknown?]
+
   type T = $$Generic<PIXI.AssetsClass>
 
   type $$Props = {
     instance?: T
-    resources?:
-      | string[]
-      | Array<
-          [string | string[], string | (string | PIXI.ResolveAsset)[], unknown?]
-        >
+    resources?: AssetResource[]
   }
 
   export let instance = PIXI.Assets as T
@@ -53,28 +53,26 @@
    * An array of urls or arguments to be passed into PIXI.Loader's add() function
    * @type {string[] | Array<[string, string, PIXI.IAddOptions, () => any]>}
    */
-  export let resources:
-    | string[]
-    | Array<
-        [string | string[], string | (string | PIXI.ResolveAsset)[], unknown?]
-      > = []
+  export let resources: AssetResource[] = []
 
   let loading = true
   onMount(async () => {
     loading = true
     let keys = []
-    resources.forEach((url) => {
-      if (Array.isArray(url)) {
-        const [name, ...rest] = url
-        // @ts-ignore
-        instance.add(name, ...rest)
+    const arrForAdd = resources.filter((u: AssetResource) => Array.isArray(u))
+    const arrForLoad: string[] = resources
+      .filter((u: AssetResource) => typeof u === 'string')
+      .map((u) => u as string)
 
-        keys.push(name)
-      } else {
-        // instance.load(url)
-      }
+    arrForAdd.forEach((url) => {
+      const [name, ...rest] = url
+      // @ts-ignore
+      instance.add(name, ...rest)
+      keys.push(name)
     })
-    await instance.load(keys)
+    await instance.load(keys.map((u) => (Array.isArray(u) ? u[0] : u)))
+    await Promise.all(arrForLoad.map(async (u) => await instance.load(u)))
+
     loading = false
   })
 </script>
