@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@pixi/filter-color-replace': ^5.0.0
   '@steeze-ui/heroicons': ^1.1.1
   '@steeze-ui/svelte-icon': ^1.3.2
   '@sveltejs/vite-plugin-svelte': ^1.0.9
@@ -36,6 +37,7 @@ specifiers:
   yrv: ^0.0.57
 
 devDependencies:
+  '@pixi/filter-color-replace': 5.0.0
   '@steeze-ui/heroicons': 1.1.1
   '@steeze-ui/svelte-icon': 1.3.2
   '@sveltejs/vite-plugin-svelte': 1.0.9_svelte@3.52.0+vite@3.1.8
@@ -763,6 +765,12 @@ packages:
 
   /@pixi/filter-color-matrix/7.0.0-beta.4:
     resolution: {integrity: sha512-qtNCSUiH101smrr3g9VNlsEvyZuUDXxbHPClCHZJCj93jmSUr6O0pvhGT9XLsVyFmIqw/1NX2o77mGSePxqznQ==}
+    dev: true
+
+  /@pixi/filter-color-replace/5.0.0:
+    resolution: {integrity: sha512-u4VOtKbY6SSr2P9v5AL8/2MVsUcAH9z92c1eaqeE3PXCPNyCgZKuNHWl8+FjBIDl/1UMQVhXH2zNrC3Vuqo3JA==}
+    peerDependencies:
+      '@pixi/core': ^7.0.0-X
     dev: true
 
   /@pixi/filter-displacement/7.0.0-beta.4:

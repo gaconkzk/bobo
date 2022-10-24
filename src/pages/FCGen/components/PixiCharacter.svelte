@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { ColorReplaceFilter } from '@pixi/filter-color-replace'
+  import * as PIXI from 'pixi.js'
   import Sprite from '$components/PIXI/Sprite.svelte'
   import { getResource } from '$components/PIXI/Assets.svelte'
   import Container from '$components/PIXI/Container.svelte'
@@ -14,6 +16,8 @@
   export let y: number = 0
   export let width: number
   export let height: number
+
+  let container: PIXI.Container
 
   let headTexture = getOrDefault('head')
   let bodyTexture = getOrDefault('body')
@@ -31,6 +35,7 @@
 
   let prevName = ''
   $: {
+    console.log('name', name)
     if (name !== prevName) {
       headTexture = getOrDefault('head')
       bodyTexture = getOrDefault('body')
@@ -40,7 +45,10 @@
   }
 </script>
 
-<Container>
+<Container
+  bind:instance={container}
+  filters={[new ColorReplaceFilter(0xee7f6a, 0x00ff00, 0.1)]}
+>
   <Sprite texture={headTexture} {x} {y} {width} {height} />
   <Sprite texture={bodyTexture} {x} {y} {width} {height} />
   <Sprite texture={handTexture} {x} {y} {width} {height} />

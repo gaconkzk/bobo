@@ -1,4 +1,5 @@
 <script>
+  import * as PIXI from 'pixi.js'
   import Dropdown from './../../components/Dropdown.svelte'
   import ImgsProvider, {
     getCharacters,
@@ -14,13 +15,16 @@
 
   import PixiCharacter from './components/PixiCharacter.svelte'
 
-  import spriteData from './sprites.json'
+  import { sprites } from './sprites'
   import { CharacterAction } from '$components/FCGenerator/types'
 
   let chars
   let currentFrame
   let currentAction = 'walk'
   let currentChar
+
+  // pixelalbe - no blurred
+  PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
 </script>
 
 <div class="flex flex-col w-full h-full justify-center">
@@ -54,7 +58,9 @@
                 on:click={() => {
                   currentFrame = 0
                   currentChar = character
-                  currentAction = currentAction ?? currentChar.animation[0]
+                  currentAction = currentChar.animation[0]
+
+                  console.log('change name', currentChar.name)
                 }}
               >
                 <img
@@ -73,19 +79,19 @@
             <div class="mb-1">Select animation</div>
             <Dropdown
               bind:selectedValue={currentAction}
-              options={['walk', 'idle']}
+              options={currentChar.animation}
             />
           </div>
         </div>
         <div class="bg-chessboard-transparent">
           <Application width={400} height={400} antialias backgroundAlpha={0}>
-            <Assets resources={spriteData}>
+            <Assets resources={sprites}>
               <slot slot="loading">
                 <Text text={`Loading... `} x={200} y={200} anchor={0.5} />
               </slot>
               {#each Array(getFramesLength(CharacterAction.WALK)) as _, i}
                 <PixiCharacter
-                  name={currentChar?.name ?? 'kunio'}
+                  name={currentChar.name}
                   action={CharacterAction.WALK}
                   frame={i}
                   x={i * 64}

@@ -1,0 +1,141 @@
+// default textures - usually using for stand
+
+export const sprites = [
+  ['brain', '/imgs/brain.png'],
+  [['abel_head', 'abel_head_walk_default'], '/imgs/sprites/head/abel.png'],
+  [['abel_body', 'abel_body_walk_default'], '/imgs/sprites/body/abel.png'],
+  [['abel_hand', 'abel_hand_walk_default'], '/imgs/sprites/hand/abel.png'],
+  [
+    [
+      'kunio_head',
+      'kunio_head_idle_default',
+      'kunio_head_walk_0',
+      'kunio_head_walk_1',
+      'kunio_head_walk_2',
+      'kunio_head_walk_3',
+    ],
+    '/imgs/sprites/head/kunio.png',
+  ],
+  [
+    [
+      'horibata_head',
+      'horibata_head_idle_default',
+      'horibata_head_walk_0',
+      'horibata_head_walk_1',
+      'horibata_head_walk_2',
+      'horibata_head_walk_3',
+    ],
+    '/imgs/sprites/head/horibata.png',
+  ],
+  [
+    [
+      'yoritsune_head',
+      'yoritsune_head_idle_default',
+      'yoritsune_head_walk_0',
+      'yoritsune_head_walk_1',
+      'yoritsune_head_walk_2',
+      'yoritsune_head_walk_3',
+    ],
+    '/imgs/sprites/head/yoritsune.png',
+  ],
+  [
+    [
+      'kunio_body',
+      'kunio_body_idle_default',
+      'horibata_body',
+      'horibata_body_idle_default',
+      'yoritsune_body',
+      'yoritsune_body_idle_default',
+    ],
+    '/imgs/sprites/body/default.png',
+  ],
+  [
+    [
+      'kunio_hand',
+      'kunio_hand_idle_default',
+      'horibata_hand',
+      'horibata_hand_idle_default',
+      'yoritsune_hand',
+      'yoritsune_hand_idle_default',
+    ],
+    '/imgs/sprites/hand/default.png',
+  ],
+  [
+    [
+      'yoritsune_body_walk_0',
+      'horibata_body_walk_0',
+      'kunio_body_walk_0',
+      'default_body_walk_0',
+    ],
+    '/imgs/sprites/walk/default/body_1.png',
+  ],
+  [
+    [
+      'yoritsune_hand_walk_0',
+      'horibata_hand_walk_0',
+      'kunio_hand_walk_0',
+      'default_hand_walk_0',
+    ],
+    '/imgs/sprites/walk/default/hand_1.png',
+  ],
+  [
+    [
+      'yoritsune_body_walk_1',
+      'horibata_body_walk_1',
+      'kunio_body_walk_1',
+      'default_body_walk_1',
+    ],
+    '/imgs/sprites/walk/default/body_2.png',
+  ],
+  [
+    [
+      'yoritsune_hand_walk_1',
+      'horibata_hand_walk_1',
+      'kunio_hand_walk_1',
+      'default_hand_walk_1',
+    ],
+    '/imgs/sprites/walk/default/hand_2.png',
+  ],
+  [
+    [
+      'yoritsune_body_walk_2',
+      'horibata_body_walk_2',
+      'kunio_body_walk_2',
+      'default_body_walk_2',
+    ],
+    '/imgs/sprites/walk/default/body_3.png',
+  ],
+  [
+    [
+      'yoritsune_hand_walk_2',
+      'horibata_hand_walk_2',
+      'kunio_hand_walk_2',
+      'default_hand_walk_2',
+    ],
+    '/imgs/sprites/walk/default/hand_3.png',
+  ],
+  [
+    [
+      'yoritsune_body_walk_3',
+      'horibata_body_walk_3',
+      'kunio_body_walk_3',
+      'default_body_walk_3',
+    ],
+    '/imgs/sprites/walk/default/body_4.png',
+  ],
+  [
+    [
+      'yoritsune_hand_walk_3',
+      'horibata_hand_walk_3',
+      'kunio_hand_walk_3',
+      'default_hand_walk_3',
+    ],
+    '/imgs/sprites/walk/default/hand_4.png',
+  ],
+  [['abel_hand_idle_0'], '/imgs/sprites/idle/abel/hand_abel_1.png'],
+  [['abel_head_idle_0'], '/imgs/sprites/idle/abel/head_abel_1.png'],
+  [['abel_body_idle_0'], '/imgs/sprites/idle/abel/body_abel_1.png'],
+  [['abel_hand_idle_1'], '/imgs/sprites/idle/abel/hand_abel_2.png'],
+  [['abel_head_idle_1'], '/imgs/sprites/idle/abel/head_abel_2.png'],
+  [['abel_body_idle_1'], '/imgs/sprites/idle/abel/body_abel_2.png'],
+]
