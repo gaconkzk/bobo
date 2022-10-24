@@ -142,9 +142,9 @@
 
   function view(node: HTMLElement): void {
     if (node.childNodes.length) {
-      node.childNodes[0].appendChild(instance.view)
+      node.childNodes[0].appendChild(instance.view as HTMLCanvasElement)
     } else {
-      node.appendChild(instance.view)
+      node.appendChild(instance.view as HTMLCanvasElement)
     }
   }
 
