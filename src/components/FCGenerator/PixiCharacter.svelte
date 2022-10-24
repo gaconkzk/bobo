@@ -7,6 +7,7 @@
 
   import { actionSupported } from '$components/FCGenerator'
   import { CharacterAction } from '$components/FCGenerator/types'
+  import { getSpriteName } from './sprites'
 
   export let name = ''
   export let action: CharacterAction = CharacterAction.DEFAULT
@@ -23,19 +24,12 @@
   let bodyTexture = getOrDefault('body')
   let handTexture = getOrDefault('hand')
   function getOrDefault(part: 'head' | 'body' | 'hand') {
-    let txt
-    if (actionSupported(name, action)) {
-      txt = getResource(`${name}_${part}_${action}_${frame}`)
-    } else {
-      txt = getResource(`${name}_${part}_${action}_default`)
-    }
-
-    return txt
+    const sprite_name = getSpriteName(name, part, action, frame)
+    return getResource(sprite_name)
   }
 
   let prevName = ''
   $: {
-    console.log('name', name)
     if (name !== prevName) {
       headTexture = getOrDefault('head')
       bodyTexture = getOrDefault('body')

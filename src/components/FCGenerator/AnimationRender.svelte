@@ -14,6 +14,8 @@
         return makeWalk(character, animation)
       case CharacterAction.IDLE:
         return makeIdle(character, animation)
+      case CharacterAction.RUN:
+        return makeRun(character, animation)
       default: {
         let heads,
           bodies,
@@ -42,6 +44,7 @@
   import { onDestroy, onMount } from 'svelte'
   import { makeWalk } from './walk'
   import { makeIdle } from './idle'
+  import { makeRun } from './run'
 
   export let char: string
   export let action: CharacterAction.WALK

@@ -50,6 +50,7 @@
   import { data, processPromiseSprite } from '.'
   import { walk } from './walk'
   import { idle } from './idle'
+  import { run } from './run'
   import { CharacterAction } from './types'
 
   const dispatch = createEventDispatcher()
@@ -57,7 +58,7 @@
   let loading = true
   let imgs = loadImages(data)
 
-  let anms = loadAnimations({ walk, idle })
+  let anms = loadAnimations({ walk, idle, run })
   onMount(async () => {
     characters = await imgs
     animations = await anms

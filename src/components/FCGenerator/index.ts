@@ -4,6 +4,7 @@ import { hands } from './hand'
 import { CharacterAction } from './types'
 import { IDLE_FRAMES_LENGTH } from './idle'
 import { WALK_FRAMES_LENGTH } from './walk'
+import { RUN_FRAMES_LENGTH } from './run'
 
 const [kunio, horibata, yoritsune, abel] = heads
 
@@ -13,21 +14,21 @@ const data: PromiseSprite[] = [
     head: kunio,
     body: bodies.default,
     hand: hands.default,
-    animation: ['walk'],
+    animation: ['walk', 'run'],
   },
   {
     name: 'horibata',
     head: horibata,
     body: bodies.default,
     hand: hands.default,
-    animation: ['walk'],
+    animation: ['walk', 'run'],
   },
   {
     name: 'yoritsune',
     head: yoritsune,
     body: bodies.default,
     hand: hands.default,
-    animation: ['walk'],
+    animation: ['walk', 'run'],
   },
   {
     name: 'abel',
@@ -65,6 +66,8 @@ export const getFramesLength = (action: CharacterAction) => {
       return IDLE_FRAMES_LENGTH
     case CharacterAction.WALK:
       return WALK_FRAMES_LENGTH
+    case CharacterAction.RUN:
+      return RUN_FRAMES_LENGTH
     default:
       return 1
   }

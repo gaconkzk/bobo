@@ -1,9 +1,9 @@
 <script>
   import * as PIXI from 'pixi.js'
-  import Dropdown from './../../components/Dropdown.svelte'
+  import Dropdown from '$components/Dropdown.svelte'
   import ImgsProvider, {
     getCharacters,
-  } from './../../components/FCGenerator/ImgsProvider.svelte'
+  } from '$components/FCGenerator/ImgsProvider.svelte'
   import AnimationRender from '$components/FCGenerator/AnimationRender.svelte'
   import Back2HomeBtn from '../common/Back2HomeBtn.svelte'
 
@@ -13,9 +13,9 @@
   import Text from '$components/PIXI/Text.svelte'
   import { getFramesLength } from '$components/FCGenerator'
 
-  import PixiCharacter from './components/PixiCharacter.svelte'
+  import PixiCharacter from '$components/FCGenerator/PixiCharacter.svelte'
 
-  import { sprites } from './sprites'
+  import { sprites } from '$components/FCGenerator/sprites'
   import { CharacterAction } from '$components/FCGenerator/types'
 
   let chars
@@ -58,9 +58,9 @@
                 on:click={() => {
                   currentFrame = 0
                   currentChar = character
-                  currentAction = currentChar.animation[0]
-
-                  console.log('change name', currentChar.name)
+                  currentAction = currentChar.animation.includes(currentAction)
+                    ? currentAction
+                    : currentChar.animation[0]
                 }}
               >
                 <img
@@ -102,11 +102,22 @@
               {/each}
               {#each Array(getFramesLength(CharacterAction.IDLE)) as _, i}
                 <PixiCharacter
-                  name={currentChar?.name ?? 'kunio'}
+                  name={currentChar?.name ?? 'abel'}
                   action={CharacterAction.IDLE}
                   frame={i}
                   x={i * 64}
                   y="64"
+                  width="64"
+                  height="64"
+                />
+              {/each}
+              {#each Array(getFramesLength(CharacterAction.RUN)) as _, i}
+                <PixiCharacter
+                  name={currentChar?.name ?? 'kunio'}
+                  action={CharacterAction.RUN}
+                  frame={i}
+                  x={i * 64}
+                  y="128"
                   width="64"
                   height="64"
                 />
