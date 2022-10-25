@@ -133,7 +133,14 @@
   $: applyProp('textures', textures)
   $: applyProp('totalFrames', totalFrames)
   $: applyProp('updateAnchor', updateAnchor)
-  $: textures.forEach((t) => t.on('update', () => invalidate()))
+  $: {
+    textures.forEach((t) =>
+      t.on('update', () => {
+        invalidate()
+      })
+    )
+    instance.play()
+  }
 
   instance.onComplete = () => dispatch('complete')
   instance.onFrameChange = (currentFrame: number) =>

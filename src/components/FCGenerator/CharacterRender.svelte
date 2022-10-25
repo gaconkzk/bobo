@@ -4,8 +4,6 @@
   import Sprite from '$components/PIXI/Sprite.svelte'
   import { getResource } from '$components/PIXI/Assets.svelte'
   import Container from '$components/PIXI/Container.svelte'
-
-  import { actionSupported } from '$components/FCGenerator'
   import { CharacterAction } from '$components/FCGenerator/types'
   import { getSpriteName } from './sprites'
 
@@ -17,6 +15,8 @@
   export let y: number = 0
   export let width: number
   export let height: number
+  export let originalSkin: number = undefined
+  export let skin: number = undefined
 
   let container: PIXI.Container
 
@@ -37,12 +37,13 @@
       prevName = name
     }
   }
+  $: filters =
+    !!skin && !!originalSkin
+      ? [new ColorReplaceFilter(originalSkin, skin, 0.1)]
+      : undefined
 </script>
 
-<Container
-  bind:instance={container}
-  filters={[new ColorReplaceFilter(0xee7f6a, 0x00ff00, 0.1)]}
->
+<Container bind:instance={container} {filters}>
   <Sprite texture={headTexture} {x} {y} {width} {height} />
   <Sprite texture={bodyTexture} {x} {y} {width} {height} />
   <Sprite texture={handTexture} {x} {y} {width} {height} />

@@ -1,131 +1,129 @@
 <script>
+  import { animations } from '$components/FCGenerator/sprites/common/animation'
   import * as PIXI from 'pixi.js'
   import Dropdown from '$components/Dropdown.svelte'
-  import ImgsProvider, {
-    getCharacters,
-  } from '$components/FCGenerator/ImgsProvider.svelte'
-  import AnimationRender from '$components/FCGenerator/AnimationRender.svelte'
   import Back2HomeBtn from '../common/Back2HomeBtn.svelte'
-
-  // Replacing with pixi
   import Application from '$components/PIXI/Application.svelte'
-  import Assets from '$components/PIXI/Assets.svelte'
-  import Text from '$components/PIXI/Text.svelte'
-  import { getFramesLength } from '$components/FCGenerator'
+  import Assets, { getResource } from '$components/PIXI/Assets.svelte'
 
-  import PixiCharacter from '$components/FCGenerator/PixiCharacter.svelte'
+  import Character from '$components/FCGenerator/CharacterRender.svelte'
 
-  import { sprites } from '$components/FCGenerator/sprites'
+  import {
+    getFramesLength,
+    data,
+    sprites,
+  } from '$components/FCGenerator/sprites'
   import { CharacterAction } from '$components/FCGenerator/types'
+  import AnimatedCharacter from '$components/FCGenerator/AnimatedCharacterRender.svelte'
+  import Sprite from '$components/PIXI/Sprite.svelte'
 
-  let chars
-  let currentFrame
+  let chars = data
+  let currentFrame = 0
   let currentAction = 'walk'
-  let currentChar
+  let currentChar = data[0]
 
   // pixelalbe - no blurred
   PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
+
+  let spriteColumn = animations.reduce((acc, item) => {
+    if (item.length > acc) {
+      return item.length
+    }
+    return acc
+  }, 0)
+  let spriteRow = animations.length
+  let spriteWidth = 64
+  let spriteHeight = 64
 </script>
 
 <div class="flex flex-col w-full h-full justify-center">
   <Back2HomeBtn />
-  <ImgsProvider
-    on:loaded={() => {
-      chars = getCharacters()
-
-      currentChar = chars[0]
-      currentAction = currentAction ?? currentChar.animation[0]
-    }}
-  >
-    {#if chars.length > 0}
-      <div class="border-1 rounded border-red-200 flex flex-row p-2">
-        <div class="w-370px left-panel flex flex-col gap-y-2">
-          <div
-            class="w-120px h-120px border-1 border-blue-200 m-4 relative bg-gray-200"
-          >
-            <AnimationRender
-              char={currentChar?.name}
-              action={currentAction}
-              class="w-128px h-128px"
+  <Assets resources={sprites}>
+    <slot slot="loading">
+      <div>Loading ...</div>
+    </slot>
+    <div class="border-1 rounded border-red-200 flex flex-row p-2">
+      <div class="w-370px left-panel flex flex-col gap-y-2">
+        <div
+          class="w-128px h-128px border-1 border-blue-200 m-4 relative bg-chessboard-transparent"
+        >
+          <Application width={128} height={128} backgroundAlpha={0.4}>
+            <AnimatedCharacter
+              width={128}
+              height={128}
+              name={currentChar?.name}
+              action={currentChar.animation.find(
+                (a) => a.name === currentAction
+              )}
+              x={0}
+              y={0}
+              originalSkin={currentChar.skin}
             />
-          </div>
-          <div class="flex flex-row">
-            Select head
-            {#each chars as character}
-              <div
-                role="presentation"
-                class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
-                on:click={() => {
-                  currentFrame = 0
-                  currentChar = character
-                  currentAction = currentChar.animation.includes(currentAction)
-                    ? currentAction
-                    : currentChar.animation[0]
-                }}
-              >
-                <img
-                  src={character.head}
-                  alt="broken"
-                  width="120"
-                  height="120"
-                  class="-ml-40px -mt-23px"
-                />
-              </div>
-            {/each}
-          </div>
-          <div class="">Select hands</div>
-          <div class="">Select body</div>
-          <div class="">
-            <div class="mb-1">Select animation</div>
-            <Dropdown
-              bind:selectedValue={currentAction}
-              options={currentChar.animation}
-            />
-          </div>
+            <!-- </Assets> -->
+          </Application>
         </div>
+        <div class="flex flex-row">
+          Select head
+          {#each chars as character}
+            <div
+              role="presentation"
+              class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
+              on:click={() => {
+                currentFrame = 0
+                currentChar = character
+                currentAction = currentChar.animation.some(
+                  (a) => a.name === currentAction
+                )
+                  ? currentAction
+                  : currentChar.animation[0].name
+              }}
+            >
+              <Application width={40} height={40} backgroundColor={0xffffff}>
+                <Sprite
+                  texture={getResource(character.name + '_head')}
+                  x={-45}
+                  y={-24}
+                  width={128}
+                  height={128}
+                />
+              </Application>
+            </div>
+          {/each}
+        </div>
+        <div class="">Select hands</div>
+        <div class="">Select body</div>
+        <div class="">
+          <div class="mb-1">Select animation</div>
+          <Dropdown
+            bind:selectedValue={currentAction}
+            options={currentChar.animation.map((a) => a.name)}
+          />
+        </div>
+      </div>
+      <div class="h-full overflow-auto">
         <div class="bg-chessboard-transparent">
-          <Application width={400} height={400} antialias backgroundAlpha={0}>
-            <Assets resources={sprites}>
-              <slot slot="loading">
-                <Text text={`Loading... `} x={200} y={200} anchor={0.5} />
-              </slot>
-              {#each Array(getFramesLength(CharacterAction.WALK)) as _, i}
-                <PixiCharacter
+          <Application
+            width={spriteColumn * spriteWidth}
+            height={spriteRow * spriteHeight}
+            backgroundAlpha={0}
+          >
+            {#each animations as animation, row}
+              {#each Array(animation.length) as _, col}
+                <Character
                   name={currentChar.name}
-                  action={CharacterAction.WALK}
-                  frame={i}
-                  x={i * 64}
-                  y="0"
+                  action={animation.name}
+                  frame={col}
+                  x={col * 64}
+                  y={row * 64}
                   width="64"
                   height="64"
+                  originalSkin={currentChar.skin}
                 />
               {/each}
-              {#each Array(getFramesLength(CharacterAction.IDLE)) as _, i}
-                <PixiCharacter
-                  name={currentChar?.name ?? 'abel'}
-                  action={CharacterAction.IDLE}
-                  frame={i}
-                  x={i * 64}
-                  y="64"
-                  width="64"
-                  height="64"
-                />
-              {/each}
-              {#each Array(getFramesLength(CharacterAction.RUN)) as _, i}
-                <PixiCharacter
-                  name={currentChar?.name ?? 'kunio'}
-                  action={CharacterAction.RUN}
-                  frame={i}
-                  x={i * 64}
-                  y="128"
-                  width="64"
-                  height="64"
-                />
-              {/each}
-            </Assets>
+            {/each}
           </Application>
         </div>
       </div>
-    {/if}
-  </ImgsProvider>
+    </div>
+  </Assets>
 </div>
