@@ -6,7 +6,7 @@
   import Container from '$components/PIXI/Container.svelte'
   import { CharacterAction } from './types'
 
-  export let name = []
+  export let partIdx = []
   export let character
   export let action: CharacterAction
   export let frame = 0
@@ -25,7 +25,11 @@
   let handTexture = getOrDefault('hand')
   function getOrDefault(part: 'head' | 'body' | 'hand') {
     const partName =
-      part === 'head' ? name[0] : part === 'body' ? name[1] : name[2]
+      part === 'head'
+        ? character.head[partIdx[0]]
+        : part === 'body'
+        ? character.body[partIdx[1]]
+        : character.hand[partIdx[2]]
     const sprite_name =
       frame && character?.animation.some((a) => a.name === action)
         ? `${partName}_${part}_${action}_${frame}`
@@ -33,13 +37,13 @@
     return getResource(sprite_name)
   }
 
-  let prevName = []
+  let prevPartIdx = []
   $: {
-    if (name !== prevName) {
+    if (partIdx !== prevPartIdx) {
       headTexture = getOrDefault('head')
       bodyTexture = getOrDefault('body')
       handTexture = getOrDefault('hand')
-      prevName = name
+      prevPartIdx = partIdx
     }
   }
   $: filters =

@@ -16,9 +16,9 @@
   let currentFrame = 0
   let currentAction = 'walk'
   let currentChar = data[0]
-  let currentHead = currentChar.head[0]
-  let currentBody = currentChar.body[0]
-  let currentHand = currentChar.hand[0]
+  let currentHeadIdx = 0
+  let currentBodyIdx = 0
+  let currentHandIdx = 0
 
   export let router = undefined
   console.log('this for remove stupid svelte warning router', router)
@@ -52,7 +52,7 @@
             <AnimatedCharacter
               width={128}
               height={128}
-              name={[currentHead, currentBody, currentHand]}
+              partIdx={[currentHeadIdx, currentBodyIdx, currentHandIdx]}
               character={currentChar}
               action={currentChar.animation.find(
                 (a) => a.name === currentAction
@@ -79,9 +79,9 @@
                 )
                   ? currentAction
                   : currentChar.animation[0].name
-                currentHead = currentChar.head[0]
-                currentBody = currentChar.body[0]
-                currentHand = currentChar.hand[0]
+                currentHeadIdx = 0
+                currentBodyIdx = 0
+                currentHandIdx = 0
               }}
             >
               <Application width={40} height={40} backgroundColor={0xffffff}>
@@ -152,7 +152,7 @@
             {#each animations as animation, row}
               {#each Array(animation.length) as _, col}
                 <Character
-                  name={[currentHead, currentBody, currentHand]}
+                  partIdx={[currentHeadIdx, currentBodyIdx, currentHandIdx]}
                   character={currentChar}
                   action={animation.name}
                   frame={col}

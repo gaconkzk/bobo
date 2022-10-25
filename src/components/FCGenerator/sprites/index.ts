@@ -23,14 +23,20 @@ export const actionSupported = (
 }
 
 export function getAnimationSpriteNames(
-  name: string,
+  character: any,
+  characterPartIdx: number,
   part: 'head' | 'body' | 'hand',
   action: CharacterAction
 ): string[] {
   const frameLength = animations.find((a) => a.name === action)?.length ?? 1
   const sprNames = []
   for (let i = 0; i < frameLength; i++) {
-    const sprite_name = getSpriteName(name, part, action, i)
+    const sprite_name = getSpriteName(
+      character[part][characterPartIdx],
+      part,
+      action,
+      i
+    )
     sprNames.push(sprite_name)
   }
   return sprNames

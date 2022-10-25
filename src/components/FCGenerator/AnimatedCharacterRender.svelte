@@ -8,7 +8,7 @@
   import { getAnimationSpriteNames } from './sprites'
   import AnimatedSprite from '$components/PIXI/AnimatedSprite.svelte'
 
-  export let name = []
+  export let partIdx = []
   export let character
   export let action: { name: CharacterAction; length: number; speed: number } =
     {
@@ -26,36 +26,54 @@
 
   let container: PIXI.Container
 
-  let [head, body, hand] = name
+  let [head, body, hand] = partIdx
 
-  let headTextures = getAnimationSpriteNames(head, 'head', action.name).map(
-    (sn) => getResource(sn)
-  )
-  let bodyTextures = getAnimationSpriteNames(body, 'body', action.name).map(
-    (sn) => getResource(sn)
-  )
-  let handTextures = getAnimationSpriteNames(hand, 'hand', action.name).map(
-    (sn) => getResource(sn)
-  )
+  let headTextures = getAnimationSpriteNames(
+    character,
+    head,
+    'head',
+    action.name
+  ).map((sn) => getResource(sn))
+  let bodyTextures = getAnimationSpriteNames(
+    character,
+    body,
+    'body',
+    action.name
+  ).map((sn) => getResource(sn))
+  let handTextures = getAnimationSpriteNames(
+    character,
+    hand,
+    'hand',
+    action.name
+  ).map((sn) => getResource(sn))
 
   let headSprite, bodySprite, handSprite
 
-  let prevName = []
-  let prevAction = null
+  let prevPartIdx = []
+  let prevCharacter = null
   $: {
-    if (name !== prevName || action !== prevAction) {
-      let [head, body, hand] = name
-      headTextures = getAnimationSpriteNames(head, 'head', action.name).map(
-        (sn) => getResource(sn)
-      )
-      bodyTextures = getAnimationSpriteNames(body, 'body', action.name).map(
-        (sn) => getResource(sn)
-      )
-      handTextures = getAnimationSpriteNames(hand, 'hand', action.name).map(
-        (sn) => getResource(sn)
-      )
-      prevName = name
-      prevAction = action
+    if (character !== prevCharacter || action !== prevCharacter) {
+      let [head, body, hand] = partIdx
+      headTextures = getAnimationSpriteNames(
+        character,
+        head,
+        'head',
+        action.name
+      ).map((sn) => getResource(sn))
+      bodyTextures = getAnimationSpriteNames(
+        character,
+        body,
+        'body',
+        action.name
+      ).map((sn) => getResource(sn))
+      handTextures = getAnimationSpriteNames(
+        character,
+        hand,
+        'hand',
+        action.name
+      ).map((sn) => getResource(sn))
+      prevPartIdx = partIdx
+      prevCharacter = action
     }
   }
 
