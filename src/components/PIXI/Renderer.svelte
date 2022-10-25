@@ -14,6 +14,7 @@
   import {
     createEventDispatcher,
     getContext,
+    onDestroy,
     onMount,
     setContext,
   } from 'svelte'
@@ -151,6 +152,10 @@
   onMount(() => {
     instance.on('prerender', (ev) => dispatch('prerender', ev))
     instance.on('postrender', (ev) => dispatch('postrender', ev))
+  })
+
+  onDestroy(() => {
+    instance?.destroy(true)
   })
 </script>
 
