@@ -46,11 +46,7 @@ export const getSpriteName = (
   if (!action) {
     return `${tName}_${part}`
   } else {
-    if (
-      data.some(
-        (c) => c.name === name && c.animation.some((a) => a.name === action)
-      )
-    ) {
+    if (action && frame >= 0) {
       return `${tName}_${part}_${action}_${frame}`
     } else {
       return `${tName}_${part}`

@@ -8,7 +8,8 @@
   import { getAnimationSpriteNames } from './sprites'
   import AnimatedSprite from '$components/PIXI/AnimatedSprite.svelte'
 
-  export let name = ''
+  export let name = []
+  export let character
   export let action: { name: CharacterAction; length: number; speed: number } =
     {
       name: CharacterAction.DEFAULT,
@@ -25,29 +26,32 @@
 
   let container: PIXI.Container
 
-  let headTextures = getAnimationSpriteNames(name, 'head', action.name).map(
+  let [head, body, hand] = name
+
+  let headTextures = getAnimationSpriteNames(head, 'head', action.name).map(
     (sn) => getResource(sn)
   )
-  let bodyTextures = getAnimationSpriteNames(name, 'body', action.name).map(
+  let bodyTextures = getAnimationSpriteNames(body, 'body', action.name).map(
     (sn) => getResource(sn)
   )
-  let handTextures = getAnimationSpriteNames(name, 'hand', action.name).map(
+  let handTextures = getAnimationSpriteNames(hand, 'hand', action.name).map(
     (sn) => getResource(sn)
   )
 
   let headSprite, bodySprite, handSprite
 
-  let prevName = ''
+  let prevName = []
   let prevAction = null
   $: {
     if (name !== prevName || action !== prevAction) {
-      headTextures = getAnimationSpriteNames(name, 'head', action.name).map(
+      let [head, body, hand] = name
+      headTextures = getAnimationSpriteNames(head, 'head', action.name).map(
         (sn) => getResource(sn)
       )
-      bodyTextures = getAnimationSpriteNames(name, 'body', action.name).map(
+      bodyTextures = getAnimationSpriteNames(body, 'body', action.name).map(
         (sn) => getResource(sn)
       )
-      handTextures = getAnimationSpriteNames(name, 'hand', action.name).map(
+      handTextures = getAnimationSpriteNames(hand, 'hand', action.name).map(
         (sn) => getResource(sn)
       )
       prevName = name

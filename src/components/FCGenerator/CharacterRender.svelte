@@ -4,11 +4,11 @@
   import Sprite from '$components/PIXI/Sprite.svelte'
   import { getResource } from '$components/PIXI/Assets.svelte'
   import Container from '$components/PIXI/Container.svelte'
-  import { CharacterAction } from '$components/FCGenerator/types'
-  import { getSpriteName } from './sprites'
+  import { CharacterAction } from './types'
 
-  export let name = ''
-  export let action: CharacterAction = CharacterAction.DEFAULT
+  export let name = []
+  export let character
+  export let action: CharacterAction
   export let frame = 0
 
   export let x: number = 0
@@ -24,11 +24,16 @@
   let bodyTexture = getOrDefault('body')
   let handTexture = getOrDefault('hand')
   function getOrDefault(part: 'head' | 'body' | 'hand') {
-    const sprite_name = getSpriteName(name, part, action, frame)
+    const partName =
+      part === 'head' ? name[0] : part === 'body' ? name[1] : name[2]
+    const sprite_name =
+      frame && character?.animation.some((a) => a.name === action)
+        ? `${partName}_${part}_${action}_${frame}`
+        : `${partName}_${part}`
     return getResource(sprite_name)
   }
 
-  let prevName = ''
+  let prevName = []
   $: {
     if (name !== prevName) {
       headTexture = getOrDefault('head')

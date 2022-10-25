@@ -16,6 +16,9 @@
   let currentFrame = 0
   let currentAction = 'walk'
   let currentChar = data[0]
+  let currentHead = currentChar.head[0]
+  let currentBody = currentChar.body[0]
+  let currentHand = currentChar.hand[0]
 
   export let router = undefined
   console.log('this for remove stupid svelte warning router', router)
@@ -49,7 +52,8 @@
             <AnimatedCharacter
               width={128}
               height={128}
-              name={currentChar?.name}
+              name={[currentHead, currentBody, currentHand]}
+              character={currentChar}
               action={currentChar.animation.find(
                 (a) => a.name === currentAction
               )}
@@ -75,6 +79,9 @@
                 )
                   ? currentAction
                   : currentChar.animation[0].name
+                currentHead = currentChar.head[0]
+                currentBody = currentChar.body[0]
+                currentHand = currentChar.hand[0]
               }}
             >
               <Application width={40} height={40} backgroundColor={0xffffff}>
@@ -145,7 +152,8 @@
             {#each animations as animation, row}
               {#each Array(animation.length) as _, col}
                 <Character
-                  name={currentChar.name}
+                  name={[currentHead, currentBody, currentHand]}
+                  character={currentChar}
                   action={animation.name}
                   frame={col}
                   x={col * 64}
