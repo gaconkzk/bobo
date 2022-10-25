@@ -59,7 +59,6 @@
               )}
               x={0}
               y={0}
-              originalSkin={currentChar.skin}
             />
             <!-- </Assets> -->
           </Application>

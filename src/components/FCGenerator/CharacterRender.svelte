@@ -15,7 +15,6 @@
   export let y: number = 0
   export let width: number
   export let height: number
-  export let originalSkin: number = undefined
   export let skin: number = undefined
 
   let container: PIXI.Container
@@ -40,7 +39,6 @@
   let prevCharacter = undefined
   let prevPartIdx = []
   $: {
-    console.log('change', partIdx)
     if (character !== prevCharacter || partIdx !== prevPartIdx) {
       headTexture = getOrDefault('head')
       bodyTexture = getOrDefault('body')

@@ -21,7 +21,6 @@
   export let y: number = 0
   export let width: number
   export let height: number
-  export let originalSkin: number
   export let skin: number = undefined
 
   let container: PIXI.Container
@@ -84,8 +83,8 @@
   }
 
   $: filters =
-    !!skin && !!originalSkin
-      ? [new ColorReplaceFilter(originalSkin, skin, 0.1)]
+    !!skin && !!character.originalSkin
+      ? [new ColorReplaceFilter(character.originalSkin, skin, 0.1)]
       : undefined
 </script>
 
