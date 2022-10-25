@@ -1,13 +1,9 @@
 import { CharacterAction } from '$components/FCGenerator/types'
 import abel from './abel'
+import { animations } from './common/animation'
 import horibata from './horibata'
 import kunio from './kunio'
 import yoritsune from './yoritsune'
-
-export const IDLE_FRAMES_LENGTH = 2
-export const WALK_FRAMES_LENGTH = 4
-export const RUN_FRAMES_LENGTH = 2
-export const KICK_FRAMES_LENGTH = 2
 
 export const data = [kunio, horibata, yoritsune, abel]
 
@@ -26,27 +22,12 @@ export const actionSupported = (
   )
 }
 
-export const getFramesLength = (action: CharacterAction) => {
-  switch (action) {
-    case CharacterAction.IDLE:
-      return IDLE_FRAMES_LENGTH
-    case CharacterAction.WALK:
-      return WALK_FRAMES_LENGTH
-    case CharacterAction.RUN:
-      return RUN_FRAMES_LENGTH
-    case CharacterAction.KICK:
-      return KICK_FRAMES_LENGTH
-    default:
-      return 1
-  }
-}
-
 export function getAnimationSpriteNames(
   name: string,
   part: 'head' | 'body' | 'hand',
   action: CharacterAction
 ): string[] {
-  const frameLength = getFramesLength(action)
+  const frameLength = animations.find((a) => a.name === action)?.length ?? 1
   const sprNames = []
   for (let i = 0; i < frameLength; i++) {
     const sprite_name = getSpriteName(name, part, action, i)
@@ -95,6 +76,7 @@ export const sprites = [
       'kunio_head_walk_2',
       'kunio_head_walk_3',
       'kunio_head_kick_0',
+      'kunio_head_knee_0',
     ],
     '/imgs/sprites/head/kunio.png',
   ],
@@ -108,12 +90,10 @@ export const sprites = [
       'horibata_head_walk_2',
       'horibata_head_walk_3',
       'horibata_head_kick_0',
+      'horibata_head_knee_0',
     ],
     '/imgs/sprites/head/horibata.png',
   ],
-  [['kunio_head_kick_1'], '/imgs/sprites/headside/kunio.png'],
-  [['horibata_head_kick_1'], '/imgs/sprites/headside/horibata.png'],
-  [['yoritsune_head_kick_1'], '/imgs/sprites/headside/yoritsune.png'],
   [
     [
       'yoritsune_head',
@@ -124,8 +104,21 @@ export const sprites = [
       'yoritsune_head_walk_2',
       'yoritsune_head_walk_3',
       'yoritsune_head_kick_0',
+      'yoritsune_head_knee_0',
     ],
     '/imgs/sprites/head/yoritsune.png',
+  ],
+  [
+    ['kunio_head_kick_1', 'kunio_head_knee_1'],
+    '/imgs/sprites/headside/kunio.png',
+  ],
+  [
+    ['horibata_head_kick_1', 'horibata_head_knee_1'],
+    '/imgs/sprites/headside/horibata.png',
+  ],
+  [
+    ['yoritsune_head_kick_1', 'yoritsune_head_knee_1'],
+    '/imgs/sprites/headside/yoritsune.png',
   ],
   [['default_body'], '/imgs/sprites/body/default.png'],
   [['default_hand'], '/imgs/sprites/hand/default.png'],
@@ -145,6 +138,10 @@ export const sprites = [
   [['default_hand_kick_0'], '/imgs/sprites/kick/default/hand_1.png'],
   [['default_body_kick_1'], '/imgs/sprites/kick/default/body_2.png'],
   [['default_hand_kick_1'], '/imgs/sprites/kick/default/hand_2.png'],
+  [['default_body_knee_0'], '/imgs/sprites/knee/default/body_1.png'],
+  [['default_hand_knee_0'], '/imgs/sprites/knee/default/hand_1.png'],
+  [['default_body_knee_1'], '/imgs/sprites/knee/default/body_2.png'],
+  [['default_hand_knee_1'], '/imgs/sprites/knee/default/hand_2.png'],
   [['abel_hand_idle_0'], '/imgs/sprites/idle/abel/hand_abel_1.png'],
   [['abel_head_idle_0'], '/imgs/sprites/idle/abel/head_abel_1.png'],
   [['abel_body_idle_0'], '/imgs/sprites/idle/abel/body_abel_1.png'],

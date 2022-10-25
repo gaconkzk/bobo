@@ -3,11 +3,12 @@
 Generating a completely spritesheet (include atlas) based on templates (most kunio)
 
 Actions/Animation (for now support left|right only):
-- Idle
-- Walk
-- Run
+- Idle (sf4: x)
+- Walk (nek: x)
+- Run (nek: x)
 - Punch
-- Kick
+- Kick (nek: x) - passing ball
+- Knee (nek: x) - stop heavy ball
 - Jump
 - ...
 

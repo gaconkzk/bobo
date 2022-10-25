@@ -8,12 +8,7 @@
 
   import Character from '$components/FCGenerator/CharacterRender.svelte'
 
-  import {
-    getFramesLength,
-    data,
-    sprites,
-  } from '$components/FCGenerator/sprites'
-  import { CharacterAction } from '$components/FCGenerator/types'
+  import { data, sprites } from '$components/FCGenerator/sprites'
   import AnimatedCharacter from '$components/FCGenerator/AnimatedCharacterRender.svelte'
   import Sprite from '$components/PIXI/Sprite.svelte'
 
@@ -21,6 +16,9 @@
   let currentFrame = 0
   let currentAction = 'walk'
   let currentChar = data[0]
+
+  export let router = undefined
+  console.log('this for remove stupid svelte warning router', router)
 
   // pixelalbe - no blurred
   PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST

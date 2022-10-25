@@ -20,10 +20,16 @@ export const IDLE_ANIMATION = {
   length: 2,
   speed: 0.09,
 }
+export const KNEE_ANIMATION = {
+  name: CharacterAction.KNEE,
+  length: 2,
+  speed: 0.05,
+}
 
 export const animations = [
   WALK_ANIMATION,
   RUN_ANIMATION,
   KICK_ANIMATION,
+  KNEE_ANIMATION,
   IDLE_ANIMATION,
 ]
