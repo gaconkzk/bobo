@@ -5,7 +5,7 @@
 </script>
 
 <script lang="ts">
-  import { setContext } from 'svelte'
+  import { onDestroy, setContext } from 'svelte'
   import { removeUndefined } from '$utils/remove-undefined'
   import * as PIXI from 'pixi.js'
   import Renderer from './Renderer.svelte'
@@ -152,10 +152,16 @@
   if (render) {
     instance.ticker.remove(instance.render, instance)
   }
+
+  let isDestroying = false
+  onDestroy(() => {
+    isDestroying = true
+    instance?.renderer?.destroy(true)
+  })
 </script>
 
 <Renderer
-  instance={instance.renderer}
+  bind:instance={instance.renderer}
   on:invalidate={() => {
     invalidated = true
   }}
@@ -169,13 +175,15 @@
   {#if render}
     <Ticker
       on:tick={() => {
-        if (render === 'demand') {
-          if (invalidated) {
-            invalidated = false
-            instance.renderer.render(instance.stage)
+        if (!isDestroying) {
+          if (render === 'demand') {
+            if (invalidated) {
+              invalidated = false
+              instance?.renderer?.render(instance.stage)
+            }
+          } else if (render === 'auto') {
+            instance?.renderer?.render(instance.stage)
           }
-        } else if (render === 'auto') {
-          instance.renderer.render(instance.stage)
         }
       }}
     />

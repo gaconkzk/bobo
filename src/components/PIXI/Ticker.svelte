@@ -31,6 +31,7 @@
   import {
     createEventDispatcher,
     getContext,
+    onDestroy,
     onMount,
     setContext,
   } from 'svelte'
@@ -95,10 +96,6 @@
     instance.add((delta) => {
       dispatch('tick', delta)
     }, priority)
-
-    return () => {
-      instance.destroy()
-    }
   })
 
   $: applyProp('autoStart', autoStart)

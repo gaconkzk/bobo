@@ -14,7 +14,6 @@
   import {
     createEventDispatcher,
     getContext,
-    onDestroy,
     onMount,
     setContext,
   } from 'svelte'
@@ -141,7 +140,7 @@
     },
   })
 
-  function view(node: HTMLElement): void {
+  function view(node: HTMLElement): any {
     if (node.childNodes.length) {
       node.childNodes[0].appendChild(instance.view as HTMLCanvasElement)
     } else {
@@ -152,10 +151,6 @@
   onMount(() => {
     instance.on('prerender', (ev) => dispatch('prerender', ev))
     instance.on('postrender', (ev) => dispatch('postrender', ev))
-  })
-
-  onDestroy(() => {
-    instance?.destroy(true)
   })
 </script>
 
