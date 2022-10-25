@@ -98,10 +98,14 @@
         </div>
         <div class="flex flex-row">
           Select hands
-          {#each currentChar.hand as hand}
+          {#each currentChar.hand as hand, i}
             <div
               role="presentation"
               class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
+              class:selected={i === currentHandIdx}
+              on:click={() => {
+                currentHandIdx = i
+              }}
             >
               <Application width={40} height={40} backgroundColor={0xffffff}>
                 <Sprite
@@ -117,10 +121,14 @@
         </div>
         <div class="flex flex-row">
           Select body
-          {#each currentChar.body as body}
+          {#each currentChar.body as body, i}
             <div
               role="presentation"
               class="w-40px h-60px overflow-hidden border-1 border-blue rounded m-2"
+              class:selected={i === currentBodyIdx}
+              on:click={() => {
+                currentBodyIdx = i
+              }}
             >
               <Application width={40} height={60} backgroundColor={0xffffff}>
                 <Sprite
@@ -160,7 +168,6 @@
                   y={row * 64}
                   width="64"
                   height="64"
-                  originalSkin={currentChar.skin}
                 />
               {/each}
             {/each}

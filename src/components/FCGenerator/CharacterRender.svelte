@@ -37,18 +37,21 @@
     return getResource(sprite_name)
   }
 
+  let prevCharacter = undefined
   let prevPartIdx = []
   $: {
-    if (partIdx !== prevPartIdx) {
+    console.log('change', partIdx)
+    if (character !== prevCharacter || partIdx !== prevPartIdx) {
       headTexture = getOrDefault('head')
       bodyTexture = getOrDefault('body')
       handTexture = getOrDefault('hand')
       prevPartIdx = partIdx
+      prevCharacter = character
     }
   }
   $: filters =
-    !!skin && !!originalSkin
-      ? [new ColorReplaceFilter(originalSkin, skin, 0.1)]
+    !!skin && !!character.originalSkin
+      ? [new ColorReplaceFilter(character.originalSkin, skin, 0.1)]
       : undefined
 </script>
 
