@@ -66,6 +66,7 @@
             <div
               role="presentation"
               class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
+              class:selected={character.name === currentChar.name}
               on:click={() => {
                 currentFrame = 0
                 currentChar = character
@@ -88,8 +89,44 @@
             </div>
           {/each}
         </div>
-        <div class="">Select hands</div>
-        <div class="">Select body</div>
+        <div class="flex flex-row">
+          Select hands
+          {#each currentChar.hand as hand}
+            <div
+              role="presentation"
+              class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
+            >
+              <Application width={40} height={40} backgroundColor={0xffffff}>
+                <Sprite
+                  texture={getResource(`${hand}_hand`)}
+                  x={-45}
+                  y={-44}
+                  width={128}
+                  height={128}
+                />
+              </Application>
+            </div>
+          {/each}
+        </div>
+        <div class="flex flex-row">
+          Select body
+          {#each currentChar.body as body}
+            <div
+              role="presentation"
+              class="w-40px h-60px overflow-hidden border-1 border-blue rounded m-2"
+            >
+              <Application width={40} height={60} backgroundColor={0xffffff}>
+                <Sprite
+                  texture={getResource(`${body}_body`)}
+                  x={-45}
+                  y={-44}
+                  width={128}
+                  height={128}
+                />
+              </Application>
+            </div>
+          {/each}
+        </div>
         <div class="">
           <div class="mb-1">Select animation</div>
           <Dropdown
@@ -125,3 +162,9 @@
     </div>
   </Assets>
 </div>
+
+<style>
+  .selected {
+    @apply border-2 border-red-400;
+  }
+</style>

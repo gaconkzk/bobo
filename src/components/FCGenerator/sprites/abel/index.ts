@@ -4,6 +4,6 @@ export default {
   ...common_sf4,
   name: 'abel',
   head: ['abel'],
-  body: ['abel'],
-  hand: ['abel'],
+  body: ['abel', 'abel1'],
+  hand: ['abel', 'abel1'],
 }

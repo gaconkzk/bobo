@@ -66,6 +66,8 @@ export const sprites = [
   [['abel_head'], '/imgs/sprites/head/abel.png'],
   [['abel_body'], '/imgs/sprites/body/abel.png'],
   [['abel_hand'], '/imgs/sprites/hand/abel.png'],
+  [['abel1_body'], '/imgs/sprites/body/abel1.png'],
+  [['abel1_hand'], '/imgs/sprites/hand/abel1.png'],
   [
     [
       'kunio_head',
@@ -148,4 +150,10 @@ export const sprites = [
   [['abel_hand_idle_1'], '/imgs/sprites/idle/abel/hand_abel_2.png'],
   [['abel_head_idle_1'], '/imgs/sprites/idle/abel/head_abel_2.png'],
   [['abel_body_idle_1'], '/imgs/sprites/idle/abel/body_abel_2.png'],
+  [['abel1_hand_idle_0'], '/imgs/sprites/idle/abel1/hand_abel1_1.png'],
+  [['abel1_head_idle_0'], '/imgs/sprites/idle/abel1/head_abel1_1.png'],
+  [['abel1_body_idle_0'], '/imgs/sprites/idle/abel1/body_abel1_1.png'],
+  [['abel1_hand_idle_1'], '/imgs/sprites/idle/abel1/hand_abel1_2.png'],
+  [['abel1_head_idle_1'], '/imgs/sprites/idle/abel1/head_abel1_2.png'],
+  [['abel1_body_idle_1'], '/imgs/sprites/idle/abel1/body_abel1_2.png'],
 ]
