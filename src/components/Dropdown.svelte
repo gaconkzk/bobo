@@ -2,10 +2,12 @@
   export let selectedValue = 'Dropdown button'
   export let options = []
 
+  let dropdownMenu: HTMLDivElement
+
   function toggleDropdown() {
-    const mnu = document.getElementById('dropdown')
+    const mnu = dropdownMenu
     const ls = mnu.classList
-    ls.toggle('hidden')
+    ls.toggle('invisible')
   }
 </script>
 
@@ -13,7 +15,7 @@
   <button
     id="dropdownDefault"
     data-dropdown-toggle="dropdown"
-    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-1.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
     type="button"
     on:click={toggleDropdown}
     >{selectedValue}
@@ -35,8 +37,8 @@
   </button>
   <!-- Dropdown menu -->
   <div
-    id="dropdown"
-    class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute top-0 left-0"
+    bind:this={dropdownMenu}
+    class="invisible z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 absolute bottom-10 left-0"
   >
     <ul
       class="py-1 text-sm text-gray-700 dark:text-gray-200"

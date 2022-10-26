@@ -78,8 +78,8 @@
             <!-- </Assets> -->
           </Application>
         </div>
-        <div class="flex flex-row">
-          Select head
+        <div class="flex flex-row items-center">
+          <span class="w-25">Select head</span>
           {#each chars as character}
             <div
               role="presentation"
@@ -110,8 +110,8 @@
             </div>
           {/each}
         </div>
-        <div class="flex flex-row">
-          Select hands
+        <div class="flex flex-row items-center">
+          <span class="w-25">Select hands</span>
           {#each currentChar.hand as hand, i}
             <div
               role="presentation"
@@ -133,8 +133,8 @@
             </div>
           {/each}
         </div>
-        <div class="flex flex-row">
-          Select body
+        <div class="flex flex-row items-center">
+          <span class="w-25">Select body</span>
           {#each currentChar.body as body, i}
             <div
               role="presentation"
