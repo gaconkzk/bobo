@@ -63,7 +63,7 @@ export const getSpriteName = (
 export const heads = () => data.flatMap((c) => c.head)
 
 // default textures - usually using for stand
-export const sprites = [
+export const sprites: AssetResource[] = [
   ['brain', '/imgs/brain.png'],
   [['abel_head'], '/imgs/sprites/head/abel.png'],
   [['abel_body'], '/imgs/sprites/body/abel.png'],

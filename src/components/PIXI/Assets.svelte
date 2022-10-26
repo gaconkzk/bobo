@@ -34,10 +34,6 @@
     }
   }
 
-  type AssetResource =
-    | string
-    | [string | string[], string | (string | PIXI.ResolveAsset)[], unknown?]
-
   type T = $$Generic<PIXI.AssetsClass>
 
   type $$Props = {

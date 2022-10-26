@@ -156,7 +156,7 @@
   let isDestroying = false
   onDestroy(() => {
     isDestroying = true
-    instance?.renderer?.destroy(true)
+    instance?.destroy(true)
   })
 </script>
 

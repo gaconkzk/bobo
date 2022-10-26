@@ -56,3 +56,7 @@ type PromiseSprite = {
   hand: Promise<string>
   animation: string[]
 }
+
+type AssetResource =
+  | string
+  | [string | string[], string | (string | PIXI.ResolveAsset)[], unknown?]

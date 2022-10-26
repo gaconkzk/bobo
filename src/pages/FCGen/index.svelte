@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { animations } from '$components/FCGenerator/sprites/common/animation'
   import * as PIXI from 'pixi.js'
   import Dropdown from '$components/Dropdown.svelte'
@@ -11,6 +11,7 @@
   import { data, sprites } from '$components/FCGenerator/sprites'
   import AnimatedCharacter from '$components/FCGenerator/AnimatedCharacterRender.svelte'
   import Sprite from '$components/PIXI/Sprite.svelte'
+  import Container from '$components/PIXI/Container.svelte'
 
   let chars = data
   let currentFrame = 0
@@ -32,9 +33,23 @@
     }
     return acc
   }, 0)
+
   let spriteRow = animations.length
   let spriteWidth = 64
   let spriteHeight = 64
+
+  let spriteSheetApp
+  let characterSprite
+  const exportSprite = async () => {
+    const extract: PIXI.Extract = spriteSheetApp?.renderer?.extract
+    if (extract) {
+      const imgHtml = await extract.image(characterSprite)
+      const link = document.createElement('a')
+      link.download = `${currentChar.name}_sprite.png`
+      link.href = imgHtml.src
+      link.click()
+    }
+  }
 </script>
 
 <div class="flex flex-col w-full h-full justify-center">
@@ -150,26 +165,30 @@
         </div>
       </div>
       <div class="h-full overflow-auto">
+        <button on:click={exportSprite}>export</button>
         <div class="bg-chessboard-transparent">
           <Application
+            bind:instance={spriteSheetApp}
             width={spriteColumn * spriteWidth}
             height={spriteRow * spriteHeight}
             backgroundAlpha={0}
           >
-            {#each animations as animation, row}
-              {#each Array(animation.length) as _, col}
-                <Character
-                  partIdx={[currentHeadIdx, currentBodyIdx, currentHandIdx]}
-                  character={currentChar}
-                  action={animation.name}
-                  frame={col}
-                  x={col * 64}
-                  y={row * 64}
-                  width="64"
-                  height="64"
-                />
+            <Container bind:instance={characterSprite}>
+              {#each animations as animation, row}
+                {#each Array(animation.length) as _, col}
+                  <Character
+                    partIdx={[currentHeadIdx, currentBodyIdx, currentHandIdx]}
+                    character={currentChar}
+                    action={animation.name}
+                    frame={col}
+                    x={col * 64}
+                    y={row * 64}
+                    width={64}
+                    height={64}
+                  />
+                {/each}
               {/each}
-            {/each}
+            </Container>
           </Application>
         </div>
       </div>
