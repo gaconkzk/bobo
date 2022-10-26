@@ -78,12 +78,14 @@
             <!-- </Assets> -->
           </Application>
         </div>
-        <div class="flex flex-row items-center">
+        <div class="grid grid-cols-5 items-center">
           <span class="w-25">Select head</span>
-          {#each chars as character}
+          {#each chars as character, i}
             <div
               role="presentation"
-              class="w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
+              class="col-auto {i > 1 && i % 4 === 0
+                ? 'col-start-2 col-span-1'
+                : ''} w-40px h-40px overflow-hidden border-1 border-blue rounded m-2"
               class:selected={character.name === currentChar.name}
               on:click={() => {
                 currentFrame = 0

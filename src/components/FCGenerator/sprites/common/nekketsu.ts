@@ -13,3 +13,5 @@ export default {
   cloth: 0xffffff,
   from: 'nekketsu',
 }
+
+// for nekketsu walk, run - head same and don't need frame

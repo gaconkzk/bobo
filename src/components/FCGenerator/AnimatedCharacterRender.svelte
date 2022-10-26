@@ -53,12 +53,14 @@
   $: {
     if (character !== prevCharacter || action !== prevCharacter) {
       let [head, body, hand] = partIdx
-      headTextures = getAnimationSpriteNames(
+      const headNames = getAnimationSpriteNames(
         character,
         head,
         'head',
         action.name
-      ).map((sn) => getResource(sn))
+      )
+      console.log('headname', headNames)
+      headTextures = headNames.map((sn) => getResource(sn))
       bodyTextures = getAnimationSpriteNames(
         character,
         body,
@@ -95,6 +97,7 @@
     {y}
     {width}
     {height}
+    playing={true}
     animationSpeed={action.speed}
     bind:instance={headSprite}
   />
@@ -104,6 +107,7 @@
     {y}
     {width}
     {height}
+    playing={true}
     animationSpeed={action.speed}
     bind:instance={bodySprite}
   />
@@ -113,6 +117,7 @@
     {y}
     {width}
     {height}
+    playing={true}
     animationSpeed={action.speed}
     bind:instance={handSprite}
   />

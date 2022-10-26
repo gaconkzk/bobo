@@ -3,7 +3,7 @@
    * @restProps {Container}
    */
   import * as PIXI from 'pixi.js'
-  import { afterUpdate, createEventDispatcher } from 'svelte'
+  import { afterUpdate, createEventDispatcher, onMount } from 'svelte'
 
   import Container from './Container.svelte'
   import { getRenderer } from './Renderer.svelte'
@@ -17,7 +17,7 @@
     autoUpdate?: PIXI.AnimatedSprite['autoUpdate']
     currentFrame?: PIXI.AnimatedSprite['currentFrame']
     loop?: PIXI.AnimatedSprite['loop']
-    playing?: PIXI.AnimatedSprite['playing']
+    playing?: boolean
     blendMode?: PIXI.AnimatedSprite['blendMode']
     pluginName?: PIXI.AnimatedSprite['pluginName']
     roundPixels?: PIXI.AnimatedSprite['roundPixels']
@@ -110,11 +110,24 @@
    *
    * @type {PIXI.Sprite}
    */
-  export let instance: T = new PIXI.AnimatedSprite(textures) as T
+  export let instance: T = new PIXI.AnimatedSprite(textures, autoUpdate) as T
 
-  const { applyProp } = createApplyProps<PIXI.AnimatedSprite>(instance)
+  const { applyProp } = createApplyProps<PIXI.AnimatedSprite>(instance, {
+    textures: (value, instance) => {
+      instance.textures = value
+      if (playing) {
+        instance.play()
+      }
+    },
+    playing: (value, instance) => {
+      if (playing) {
+        instance.play()
+      } else {
+        instance.stop()
+      }
+    },
+  })
   const { invalidate } = getRenderer()
-
   const dispatch = createEventDispatcher()
 
   afterUpdate(() => {
@@ -133,19 +146,18 @@
   $: applyProp('textures', textures)
   $: applyProp('totalFrames', totalFrames)
   $: applyProp('updateAnchor', updateAnchor)
-  $: {
-    textures.forEach((t) =>
-      t.on('update', () => {
-        invalidate()
-      })
-    )
-    instance.play()
-  }
 
-  instance.onComplete = () => dispatch('complete')
-  instance.onFrameChange = (currentFrame: number) =>
-    dispatch('framechange', { currentFrame })
-  instance.onLoop = () => dispatch('loop')
+  // trigger render if texture loads (was not preloaded)
+  $: textures.forEach((t) => t.on('update', invalidate))
+
+  onMount(() => {
+    instance.onComplete = () => dispatch('complete')
+    instance.onFrameChange = () => {
+      dispatch('frameChange')
+      invalidate()
+    }
+    instance.onLoop = () => dispatch('loop')
+  })
 </script>
 
 <Container

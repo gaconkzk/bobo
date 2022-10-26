@@ -29,10 +29,16 @@
         : part === 'body'
         ? character.body[partIdx[1]]
         : character.hand[partIdx[2]]
-    const sprite_name =
+
+    let sprite_name =
       frame && character?.animation.some((a) => a.name === action)
         ? `${partName}_${part}_${action}_${frame}`
         : `${partName}_${part}`
+
+    // ok? - currently walk,run head don't need frame
+    if (part === 'head' && ['walk', 'run'].includes(action)) {
+      sprite_name = `${partName}_${part}`
+    }
     return getResource(sprite_name)
   }
 

@@ -4,8 +4,9 @@ import { animations } from './common/animation'
 import horibata from './horibata'
 import kunio from './kunio'
 import yoritsune from './yoritsune'
+import iwakabe from './iwakabe'
 
-export const data = [kunio, horibata, yoritsune, abel]
+export const data = [kunio, horibata, yoritsune, iwakabe, abel]
 
 // those using default bodies and hands
 const isDefault = (name) => {
@@ -52,6 +53,11 @@ export const getSpriteName = (
   if (!action) {
     return `${tName}_${part}`
   } else {
+    // ok? - currently walk,run head don't need frame
+    if (part === 'head' && ['walk', 'run'].includes(action)) {
+      return `${tName}_${part}`
+    }
+
     if (action && frame >= 0) {
       return `${tName}_${part}_${action}_${frame}`
     } else {
@@ -71,46 +77,20 @@ export const sprites: AssetResource[] = [
   [['abel1_body'], '/imgs/sprites/body/abel1.png'],
   [['abel1_hand'], '/imgs/sprites/hand/abel1.png'],
   [
-    [
-      'kunio_head',
-      'kunio_head_run_0',
-      'kunio_head_run_1',
-      'kunio_head_walk_0',
-      'kunio_head_walk_1',
-      'kunio_head_walk_2',
-      'kunio_head_walk_3',
-      'kunio_head_kick_0',
-      'kunio_head_knee_0',
-    ],
+    ['kunio_head', 'kunio_head_kick_0', 'kunio_head_knee_0'],
     '/imgs/sprites/head/kunio.png',
   ],
   [
-    [
-      'horibata_head',
-      'horibata_head_run_0',
-      'horibata_head_run_1',
-      'horibata_head_walk_0',
-      'horibata_head_walk_1',
-      'horibata_head_walk_2',
-      'horibata_head_walk_3',
-      'horibata_head_kick_0',
-      'horibata_head_knee_0',
-    ],
+    ['horibata_head', 'horibata_head_kick_0', 'horibata_head_knee_0'],
     '/imgs/sprites/head/horibata.png',
   ],
   [
-    [
-      'yoritsune_head',
-      'yoritsune_head_run_0',
-      'yoritsune_head_run_1',
-      'yoritsune_head_walk_0',
-      'yoritsune_head_walk_1',
-      'yoritsune_head_walk_2',
-      'yoritsune_head_walk_3',
-      'yoritsune_head_kick_0',
-      'yoritsune_head_knee_0',
-    ],
+    ['yoritsune_head', 'yoritsune_head_kick_0', 'yoritsune_head_knee_0'],
     '/imgs/sprites/head/yoritsune.png',
+  ],
+  [
+    ['iwakabe_head', 'iwakabe_head_kick_0', 'iwakabe_head_knee_0'],
+    '/imgs/sprites/head/iwakabe.png',
   ],
   [
     ['kunio_head_kick_1', 'kunio_head_knee_1'],
@@ -123,6 +103,10 @@ export const sprites: AssetResource[] = [
   [
     ['yoritsune_head_kick_1', 'yoritsune_head_knee_1'],
     '/imgs/sprites/headside/yoritsune.png',
+  ],
+  [
+    ['iwakabe_head_kick_1', 'iwakabe_head_knee_1'],
+    '/imgs/sprites/headside/iwakabe.png',
   ],
   [['default_body'], '/imgs/sprites/body/default.png'],
   [['default_hand'], '/imgs/sprites/hand/default.png'],
