@@ -8,6 +8,10 @@ So what should I do???
 - [ ] Build dictionary for Langrisser Mobile Game
 - [ ] Build a place for my future web games
 - [ ] Build a place for monitoring my things
+- [ ] Build a manga reader page
+- [ ] Build a stream video player (p2p)
+- [ ] Build a nekketsu football sprite sheet generator
+- [ ] Build a keyboard typing tutor for coder/programmer
 - [ ] Aalalala
 
 ### Todo now (CT)
