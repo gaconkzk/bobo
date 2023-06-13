@@ -1,0 +1,13 @@
+/node_modules/
+/public/build/
+
+.DS_Store
+/public/index.css
+
+yarn-error.log
+
+.env
+
+.firebase*
+
+/dist/
